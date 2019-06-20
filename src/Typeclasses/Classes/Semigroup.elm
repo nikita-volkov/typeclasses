@@ -12,14 +12,17 @@ type alias Semigroup a =
 prepend : (a -> a -> a) -> Semigroup a
 prepend prepend_ = { prepend = prepend_ }
 
+concat : (List a -> a) -> Semigroup a
+concat concat_ = prepend (\ l r -> concat_ [l, r])
+
 appendable : Semigroup appendable
-appendable = { prepend = (++) }
+appendable = prepend (++)
 
 numberProduct : Semigroup number
-numberProduct = { prepend = (*) }
+numberProduct = prepend (*)
 
 numberSum : Semigroup number
-numberSum = { prepend = (+) }
+numberSum = prepend (+)
 
 intProduct : Semigroup Int
 intProduct = numberProduct

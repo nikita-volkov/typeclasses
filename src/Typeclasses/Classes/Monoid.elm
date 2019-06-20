@@ -8,20 +8,34 @@ import Set exposing (Set)
 type alias Monoid a =
   {
     semigroup : Semigroup a,
-    identity : a
+    identity : a,
+    concat : List a -> a
+  }
+
+identityAndConcat : a -> (List a -> a) -> Monoid a
+identityAndConcat identity concat =
+  {
+    semigroup = Semigroup.concat concat,
+    identity = identity,
+    concat = concat
   }
 
 semigroupAndIdentity : Semigroup a -> a -> Monoid a
-semigroupAndIdentity semigroup identity = { semigroup = semigroup, identity = identity }
+semigroupAndIdentity semigroup identity =
+  {
+    semigroup = semigroup,
+    identity = identity,
+    concat = List.foldl semigroup.prepend identity
+  }
 
 appendable : appendable -> Monoid appendable
-appendable identity = { semigroup = Semigroup.appendable, identity = identity }
+appendable = semigroupAndIdentity Semigroup.appendable
 
 numberProduct : Monoid number
-numberProduct = { semigroup = Semigroup.numberProduct, identity = 1 }
+numberProduct = { semigroup = Semigroup.numberProduct, identity = 1, concat = List.product }
 
 numberSum : Monoid number
-numberSum = { semigroup = Semigroup.numberSum, identity = 0 }
+numberSum = { semigroup = Semigroup.numberSum, identity = 0, concat = List.sum }
 
 intProduct : Monoid Int
 intProduct = numberProduct

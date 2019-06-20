@@ -6,7 +6,7 @@ import Typeclasses.Classes.Equality as Equality exposing (Equality)
 
 
 fold : Monoid a -> List a -> a
-fold monoid = List.foldl monoid.semigroup.prepend monoid.identity
+fold monoid = monoid.concat
 
 foldMap : Monoid b -> (a -> b) -> List a -> b
 foldMap monoidOfB aToB = List.foldl (monoidOfB.semigroup.prepend << aToB) monoidOfB.identity

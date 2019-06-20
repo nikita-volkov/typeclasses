@@ -58,6 +58,12 @@ setIntersection = semigroupAndIdentity Semigroup.setIntersection Set.empty
 setDifference : Monoid (Set comparable)
 setDifference = semigroupAndIdentity Semigroup.setDifference Set.empty
 
+cmd : Monoid (Cmd msg)
+cmd = identityAndConcat Cmd.none Cmd.batch
+
+sub : Monoid (Sub msg)
+sub = identityAndConcat Sub.none Sub.batch
+
 {-| Map over the owner type of an instance to produce a new instance.
 
 You need to provide both a covariant and a contravariant mapping

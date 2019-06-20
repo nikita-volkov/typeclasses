@@ -45,6 +45,12 @@ setIntersection = prepend Set.intersect
 setDifference : Semigroup (Set comparable)
 setDifference = prepend Set.diff
 
+cmd : Semigroup (Cmd msg)
+cmd = concat Cmd.batch
+
+sub : Semigroup (Sub msg)
+sub = concat Sub.batch
+
 {-| Map over the owner type of an instance to produce a new instance.
 
 You need to provide both a covariant and a contravariant mapping

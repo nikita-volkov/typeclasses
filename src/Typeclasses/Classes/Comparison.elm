@@ -50,8 +50,8 @@ compare compare_ =
       _ -> l
   }
 
-lt : Equality a -> (a -> a -> Bool) -> Comparison a
-lt equality lt_ =
+equalityAndLt : Equality a -> (a -> a -> Bool) -> Comparison a
+equalityAndLt equality lt_ =
   {
     equality = equality
     ,

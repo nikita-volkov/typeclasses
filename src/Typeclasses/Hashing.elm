@@ -48,3 +48,15 @@ allowing you to control the balance between the quality of hashing and its perfo
 -}
 string : Int -> Hashing String
 string sampling = Debug.todo ""
+
+{-| Map over the owner type of an instance to produce a new instance.
+
+Please notice that mapping is contravariant (i.e., `(b -> a)` instead of `(a -> b)`).
+-}
+map : (b -> a) -> Hashing a -> Hashing b
+map bToA hashingOfA =
+  {
+    hash = \ b -> hashingOfA.hash (bToA b)
+    ,
+    hashWithSalt = \ salt b -> hashingOfA.hashWithSalt salt (bToA b)
+  }

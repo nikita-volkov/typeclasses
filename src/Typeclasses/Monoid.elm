@@ -43,3 +43,14 @@ setIntersection = semigroupAndIdentity Semigroup.setIntersection Set.empty
 
 setDifference : Monoid (Set comparable)
 setDifference = semigroupAndIdentity Semigroup.setDifference Set.empty
+
+{-| Map over the owner type of an instance to produce a new instance.
+
+You need to provide both a covariant and a contravariant mapping
+(i.e., `(a -> b)` and `(b -> a)`).
+-}
+map : (a -> b) -> (b -> a) -> Monoid a -> Monoid b
+map aToB bToA monoidOfA =
+  semigroupAndIdentity
+    (Semigroup.map aToB bToA monoidOfA.semigroup)
+    (aToB monoidOfA.identity)

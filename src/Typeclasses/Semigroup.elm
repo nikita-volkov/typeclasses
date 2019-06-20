@@ -41,3 +41,11 @@ setIntersection = prepend Set.intersect
 
 setDifference : Semigroup (Set comparable)
 setDifference = prepend Set.diff
+
+{-| Map over the owner type of an instance to produce a new instance.
+
+You need to provide both a covariant and a contravariant mapping
+(i.e., `(a -> b)` and `(b -> a)`).
+-}
+map : (a -> b) -> (b -> a) -> Semigroup a -> Semigroup b
+map aToB bToA semigroupOfA = prepend (\ lb rb -> aToB (semigroupOfA.prepend (bToA lb) (bToA rb)))

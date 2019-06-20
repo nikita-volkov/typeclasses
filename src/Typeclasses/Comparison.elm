@@ -104,3 +104,28 @@ int = comparable
 
 float : Comparison Float
 float = comparable
+
+{-| Map over the owner type of an instance to produce a new instance.
+
+You need to provide both a covariant and a contravariant mapping
+(i.e., `(a -> b)` and `(b -> a)`).
+-}
+map : (a -> b) -> (b -> a) -> Comparison a -> Comparison b
+map aToB bToA comparisonOfA =
+  {
+    equality = Equality.map bToA comparisonOfA.equality
+    ,
+    compare = \ lb rb -> comparisonOfA.compare (bToA lb) (bToA rb)
+    ,
+    lt = \ lb rb -> comparisonOfA.lt (bToA lb) (bToA rb)
+    ,
+    le = \ lb rb -> comparisonOfA.le (bToA lb) (bToA rb)
+    ,
+    gt = \ lb rb -> comparisonOfA.gt (bToA lb) (bToA rb)
+    ,
+    ge = \ lb rb -> comparisonOfA.ge (bToA lb) (bToA rb)
+    ,
+    min = \ lb rb -> aToB (comparisonOfA.min (bToA lb) (bToA rb))
+    ,
+    max = \ lb rb -> aToB (comparisonOfA.max (bToA lb) (bToA rb))
+  }

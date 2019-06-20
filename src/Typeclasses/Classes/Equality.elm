@@ -22,7 +22,7 @@ compare compare_ =
     _ -> False
 
 comparable : Equality comparable
-comparable = compare Basics.compare
+comparable = eqAndNotEq (==) (/=)
 
 int : Equality Int
 int = eqAndNotEq (==) (/=)

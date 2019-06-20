@@ -1,15 +1,19 @@
-module Typeclasses.Equality exposing (..)
+module Typeclasses.Classes.Equality exposing (..)
 
 import Either exposing (Either(..))
 
 {-| Explicit typeclass which implements equality for type `a`. -}
 type alias Equality a =
   {
-    eq : a -> a -> Bool
+    eq : a -> a -> Bool,
+    notEq : a -> a -> Bool
   }
 
+eqAndNotEq : (a -> a -> Bool) -> (a -> a -> Bool) -> Equality a
+eqAndNotEq eq_ notEq_ = { eq = eq_, notEq = notEq_ }
+
 eq : (a -> a -> Bool) -> Equality a
-eq eq_ = { eq = eq_ }
+eq eq_ = { eq = eq_, notEq = \ l r -> not (eq_ l r) }
 
 compare : (a -> a -> Order) -> Equality a
 compare compare_ =
@@ -21,10 +25,10 @@ comparable : Equality comparable
 comparable = compare Basics.compare
 
 int : Equality Int
-int = eq (==)
+int = eqAndNotEq (==) (/=)
 
 float : Equality Float
-float = eq (==)
+float = eqAndNotEq (==) (/=)
 
 tuple2 : Equality a -> Equality b -> Equality (a, b)
 tuple2 equalityOfA equalityOfB =

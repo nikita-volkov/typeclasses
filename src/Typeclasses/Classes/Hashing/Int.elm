@@ -1,4 +1,4 @@
-module Typeclasses.Hashing.Int exposing (..)
+module Typeclasses.Classes.Hashing.Int exposing (..)
 
 import Bitwise
 

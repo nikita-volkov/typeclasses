@@ -1,9 +1,9 @@
-module Typeclasses.Hashing exposing (..)
+module Typeclasses.Classes.Hashing exposing (..)
 {-| Hashing implementation much inspired by
 [the "hashable" Haskell library](http://hackage.haskell.org/package/hashable).
 -}
 
-import Typeclasses.Hashing.Int as Int
+import Typeclasses.Classes.Hashing.Int as Int
 import Either exposing (Either(..))
 import Array exposing (Array)
 

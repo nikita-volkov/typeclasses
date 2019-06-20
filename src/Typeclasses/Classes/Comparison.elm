@@ -1,6 +1,6 @@
-module Typeclasses.Comparison exposing (..)
+module Typeclasses.Classes.Comparison exposing (..)
 
-import Typeclasses.Equality as Equality exposing (Equality)
+import Typeclasses.Classes.Equality as Equality exposing (Equality)
 import Either exposing (Either(..))
 
 {-| Explicit typeclass which implements comparison operations for type `a`. -}

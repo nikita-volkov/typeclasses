@@ -1,6 +1,6 @@
-module Typeclasses.Monoid exposing (..)
+module Typeclasses.Classes.Monoid exposing (..)
 
-import Typeclasses.Semigroup as Semigroup exposing (Semigroup)
+import Typeclasses.Classes.Semigroup as Semigroup exposing (Semigroup)
 import Either exposing (Either(..))
 import Set exposing (Set)
 

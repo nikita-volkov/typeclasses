@@ -1,4 +1,4 @@
-module Typeclasses.Semigroup exposing (..)
+module Typeclasses.Classes.Semigroup exposing (..)
 
 import Either exposing (Either(..))
 import Set exposing (Set)

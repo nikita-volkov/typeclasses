@@ -47,6 +47,9 @@ intSum = numberSum
 string : Monoid String
 string = appendable ""
 
+maybeFirst : Monoid (Maybe a)
+maybeFirst = semigroupAndIdentity Semigroup.maybeFirst Nothing
+
 list : Monoid (List a)
 list = appendable []
 

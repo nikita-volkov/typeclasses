@@ -34,6 +34,11 @@ intSum = numberSum
 string : Semigroup String
 string = appendable
 
+maybeFirst : Semigroup (Maybe a)
+maybeFirst = prepend <| \ l r -> case l of
+  Nothing -> r
+  _ -> l
+
 list : Semigroup (List a)
 list = appendable
 

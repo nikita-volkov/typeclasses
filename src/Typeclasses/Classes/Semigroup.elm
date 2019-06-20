@@ -2,6 +2,7 @@ module Typeclasses.Classes.Semigroup exposing (..)
 
 import Either exposing (Either(..))
 import Set exposing (Set)
+import Task exposing (Task)
 
 {-| Explicit typeclass which implements semigroup operations for type `a`. -}
 type alias Semigroup a =
@@ -50,6 +51,9 @@ cmd = concat Cmd.batch
 
 sub : Semigroup (Sub msg)
 sub = concat Sub.batch
+
+task : Semigroup a -> Semigroup (Task x a)
+task semigroupOfA = prepend <| \ l r -> l |> Task.andThen (\ la -> Task.map (semigroupOfA.prepend la) r)
 
 {-| Map over the owner type of an instance to produce a new instance.
 

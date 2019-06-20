@@ -3,6 +3,7 @@ module Typeclasses.Classes.Monoid exposing (..)
 import Typeclasses.Classes.Semigroup as Semigroup exposing (Semigroup)
 import Either exposing (Either(..))
 import Set exposing (Set)
+import Task exposing (Task)
 
 {-| Explicit typeclass which implements monoid operations for type `a`. -}
 type alias Monoid a =
@@ -63,6 +64,14 @@ cmd = identityAndConcat Cmd.none Cmd.batch
 
 sub : Monoid (Sub msg)
 sub = identityAndConcat Sub.none Sub.batch
+
+task : Monoid a -> Monoid (Task x a)
+task monoidOfA =
+  {
+    semigroup = Semigroup.task monoidOfA.semigroup,
+    identity = Task.succeed monoidOfA.identity,
+    concat = Task.sequence >> Task.map monoidOfA.concat
+  }
 
 {-| Map over the owner type of an instance to produce a new instance.
 

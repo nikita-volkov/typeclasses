@@ -102,7 +102,7 @@ array hashingOfA sampling = hashWithSalt <| \ salt arrayOfA ->
             if iterationIndex < sampling
               then case Array.get (iterationIndex * chunkLength + indexInChunk) arrayOfA of
                 Just a -> loop (iterationIndex + 1) (hashingOfA.hashWithSalt collectedHash a)
-                Nothing -> Debug.todo "Inexisting index"
+                Nothing -> collectedHash
               else collectedHash
           in loop 0 (Hash.intWithSalt salt (Hash.intWithSalt sampling length))
       else Array.foldl (\ a collectedHash -> hashingOfA.hashWithSalt collectedHash a) (Hash.intWithSalt salt length) arrayOfA
@@ -130,7 +130,7 @@ string sampling = hashWithSalt <| \ salt x ->
                   slice = String.slice startIndex endIndex x
                   in case String.toList slice of
                     c :: _ -> loop (iterationIndex + 1) (Hash.charWithSalt salt c)
-                    _ -> Debug.todo "Inexisting index"
+                    _ -> collectedHash
               else collectedHash
           in loop 0 (Hash.intWithSalt salt (Hash.intWithSalt sampling length))
       else String.foldl (\ c collectedHash -> Hash.charWithSalt collectedHash c) (Hash.intWithSalt salt length) x

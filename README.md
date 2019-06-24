@@ -5,6 +5,13 @@ What they actually mean is that it doesn't support implicit values.
 Typeclasses can be defined as records with their instances provided as explicit values.
 This package does exactly that.
 
+# Status
+
+This library is in a stage of active development and not yet well covered with tests,
+which is why it is not yet advised to rely production systems on it.
+To change the status sooner you're welcome to PR with tests, benchmarks and
+missing instance declarations for basic types.
+
 # FAQ
 
 ## Why no Functors, Monads and alike?

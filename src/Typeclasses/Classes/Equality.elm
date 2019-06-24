@@ -1,4 +1,4 @@
-module Typeclasses.Classes.Equality exposing (..)
+module Typeclasses.Classes.Equality exposing (Equality, eqAndNotEq, eq, compare, comparable, map, int, float, tuple2, tuple3, either)
 {-|
 Equality typeclass definition and its instances for basic types.
 

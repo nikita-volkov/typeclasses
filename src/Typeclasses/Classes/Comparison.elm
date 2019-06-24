@@ -1,4 +1,4 @@
-module Typeclasses.Classes.Comparison exposing (..)
+module Typeclasses.Classes.Comparison exposing (Comparison, compare, equalityAndLt, comparable, map, int, float)
 {-|
 Comparison typeclass definition and its instances for basic types.
 

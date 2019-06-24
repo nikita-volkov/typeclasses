@@ -1,4 +1,4 @@
-module Typeclasses.Extensions.List exposing (..)
+module Typeclasses.Extensions.List exposing (fold, foldMap, sort, sortBy, member, dedupe)
 {-| Extensions to the list API, which utilise typeclasses.
 
 @docs fold, foldMap, sort, sortBy, member, dedupe

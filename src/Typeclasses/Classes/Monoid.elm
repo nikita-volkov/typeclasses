@@ -1,4 +1,4 @@
-module Typeclasses.Classes.Monoid exposing (..)
+module Typeclasses.Classes.Monoid exposing (Monoid, identityAndConcat, semigroupAndIdentity, appendable, numberProduct, numberSum, map, intProduct, intSum, string, maybeFirst, list, setUnion, setDifference, cmd, sub, task)
 {-|
 Monoid typeclass definition and its instances for basic types.
 

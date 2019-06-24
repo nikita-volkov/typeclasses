@@ -1,4 +1,4 @@
-module Typeclasses.Classes.Hashing exposing (..)
+module Typeclasses.Classes.Hashing exposing (Hashing, hash, hashWithSalt, map, int, list, array, string)
 {-|
 Hashing typeclass definition and its instances for basic types.
 Much inspired by [the "hashable" Haskell library](http://hackage.haskell.org/package/hashable).

@@ -1,4 +1,4 @@
-module Typeclasses.Classes.Semigroup exposing (..)
+module Typeclasses.Classes.Semigroup exposing (Semigroup, prepend, concat, appendable, numberProduct, numberSum, map, intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task)
 {-|
 Semigroup typeclass definition and its instances for basic types.
 

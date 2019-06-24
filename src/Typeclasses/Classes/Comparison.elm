@@ -1,7 +1,24 @@
 module Typeclasses.Classes.Comparison exposing (..)
+{-|
+Comparison typeclass definition and its instances for basic types.
+
+# Definition
+@docs Comparison
+
+# Construction utilities
+@docs compare, equalityAndLt, comparable
+
+# Instance transformation utilities
+@docs map
+
+# Instances
+@docs int, float
+
+-}
 
 import Typeclasses.Classes.Equality as Equality exposing (Equality)
 import Either exposing (Either(..))
+
 
 {-| Explicit typeclass which implements comparison operations for type `a`. -}
 type alias Comparison a =
@@ -16,6 +33,11 @@ type alias Comparison a =
     max : a -> a -> a
   }
 
+
+-- * Constructors
+-------------------------
+
+{-| Construct an instance from just a `compare` function. -}
 compare : (a -> a -> Order) -> Comparison a
 compare compare_ =
   {
@@ -50,6 +72,8 @@ compare compare_ =
       _ -> l
   }
 
+{-| Construct an instance from an instance of equality and
+a lesser-than function. -}
 equalityAndLt : Equality a -> (a -> a -> Bool) -> Comparison a
 equalityAndLt equality lt_ =
   {
@@ -86,6 +110,7 @@ equalityAndLt equality lt_ =
     max = \ l r -> if lt_ l r then r else l
   }
 
+{-| Construct an instance for a comparable type using the compiler-generated definitions. -}
 comparable : Comparison comparable
 comparable =
   {
@@ -99,11 +124,9 @@ comparable =
     max = max
   }
 
-int : Comparison Int
-int = comparable
 
-float : Comparison Float
-float = comparable
+-- * Transformations
+-------------------------
 
 {-| Map over the owner type of an instance to produce a new instance.
 
@@ -129,3 +152,15 @@ map aToB bToA comparisonOfA =
     ,
     max = \ lb rb -> aToB (comparisonOfA.max (bToA lb) (bToA rb))
   }
+
+
+-- * Instances
+-------------------------
+
+{-| Instance for `Int`. -}
+int : Comparison Int
+int = comparable
+
+{-| Instance for `Float`. -}
+float : Comparison Float
+float = comparable

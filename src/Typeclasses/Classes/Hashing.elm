@@ -1,11 +1,26 @@
 module Typeclasses.Classes.Hashing exposing (..)
-{-| Hashing implementation much inspired by
-[the "hashable" Haskell library](http://hackage.haskell.org/package/hashable).
+{-|
+Hashing typeclass definition and its instances for basic types.
+Much inspired by [the "hashable" Haskell library](http://hackage.haskell.org/package/hashable).
+
+# Definition
+@docs Hashing
+
+# Construction utilities
+@docs hash, hashWithSalt
+
+# Instance transformation utilities
+@docs map
+
+# Instances
+@docs int, list, array, string
+
 -}
 
 import Typeclasses.Classes.Hashing.Hash as Hash
 import Either exposing (Either(..))
 import Array exposing (Array)
+
 
 {-| Explicit typeclass which implements hashing for type `a`. -}
 type alias Hashing a =
@@ -14,6 +29,11 @@ type alias Hashing a =
     hashWithSalt : Int -> a -> Int
   }
 
+
+-- * Constructors
+-------------------------
+
+{-| Construct from just the hashing function. -}
 hash : (a -> Int) -> Hashing a
 hash hash_ =
   {
@@ -21,6 +41,7 @@ hash hash_ =
     hashWithSalt = \ salt a -> Hash.intWithSalt salt (hash_ a)
   }
 
+{-| Construct from just the hashing function, which combines the hash with salt. -}
 hashWithSalt : (Int -> a -> Int) -> Hashing a
 hashWithSalt hashWithSalt_ =
   {
@@ -28,6 +49,27 @@ hashWithSalt hashWithSalt_ =
     hashWithSalt = hashWithSalt_
   }
 
+
+-- * Transformations
+-------------------------
+
+{-| Map over the owner type of an instance to produce a new instance.
+
+Please notice that mapping is contravariant (i.e., `(b -> a)` instead of `(a -> b)`).
+-}
+map : (b -> a) -> Hashing a -> Hashing b
+map bToA hashingOfA =
+  {
+    hash = \ b -> hashingOfA.hash (bToA b)
+    ,
+    hashWithSalt = \ salt b -> hashingOfA.hashWithSalt salt (bToA b)
+  }
+
+
+-- * Instances
+-------------------------
+
+{-| Instance for `Int`. -}
 int : Hashing Int
 int =
   {
@@ -35,6 +77,8 @@ int =
     hashWithSalt = Hash.intWithSalt
   }
 
+{-| Instance for `List`, which utilizes an instance for its element.
+Traverses the list in whole. -}
 list : Hashing a -> Hashing (List a)
 list hashingOfA = hash <| \ listOfA ->
   List.foldl (\ a hash_ -> hashingOfA.hashWithSalt hash_ a) (List.length listOfA) listOfA
@@ -90,15 +134,3 @@ string sampling = hashWithSalt <| \ salt x ->
               else collectedHash
           in loop 0 (Hash.intWithSalt salt (Hash.intWithSalt sampling length))
       else String.foldl (\ c collectedHash -> Hash.charWithSalt collectedHash c) (Hash.intWithSalt salt length) x
-
-{-| Map over the owner type of an instance to produce a new instance.
-
-Please notice that mapping is contravariant (i.e., `(b -> a)` instead of `(a -> b)`).
--}
-map : (b -> a) -> Hashing a -> Hashing b
-map bToA hashingOfA =
-  {
-    hash = \ b -> hashingOfA.hash (bToA b)
-    ,
-    hashWithSalt = \ salt b -> hashingOfA.hashWithSalt salt (bToA b)
-  }

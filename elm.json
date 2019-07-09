@@ -11,7 +11,8 @@
         "Typeclasses.Classes.Monoid",
         "Typeclasses.Classes.Semigroup",
         "Typeclasses.Extensions.List",
-        "Typeclasses.Extensions.Maybe"
+        "Typeclasses.Extensions.Maybe",
+        "Typeclasses.Extensions.Set"
     ],
     "elm-version": "0.19.0 <= v < 0.20.0",
     "dependencies": {

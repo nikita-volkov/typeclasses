@@ -10,6 +10,7 @@
         "Typeclasses.Classes.Hashing",
         "Typeclasses.Classes.Monoid",
         "Typeclasses.Classes.Semigroup",
+        "Typeclasses.Extensions.Array",
         "Typeclasses.Extensions.Dict",
         "Typeclasses.Extensions.List",
         "Typeclasses.Extensions.Maybe",

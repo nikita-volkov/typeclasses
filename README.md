@@ -15,8 +15,8 @@ the compiler provides several functions which magically generalize over numeric,
 This comes with several consequences:
 
 1. You only have a limited set of predefined generic APIs, which is just numeric, appending and comparison ops:
-	- You cannot add support of such APIs to your custom types;
-	- You cannot define new generic APIs, e.g.: a hashing function, a custom conversion to string, a binary codec, an arbitrary value generator for Fuzz-tests (aka Property-tests).
+    - You cannot add support of such APIs to your custom types;
+    - You cannot define new generic APIs, e.g.: a hashing function, a custom conversion to string, a binary codec, an arbitrary value generator for Fuzz-tests (aka Property-tests).
 1. Because `Set` requires its elements to be comparable, it limits you to `Int`, `Float`, `Char`, `String`, and lists/tuples of such values. You cannot have custom types there. This goes beyond just `Set`.
 1. Normally you're free to choose names for type parameters. These ones you have to name strictly `comparable` or `appendable` and etc.
 1. To allow you to have a thing that is both `comparable` or `appendable` the compiler has to employ another level of workarounds: a combined constraint `compappend`.
@@ -68,12 +68,12 @@ type Quality = Low | High
 
 comparison : Comparison Quality
 comparison = fromCompare <| \ left right -> case left of
-	Low -> case right of
-		Low -> EQ
-		_ -> LT
-	High -> case right of
-		High -> EQ
-		_ -> GT
+  Low -> case right of
+    Low -> EQ
+    _ -> LT
+  High -> case right of
+    High -> EQ
+    _ -> GT
 ```
 
 And we can design generic APIs without magical constraints.

@@ -1,6 +1,10 @@
 module Typeclasses.Classes.Hashing exposing (Hashing, hash, hashWithSalt, map, int, list, array, string)
 {-|
 Hashing typeclass definition and its instances for basic types.
+Implements fast non-cryptographic hashing for arbitrary types,
+suitable for implementing generic hashing-based datastructures,
+like hash-tables and hash-sets. 
+
 Much inspired by [the "hashable" Haskell library](http://hackage.haskell.org/package/hashable).
 
 # Definition

@@ -1,4 +1,4 @@
-module Typeclasses.Classes.Hashing exposing (Hashing, hash, hashWithSalt, map, int, list, array, string)
+module Typeclasses.Classes.Hashing exposing (Hashing, semigroup, monoid, hash, hashWithSalt, map, concat, int, list, array, string)
 {-|
 Hashing typeclass definition and its instances for basic types.
 Implements fast non-cryptographic hashing for arbitrary types,
@@ -14,14 +14,20 @@ Much inspired by [the "hashable" Haskell library](http://hackage.haskell.org/pac
 @docs hash, hashWithSalt
 
 # Instance transformation utilities
-@docs map
+@docs map, concat
 
 # Instances
 @docs int, list, array, string
 
+# Instances for instances
+Because Hashing instances themselves can be composed,
+crazily enough they get valid instances of other typeclasses.
+@docs semigroup, monoid
 -}
 
 import Typeclasses.Classes.Hashing.Hash as Hash
+import Typeclasses.Classes.Monoid as Monoid exposing (Monoid)
+import Typeclasses.Classes.Semigroup as Semigroup exposing (Semigroup)
 import Either exposing (Either(..))
 import Array exposing (Array)
 
@@ -68,6 +74,36 @@ map bToA hashingOfA =
     ,
     hashWithSalt = \ salt b -> hashingOfA.hashWithSalt salt (bToA b)
   }
+
+empty : Hashing a
+empty = Hashing (always 0) (always (always 0))
+
+prepend : Hashing a -> Hashing a -> Hashing a
+prepend left right =
+  {
+    hash = \ a -> left.hashWithSalt (right.hash a) a,
+    hashWithSalt = \ salt a -> left.hashWithSalt (right.hashWithSalt salt a) a
+  }
+
+{-|
+Compose multiple instances together.
+
+Allows to create instances for product types (records). E.g.,
+
+```
+type alias Person = { name : String, age : Int }
+
+hashing : Hashing Person
+hashing =
+  Hashing.concat
+    [
+      Hashing.map .name (Hashing.string 4),
+      Hashing.map .age Hashing.int
+    ]
+```
+-}
+concat : List (Hashing a) -> Hashing a
+concat = List.foldl prepend empty
 
 
 -- * Instances
@@ -138,3 +174,19 @@ string sampling = hashWithSalt <| \ salt x ->
               else collectedHash
           in loop 0 (Hash.intWithSalt salt (Hash.intWithSalt sampling length))
       else String.foldl (\ c collectedHash -> Hash.charWithSalt collectedHash c) (Hash.intWithSalt salt length) x
+
+
+-- * Instances for instances
+-------------------------
+
+{-|
+Semigroup instance for Hashing.
+-}
+semigroup : Semigroup (Hashing a)
+semigroup = Semigroup.Semigroup prepend
+
+{-|
+Monoid instance for Hashing.
+-}
+monoid : Monoid (Hashing a)
+monoid = Monoid.semigroupAndIdentity semigroup empty

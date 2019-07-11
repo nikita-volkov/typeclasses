@@ -1,4 +1,4 @@
-module Typeclasses.Classes.Hashing exposing (Hashing, hash, hashWithSalt, map, concat, int, list, array, string)
+module Typeclasses.Classes.Hashing exposing (Hashing, hash, hashWithSalt, map, concat, bool, int, list, array, string)
 {-|
 Hashing typeclass definition and its instances for basic types.
 Implements fast non-cryptographic hashing for arbitrary types,
@@ -17,7 +17,7 @@ Much inspired by [the "hashable" Haskell library](http://hackage.haskell.org/pac
 @docs map, concat
 
 # Instances
-@docs int, list, array, string
+@docs bool, int, list, array, string
 -}
 
 import Typeclasses.Classes.Hashing.Hash as Hash
@@ -101,6 +101,10 @@ concat = List.foldl prepend empty
 
 -- * Instances
 -------------------------
+
+{-| Instance for `Bool`. -}
+bool : Hashing Bool
+bool = hash (\ x -> if x then 1 else 0)
 
 {-| Instance for `Int`. -}
 int : Hashing Int

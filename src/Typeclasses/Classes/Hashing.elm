@@ -104,7 +104,7 @@ concat = List.foldl prepend empty
 
 {-| Instance for `Bool`. -}
 bool : Hashing Bool
-bool = hash (\ x -> if x then 1 else 0)
+bool = hash Hash.bool
 
 {-| Instance for `Int`. -}
 int : Hashing Int

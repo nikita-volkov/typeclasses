@@ -19,7 +19,7 @@ bool : Bool -> Int
 bool x = if x then 1 else 0
 
 {-|
-Leverage existing encoder to _cast_ a float64 into an unsigned
+Leverage existing encoder to _cast_ a float32 into an unsigned
 int32 on bytes.
 
 Inspired by a smart workaround here:
@@ -27,7 +27,7 @@ https://github.com/elm-toulouse/float16/blob/1.0.1/src/Bytes/Floating/Encode.elm
 -}
 float : Float -> Int
 float =
-  Bytes.Encode.float64 Bytes.LE >>
+  Bytes.Encode.float32 Bytes.LE >>
   Bytes.Encode.encode >>
   Bytes.Decode.decode (Bytes.Decode.unsignedInt32 Bytes.LE) >>
   Maybe.withDefault 0

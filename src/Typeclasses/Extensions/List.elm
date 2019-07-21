@@ -1,7 +1,7 @@
-module Typeclasses.Extensions.List exposing (fold, foldMap, sort, sortBy, member, dedupe)
+module Typeclasses.Extensions.List exposing (fold, foldMap, sort, sortBy, member, dedupe, remove)
 {-| Extensions to the list API, which utilise typeclasses.
 
-@docs fold, foldMap, sort, sortBy, member, dedupe
+@docs fold, foldMap, sort, sortBy, member, dedupe, remove
 
 -}
 
@@ -40,3 +40,20 @@ member equality a =
 {-| *O(n^2)*. Deduplicate a list using an instance of `Equality`. -}
 dedupe : Equality a -> List a -> List a
 dedupe equality = List.foldr (\ a newList -> if member equality a newList then newList else a :: newList) []
+
+{-| *O(n)*. Remove the first occurrence of equaling element. -}
+remove : Equality a -> a -> List a -> List a
+remove equality a list =
+  let
+    eq = equality.eq
+    loop precedingList currentList = case currentList of
+      head :: tail -> if eq a head
+        then prependReversed precedingList tail
+        else loop (head :: precedingList) tail
+      _ -> list
+    in loop [] list
+
+prependReversed : List a -> List a -> List a
+prependReversed left = case left of
+  head :: tail -> prependReversed tail << (::) head
+  _ -> identity

@@ -1,4 +1,4 @@
-module Typeclasses.Classes.Hashing exposing (Hashing, hash, hashWithSalt, map, concat, bool, int, float, char, string,  maybe, list, array)
+module Typeclasses.Classes.Hashing exposing (Hashing, hash, hashWithSalt, map, concat, bool, int, float, char, string, maybe, either, list, array)
 {-|
 Hashing typeclass definition and its instances for basic types.
 Implements fast non-cryptographic hashing for arbitrary types,
@@ -17,7 +17,7 @@ Much inspired by [the "hashable" Haskell library](http://hackage.haskell.org/pac
 @docs map, concat
 
 # Instances
-@docs bool, int, float, char, string, maybe, list, array
+@docs bool, int, float, char, string, maybe, either, list, array
 -}
 
 import Typeclasses.Classes.Hashing.Hash as Hash
@@ -81,7 +81,7 @@ prepend left right =
 {-|
 Compose multiple instances together.
 
-Allows to create instances for product types (records). E.g.,
+Allows to create instances for product-types (records). E.g.,
 
 ```
 type alias Person = { name : String, age : Int }
@@ -127,6 +127,35 @@ maybe : Hashing a -> Hashing (Maybe a)
 maybe hashingOfA = hash <| \ maybeOfA -> case maybeOfA of
   Just a -> hashingOfA.hashWithSalt 1 a
   Nothing -> 0
+
+{-|
+Instance for [`Either`](/packages/toastal/either/3.5.1/Either#Either),
+which utilizes instances for its contents.
+
+Allows to create instances for sum-types (ADTs with multiple constructors). E.g.,
+
+```
+type IntOrBoolOrString = Int Int | Bool Bool | String String
+
+hashing : Hashing IntOrBoolOrString
+hashing =
+  either int (either bool (string 3)) |>
+  map (\ a -> case a of
+    Int b -> Left b
+    Bool b -> Right (Left b)
+    String b -> Right (Right b))
+```
+-}
+either : Hashing a -> Hashing b -> Hashing (Either a b)
+either hashingOfA hashingOfB =
+  {
+    hash = \ x -> case x of
+      Left a -> hashingOfA.hashWithSalt 0 a
+      Right b -> hashingOfB.hashWithSalt 1 b,
+    hashWithSalt = \ salt x -> case x of
+      Left a -> hashingOfA.hashWithSalt (Hash.intWithSalt salt 0) a
+      Right b -> hashingOfB.hashWithSalt (Hash.intWithSalt salt 1) b
+  }
 
 {-| Instance for `List`, which utilizes an instance for its element.
 Traverses the list in whole. -}

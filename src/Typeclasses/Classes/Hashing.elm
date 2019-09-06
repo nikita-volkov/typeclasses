@@ -52,6 +52,13 @@ hashWithSalt hashWithSalt_ =
     hashWithSalt = hashWithSalt_
   }
 
+const : a -> Hashing a -> Hashing ()
+const a hashingOfA =
+  {
+    hash = always (hashingOfA.hash a),
+    hashWithSalt = \ salt _ -> hashingOfA.hashWithSalt salt a
+  }
+
 
 -- * Transformations
 -------------------------

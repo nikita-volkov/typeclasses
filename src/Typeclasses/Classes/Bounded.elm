@@ -1,7 +1,7 @@
 module Typeclasses.Classes.Bounded exposing
     ( Bounded
     , bounds
-    , int, char, bool, order
+    , int, char, bool, order, unit
     , tuple2, tuple3
     )
 
@@ -20,7 +20,7 @@ module Typeclasses.Classes.Bounded exposing
 
 # Instances
 
-@docs int, char, bool, order
+@docs int, char, bool, order, unit
 
 
 # Composites
@@ -81,6 +81,13 @@ bool =
 order : Bounded Order
 order =
     bounds ( LT, GT )
+
+
+{-| Instance for `()`.
+-}
+unit : Bounded ()
+unit =
+    bounds ( (), () )
 
 
 

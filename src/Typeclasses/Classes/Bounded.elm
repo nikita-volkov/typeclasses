@@ -1,6 +1,6 @@
 module Typeclasses.Classes.Bounded exposing
     ( Bounded
-    , bounds
+    , interval
     , int, char, bool, order, unit
     , tuple2, tuple3
     )
@@ -15,7 +15,7 @@ module Typeclasses.Classes.Bounded exposing
 
 # Construction utilities
 
-@docs bounds
+@docs interval
 
 
 # Instances
@@ -43,10 +43,10 @@ type alias Bounded a =
 -------------------------
 
 
-{-| Construct an instance from the upper and lower bounds.
+{-| Construct an instance from the interval `(minBound, maxBound)`.
 -}
-bounds : ( a, a ) -> Bounded a
-bounds ( minBound, maxBound ) =
+interval : ( a, a ) -> Bounded a
+interval ( minBound, maxBound ) =
     Bounded minBound maxBound
 
 
@@ -59,35 +59,35 @@ bounds ( minBound, maxBound ) =
 -}
 int : Bounded Int
 int =
-    bounds ( -2147483648, 2147483647 )
+    interval ( -2147483648, 2147483647 )
 
 
 {-| Instance for `Float`.
 -}
 char : Bounded Char
 char =
-    bounds ( '\u{0000}', '\u{10FFFF}' )
+    interval ( '\u{0000}', '\u{10FFFF}' )
 
 
 {-| Instance for `Bool`.
 -}
 bool : Bounded Bool
 bool =
-    bounds ( False, True )
+    Bounded False True
 
 
 {-| Instance for `Order`.
 -}
 order : Bounded Order
 order =
-    bounds ( LT, GT )
+    Bounded LT GT
 
 
 {-| Instance for `()`.
 -}
 unit : Bounded ()
 unit =
-    bounds ( (), () )
+    Bounded () ()
 
 
 
@@ -95,7 +95,7 @@ unit =
 -------------------------
 
 
-{-| Instance for tuple, with instances for its members provided.
+{-| Instance for tuple (pair), with instances for its members provided.
 -}
 tuple2 : Bounded a -> Bounded b -> Bounded ( a, b )
 tuple2 boundedA boundedB =
@@ -109,7 +109,7 @@ tuple2 boundedA boundedB =
     Bounded minBound maxBound
 
 
-{-| Instance for tuple, with instances for its members provided.
+{-| Instance for tuple (triple), with instances for its members provided.
 -}
 tuple3 : Bounded a -> Bounded b -> Bounded c -> Bounded ( a, b, c )
 tuple3 boundedA boundedB boundedC =

@@ -1,9 +1,8 @@
 module Typeclasses.Classes.Bounded exposing
     ( Bounded
     , bounds
-    , int, char
+    , int, char, bool, order
     , tuple2, tuple3
-    , bool
     )
 
 {-| Bounded typeclass definition and its instances for basic types.
@@ -21,7 +20,7 @@ module Typeclasses.Classes.Bounded exposing
 
 # Instances
 
-@docs int, char
+@docs int, char, bool, order
 
 
 # Composites
@@ -60,14 +59,14 @@ bounds ( minBound, maxBound ) =
 -}
 int : Bounded Int
 int =
-    bounds ( 0, 0 )
+    bounds ( -2147483648, 2147483647 )
 
 
 {-| Instance for `Float`.
 -}
 char : Bounded Char
 char =
-    bounds ( 'a', 'a' )
+    bounds ( '\u{0000}', '\u{10FFFF}' )
 
 
 {-| Instance for `Bool`.
@@ -75,6 +74,13 @@ char =
 bool : Bounded Bool
 bool =
     bounds ( False, True )
+
+
+{-| Instance for `Order`.
+-}
+order : Bounded Order
+order =
+    bounds ( LT, GT )
 
 
 

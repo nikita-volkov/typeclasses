@@ -1,16 +1,16 @@
-module Typeclasses.Classes.Bounded exposing
-    ( Bounded
+module Typeclasses.Classes.Bounds exposing
+    ( Bounds
     , interval
     , int, char, bool, order, unit
     , tuple2, tuple3
     )
 
-{-| Bounded typeclass definition and its instances for basic types.
+{-| Bounds typeclass definition and its instances for basic types.
 
 
 # Definition
 
-@docs Bounded
+@docs Bounds
 
 
 # Construction utilities
@@ -32,7 +32,7 @@ module Typeclasses.Classes.Bounded exposing
 
 {-| Explicit typeclass which implements a bounded type `a`.
 -}
-type alias Bounded a =
+type alias Bounds a =
     { min : a
     , max : a
     }
@@ -45,9 +45,9 @@ type alias Bounded a =
 
 {-| Construct an instance from the interval `(minBound, maxBound)`.
 -}
-interval : ( a, a ) -> Bounded a
+interval : ( a, a ) -> Bounds a
 interval ( minBound, maxBound ) =
-    Bounded minBound maxBound
+    Bounds minBound maxBound
 
 
 
@@ -57,37 +57,37 @@ interval ( minBound, maxBound ) =
 
 {-| Instance for `Int`.
 -}
-int : Bounded Int
+int : Bounds Int
 int =
     interval ( -2147483648, 2147483647 )
 
 
 {-| Instance for `Char`.
 -}
-char : Bounded Char
+char : Bounds Char
 char =
     interval ( '\u{0000}', '\u{10FFFF}' )
 
 
 {-| Instance for `Bool`.
 -}
-bool : Bounded Bool
+bool : Bounds Bool
 bool =
-    Bounded False True
+    Bounds False True
 
 
 {-| Instance for `Order`.
 -}
-order : Bounded Order
+order : Bounds Order
 order =
-    Bounded LT GT
+    Bounds LT GT
 
 
 {-| Instance for `()`.
 -}
-unit : Bounded ()
+unit : Bounds ()
 unit =
-    Bounded () ()
+    Bounds () ()
 
 
 
@@ -97,7 +97,7 @@ unit =
 
 {-| Instance for tuple (pair), with instances for its members provided.
 -}
-tuple2 : Bounded a -> Bounded b -> Bounded ( a, b )
+tuple2 : Bounds a -> Bounds b -> Bounds ( a, b )
 tuple2 boundedA boundedB =
     let
         minBound =
@@ -106,12 +106,12 @@ tuple2 boundedA boundedB =
         maxBound =
             ( boundedA.max, boundedB.max )
     in
-    Bounded minBound maxBound
+    Bounds minBound maxBound
 
 
 {-| Instance for tuple (triple), with instances for its members provided.
 -}
-tuple3 : Bounded a -> Bounded b -> Bounded c -> Bounded ( a, b, c )
+tuple3 : Bounds a -> Bounds b -> Bounds c -> Bounds ( a, b, c )
 tuple3 boundedA boundedB boundedC =
     let
         minBound =
@@ -120,4 +120,4 @@ tuple3 boundedA boundedB boundedC =
         maxBound =
             ( boundedA.max, boundedB.max, boundedC.max )
     in
-    Bounded minBound maxBound
+    Bounds minBound maxBound

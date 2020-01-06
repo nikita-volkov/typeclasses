@@ -62,7 +62,7 @@ int =
     interval ( -2147483648, 2147483647 )
 
 
-{-| Instance for `Float`.
+{-| Instance for `Char`.
 -}
 char : Bounded Char
 char =

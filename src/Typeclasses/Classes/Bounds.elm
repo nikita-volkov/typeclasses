@@ -1,6 +1,6 @@
 module Typeclasses.Classes.Bounds exposing
     ( Bounds
-    , interval
+    , bounds
     , int, char, bool, order, unit
     , tuple2, tuple3
     )
@@ -15,7 +15,7 @@ module Typeclasses.Classes.Bounds exposing
 
 # Construction utilities
 
-@docs interval
+@docs bounds
 
 
 # Instances
@@ -43,10 +43,14 @@ type alias Bounds a =
 -------------------------
 
 
-{-| Construct an instance from the interval `(minBound, maxBound)`.
+{-| Construct an instance from the lower and upper bounds.
+Note that the lower bound precedes the upper bound.
+
+    bounds lower upper
+
 -}
-interval : ( a, a ) -> Bounds a
-interval ( minBound, maxBound ) =
+bounds : a -> a -> Bounds a
+bounds minBound maxBound =
     Bounds minBound maxBound
 
 
@@ -59,14 +63,14 @@ interval ( minBound, maxBound ) =
 -}
 int : Bounds Int
 int =
-    interval ( -2147483648, 2147483647 )
+    bounds -2147483648 2147483647
 
 
 {-| Instance for `Char`.
 -}
 char : Bounds Char
 char =
-    interval ( '\u{0000}', '\u{10FFFF}' )
+    bounds '\u{0000}' '\u{10FFFF}'
 
 
 {-| Instance for `Bool`.

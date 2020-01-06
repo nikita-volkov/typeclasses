@@ -33,8 +33,8 @@ module Typeclasses.Classes.Bounded exposing
 {-| Explicit typeclass which implements a bounded type `a`.
 -}
 type alias Bounded a =
-    { minBound : a
-    , maxBound : a
+    { min : a
+    , max : a
     }
 
 
@@ -101,10 +101,10 @@ tuple2 : Bounded a -> Bounded b -> Bounded ( a, b )
 tuple2 boundedA boundedB =
     let
         minBound =
-            ( boundedA.minBound, boundedB.minBound )
+            ( boundedA.min, boundedB.min )
 
         maxBound =
-            ( boundedA.maxBound, boundedB.maxBound )
+            ( boundedA.max, boundedB.max )
     in
     Bounded minBound maxBound
 
@@ -115,9 +115,9 @@ tuple3 : Bounded a -> Bounded b -> Bounded c -> Bounded ( a, b, c )
 tuple3 boundedA boundedB boundedC =
     let
         minBound =
-            ( boundedA.minBound, boundedB.minBound, boundedC.minBound )
+            ( boundedA.min, boundedB.min, boundedC.min )
 
         maxBound =
-            ( boundedA.maxBound, boundedB.maxBound, boundedC.maxBound )
+            ( boundedA.max, boundedB.max, boundedC.max )
     in
     Bounded minBound maxBound

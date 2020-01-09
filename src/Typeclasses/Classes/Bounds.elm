@@ -1,6 +1,5 @@
 module Typeclasses.Classes.Bounds exposing
     ( Bounds
-    , bounds
     , int, char, bool, order, unit
     , tuple2, tuple3
     )
@@ -11,11 +10,6 @@ module Typeclasses.Classes.Bounds exposing
 # Definition
 
 @docs Bounds
-
-
-# Construction utilities
-
-@docs bounds
 
 
 # Instances
@@ -39,22 +33,6 @@ type alias Bounds a =
 
 
 
--- * Constructors
--------------------------
-
-
-{-| Construct an instance from the lower and upper bounds.
-Note that the lower bound precedes the upper bound.
-
-    bounds lower upper
-
--}
-bounds : a -> a -> Bounds a
-bounds minBound maxBound =
-    Bounds minBound maxBound
-
-
-
 -- * Instances
 -------------------------
 
@@ -63,14 +41,14 @@ bounds minBound maxBound =
 -}
 int : Bounds Int
 int =
-    bounds -2147483648 2147483647
+    Bounds -2147483648 2147483647
 
 
 {-| Instance for `Char`.
 -}
 char : Bounds Char
 char =
-    bounds '\u{0000}' '\u{10FFFF}'
+    Bounds '\u{0000}' '\u{10FFFF}'
 
 
 {-| Instance for `Bool`.

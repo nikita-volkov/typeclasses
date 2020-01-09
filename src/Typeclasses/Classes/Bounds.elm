@@ -118,7 +118,7 @@ tuple3 boundedA boundedB boundedC =
 
 {-| Map over the owner type of an instance to produce a new instance.
 
-For example, to created a bounded record type:
+For example, to create a bounded record type:
 
     map (\v -> { x = v }) int == Bounds { x = int.min } { x = int.max }
 

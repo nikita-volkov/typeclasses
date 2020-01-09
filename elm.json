@@ -3,7 +3,7 @@
     "name": "nikita-volkov/typeclasses",
     "summary": "Explicit typeclasses",
     "license": "MIT",
-    "version": "1.7.0",
+    "version": "1.8.0",
     "exposed-modules": [
         "Typeclasses.Classes.Bounds",
         "Typeclasses.Classes.Comparison",

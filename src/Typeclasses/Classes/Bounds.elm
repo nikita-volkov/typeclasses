@@ -2,6 +2,7 @@ module Typeclasses.Classes.Bounds exposing
     ( Bounds
     , int, char, bool, order, unit
     , tuple2, tuple3
+    , map
     )
 
 {-| Bounds typeclass definition and its instances for basic types.
@@ -20,6 +21,11 @@ module Typeclasses.Classes.Bounds exposing
 # Composites
 
 @docs tuple2, tuple3
+
+
+# Instance transformation utilities
+
+@docs map
 
 -}
 
@@ -103,3 +109,20 @@ tuple3 boundedA boundedB boundedC =
             ( boundedA.max, boundedB.max, boundedC.max )
     in
     Bounds minBound maxBound
+
+
+
+-- * Transformations
+-------------------------
+
+
+{-| Map over the owner type of an instance to produce a new instance.
+
+For example, to created a bounded record type:
+
+    map (\v -> { x = v }) int == Bounds { x = int.min } { x = int.max }
+
+-}
+map : (a -> b) -> Bounds a -> Bounds b
+map transform boundsA =
+    Bounds (transform boundsA.min) (transform boundsA.max)

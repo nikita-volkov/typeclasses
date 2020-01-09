@@ -5,6 +5,7 @@
     "license": "MIT",
     "version": "1.7.0",
     "exposed-modules": [
+        "Typeclasses.Classes.Bounds",
         "Typeclasses.Classes.Comparison",
         "Typeclasses.Classes.Equality",
         "Typeclasses.Classes.Hashing",

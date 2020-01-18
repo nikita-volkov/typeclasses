@@ -1,5 +1,5 @@
-module Typeclasses.Classes.Group exposing
-    ( Group
+module Typeclasses.Classes.AbelianGroup exposing
+    ( AbelianGroup
     , numberSum
     )
 
@@ -12,22 +12,20 @@ module Typeclasses.Classes.Group exposing
 
 -}
 
-import Typeclasses.Classes.Monoid exposing (Monoid)
+import Typeclasses.Classes.Group exposing (Group)
 
 
 {-| Explicit typeclass which implements group operations for type `a`.
 -}
-type alias Group a =
-    { monoid : Monoid a
-    , inverse : a -> a
+type alias AbelianGroup a =
+    { group : Group a
     }
 
 
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
 Implements sum.
 -}
-numberSum : Group number
+numberSum : AbelianGroup number
 numberSum =
-    { monoid = Typeclasses.Classes.Monoid.numberSum
-    , inverse = \a -> a - a
+    { group = Typeclasses.Classes.Group.numberSum
     }

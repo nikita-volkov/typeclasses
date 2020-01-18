@@ -9,16 +9,22 @@ module Typeclasses.Classes.Group exposing (Group)
 
 -}
 
-import Either exposing (Either(..))
-import Set exposing (Set)
-import Task exposing (Task)
 import Typeclasses.Classes.Monoid exposing (Monoid)
-import Typeclasses.Classes.Semigroup as Semigroup exposing (Semigroup)
 
 
-{-| Explicit typeclass which implements monoid operations for type `a`.
+{-| Explicit typeclass which implements group operations for type `a`.
 -}
 type alias Group a =
     { monoid : Monoid a
-    , inverse : a -> a -> a
+    , inverse : a -> a
+    }
+
+
+{-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
+Implements sum.
+-}
+numberSum : Group number
+numberSum =
+    { monoid = Typeclasses.Classes.Monoid.numberSum
+    , inverse = \a -> a - a
     }

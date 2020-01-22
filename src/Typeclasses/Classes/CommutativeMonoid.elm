@@ -111,13 +111,6 @@ maybeFirst =
     Typeclasses.Classes.Monoid.maybeFirst
 
 
-{-| Instance for list under concatenation.
--}
-list : Typeclasses.Classes.Monoid.Monoid (List a)
-list =
-    Typeclasses.Classes.Monoid.appendable []
-
-
 {-| Instance for set under the union operation.
 -}
 setUnion : Typeclasses.Classes.Monoid.Monoid (Set comparable)

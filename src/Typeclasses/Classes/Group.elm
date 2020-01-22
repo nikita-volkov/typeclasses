@@ -1,6 +1,6 @@
 module Typeclasses.Classes.Group exposing
     ( Group
-    , numberSum
+    , floatProduct, intProduct, numberSum
     )
 
 {-| Group typeclass definition and its instances for basic types.
@@ -20,6 +20,26 @@ import Typeclasses.Classes.Monoid exposing (Monoid)
 type alias Group a =
     { monoid : Monoid a
     , inverse : a -> a
+    }
+
+
+{-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
+Implements multiplication.
+-}
+floatProduct : Group Float
+floatProduct =
+    { monoid = Typeclasses.Classes.Monoid.numberProduct
+    , inverse = \number -> 1 / number
+    }
+
+
+{-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
+Implements multiplication.
+-}
+intProduct : Group Int
+intProduct =
+    { monoid = Typeclasses.Classes.Monoid.numberProduct
+    , inverse = \number -> 1 // number
     }
 
 

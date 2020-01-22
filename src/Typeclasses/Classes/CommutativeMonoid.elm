@@ -104,13 +104,6 @@ intSum =
     numberSum
 
 
-{-| Instance for maybe, which chooses the first `Just` value.
--}
-maybeFirst : Typeclasses.Classes.Monoid.Monoid (Maybe a)
-maybeFirst =
-    Typeclasses.Classes.Monoid.maybeFirst
-
-
 {-| Instance for set under the union operation.
 -}
 setUnion : Typeclasses.Classes.Monoid.Monoid (Set comparable)

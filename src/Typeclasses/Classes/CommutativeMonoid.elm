@@ -104,13 +104,6 @@ intSum =
     numberSum
 
 
-{-| Instance for strings under the appending operation.
--}
-string : Typeclasses.Classes.Monoid.Monoid String
-string =
-    Typeclasses.Classes.Monoid.appendable ""
-
-
 {-| Instance for maybe, which chooses the first `Just` value.
 -}
 maybeFirst : Typeclasses.Classes.Monoid.Monoid (Maybe a)

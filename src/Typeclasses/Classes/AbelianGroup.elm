@@ -18,8 +18,7 @@ import Typeclasses.Classes.Group exposing (Group)
 {-| Explicit typeclass which implements group operations for type `a`.
 -}
 type alias AbelianGroup a =
-    { group : Group a
-    }
+    Group a
 
 
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
@@ -27,5 +26,4 @@ Implements sum.
 -}
 numberSum : AbelianGroup number
 numberSum =
-    { group = Typeclasses.Classes.Group.numberSum
-    }
+    Typeclasses.Classes.Group.numberSum

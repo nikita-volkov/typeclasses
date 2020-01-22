@@ -29,5 +29,5 @@ Implements sum.
 numberSum : Group number
 numberSum =
     { monoid = Typeclasses.Classes.Monoid.numberSum
-    , inverse = \a -> a - a
+    , inverse = \number -> -number
     }

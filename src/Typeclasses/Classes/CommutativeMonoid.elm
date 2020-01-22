@@ -130,10 +130,3 @@ cmd =
 sub : Typeclasses.Classes.Monoid.Monoid (Sub msg)
 sub =
     identityAndConcat Sub.none Sub.batch
-
-
-{-| Instance for tasks, which sequentially executes them and groups the results.
--}
-task : Typeclasses.Classes.Monoid.Monoid a -> Typeclasses.Classes.Monoid.Monoid (Task x a)
-task =
-    Typeclasses.Classes.Monoid.task

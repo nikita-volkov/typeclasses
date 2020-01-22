@@ -2,7 +2,7 @@ module Typeclasses.Classes.CommutativeMonoid exposing
     ( CommutativeMonoid
     , identityAndConcat, numberProduct, numberSum
     , map
-    , intProduct, intSum, setUnion, setDifference, cmd, sub, task
+    , intProduct, intSum, setUnion, setDifference, cmd, sub
     )
 
 {-| CommutativeMonoid typeclass definition and its instances for basic types.

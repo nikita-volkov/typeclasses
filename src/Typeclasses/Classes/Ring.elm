@@ -1,4 +1,7 @@
-module Typeclasses.Classes.Ring exposing (Ring)
+module Typeclasses.Classes.Ring exposing
+    ( Ring
+    , numberRing
+    )
 
 {-| Ring typeclass definition and its instances for basic types.
 
@@ -18,4 +21,11 @@ import Typeclasses.Classes.Monoid
 type alias Ring a =
     { addition : Typeclasses.Classes.AbelianGroup.AbelianGroup a
     , multiplication : Typeclasses.Classes.Monoid.Monoid a
+    }
+
+
+numberRing : Ring number
+numberRing =
+    { addition = Typeclasses.Classes.AbelianGroup.numberSum
+    , multiplication = Typeclasses.Classes.Monoid.numberProduct
     }

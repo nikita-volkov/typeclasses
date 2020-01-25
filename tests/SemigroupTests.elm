@@ -25,4 +25,20 @@ suite =
                 in
                 aTimesBThenTimesC
                     |> Expect.equal bTimesCThenTimesA
+        , Test.fuzz3
+            Fuzz.int
+            Fuzz.int
+            Fuzz.int
+            "tests numberSum is associative"
+          <|
+            \a b c ->
+                let
+                    aPlusBThenPlusC =
+                        Typeclasses.Classes.Semigroup.numberSum.prepend (Typeclasses.Classes.Semigroup.numberSum.prepend a b) c
+
+                    bPlusCThenPlusA =
+                        Typeclasses.Classes.Semigroup.numberSum.prepend a (Typeclasses.Classes.Semigroup.numberSum.prepend b c)
+                in
+                aPlusBThenPlusC
+                    |> Expect.equal bPlusCThenPlusA
         ]

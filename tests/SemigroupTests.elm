@@ -57,4 +57,20 @@ suite =
                 in
                 aAppendBThenAppendC
                     |> Expect.equal bAppendCThenAppendA
+        , Test.fuzz3
+            (Fuzz.maybe Fuzz.unit)
+            (Fuzz.maybe Fuzz.unit)
+            (Fuzz.maybe Fuzz.unit)
+            "tests maybeFirst is associative"
+          <|
+            \a b c ->
+                let
+                    aMaybeFirstBThenMaybeFirstC =
+                        Typeclasses.Classes.Semigroup.maybeFirst.prepend (Typeclasses.Classes.Semigroup.maybeFirst.prepend a b) c
+
+                    bMaybeFirstCThenMaybeFirstA =
+                        Typeclasses.Classes.Semigroup.maybeFirst.prepend a (Typeclasses.Classes.Semigroup.maybeFirst.prepend b c)
+                in
+                aMaybeFirstBThenMaybeFirstC
+                    |> Expect.equal bMaybeFirstCThenMaybeFirstA
         ]

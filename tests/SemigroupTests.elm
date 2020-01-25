@@ -121,4 +121,20 @@ suite =
                 in
                 aAndBThenAndC
                     |> Expect.equal bAndCThenAndA
+        , Test.fuzz3
+            Fuzz.bool
+            Fuzz.bool
+            Fuzz.bool
+            "tests or is associative"
+          <|
+            \a b c ->
+                let
+                    aOrBThenOrC =
+                        Typeclasses.Classes.Semigroup.or.prepend (Typeclasses.Classes.Semigroup.or.prepend a b) c
+
+                    bOrCThenOrA =
+                        Typeclasses.Classes.Semigroup.or.prepend a (Typeclasses.Classes.Semigroup.or.prepend b c)
+                in
+                aOrBThenOrC
+                    |> Expect.equal bOrCThenOrA
         ]

@@ -89,4 +89,36 @@ suite =
                 in
                 aAppendBThenAppendC
                     |> Expect.equal bAppendCThenAppendA
+        , Test.fuzz3
+            (Fuzz.list Fuzz.unit)
+            (Fuzz.list Fuzz.unit)
+            (Fuzz.list Fuzz.unit)
+            "tests setUnion is associative"
+          <|
+            \a b c ->
+                let
+                    aAppendBThenAppendC =
+                        Typeclasses.Classes.Semigroup.list.prepend (Typeclasses.Classes.Semigroup.list.prepend a b) c
+
+                    bAppendCThenAppendA =
+                        Typeclasses.Classes.Semigroup.list.prepend a (Typeclasses.Classes.Semigroup.list.prepend b c)
+                in
+                aAppendBThenAppendC
+                    |> Expect.equal bAppendCThenAppendA
+        , Test.fuzz3
+            Fuzz.bool
+            Fuzz.bool
+            Fuzz.bool
+            "tests and is associative"
+          <|
+            \a b c ->
+                let
+                    aAndBThenAndC =
+                        Typeclasses.Classes.Semigroup.and.prepend (Typeclasses.Classes.Semigroup.and.prepend a b) c
+
+                    bAndCThenAndA =
+                        Typeclasses.Classes.Semigroup.and.prepend a (Typeclasses.Classes.Semigroup.and.prepend b c)
+                in
+                aAndBThenAndC
+                    |> Expect.equal bAndCThenAndA
         ]

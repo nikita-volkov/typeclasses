@@ -41,4 +41,20 @@ suite =
                 in
                 aPlusBThenPlusC
                     |> Expect.equal bPlusCThenPlusA
+        , Test.fuzz3
+            Fuzz.string
+            Fuzz.string
+            Fuzz.string
+            "tests string append is associative"
+          <|
+            \a b c ->
+                let
+                    aAppendBThenAppendC =
+                        Typeclasses.Classes.Semigroup.string.prepend (Typeclasses.Classes.Semigroup.string.prepend a b) c
+
+                    bAppendCThenAppendA =
+                        Typeclasses.Classes.Semigroup.string.prepend a (Typeclasses.Classes.Semigroup.string.prepend b c)
+                in
+                aAppendBThenAppendC
+                    |> Expect.equal bAppendCThenAppendA
         ]

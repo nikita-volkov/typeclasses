@@ -23,7 +23,7 @@ type alias Group a =
     }
 
 
-{-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
+{-| Construct an instance for Float.
 Implements multiplication.
 -}
 floatProduct : Group Float
@@ -33,7 +33,7 @@ floatProduct =
     }
 
 
-{-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
+{-| Construct an instance for Int
 Implements multiplication.
 -}
 intProduct : Group Int

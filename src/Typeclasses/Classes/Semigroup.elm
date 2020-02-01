@@ -2,8 +2,7 @@ module Typeclasses.Classes.Semigroup exposing
     ( Semigroup
     , prepend, concat, appendable, numberProduct, numberSum
     , map
-    , intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task
-    , and, or
+    , intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task, and, or
     )
 
 {-| Semigroup typeclass definition and its instances for basic types.
@@ -26,7 +25,7 @@ module Typeclasses.Classes.Semigroup exposing
 
 # Instances
 
-@docs intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task
+@docs intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task, and, or
 
 -}
 
@@ -193,11 +192,15 @@ task semigroupOfA =
     prepend <| \l r -> l |> Task.andThen (\la -> Task.map (semigroupOfA.prepend la) r)
 
 
+{-| Instance for and
+-}
 and : Semigroup Bool
 and =
     prepend (&&)
 
 
+{-| Instance for or
+-}
 or : Semigroup Bool
 or =
     prepend (||)

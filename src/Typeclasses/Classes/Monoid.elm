@@ -2,8 +2,7 @@ module Typeclasses.Classes.Monoid exposing
     ( Monoid
     , identityAndConcat, semigroupAndIdentity, appendable, numberProduct, numberSum
     , map
-    , intProduct, intSum, string, maybeFirst, list, setUnion, setDifference, cmd, sub, task
-    , all, any
+    , intProduct, intSum, string, maybeFirst, list, setUnion, setDifference, cmd, sub, task, all, any
     )
 
 {-| Monoid typeclass definition and its instances for basic types.
@@ -26,7 +25,7 @@ module Typeclasses.Classes.Monoid exposing
 
 # Instances
 
-@docs intProduct, intSum, string, maybeFirst, list, setUnion, setDifference, cmd, sub, task
+@docs intProduct, intSum, string, maybeFirst, list, setUnion, setDifference, cmd, sub, task, all, any
 
 -}
 
@@ -190,11 +189,15 @@ task monoidOfA =
     }
 
 
+{-| Instance for all
+-}
 all : Monoid Bool
 all =
     semigroupAndIdentity Semigroup.and True
 
 
+{-| Instance for any
+-}
 any : Monoid Bool
 any =
     semigroupAndIdentity Semigroup.or False

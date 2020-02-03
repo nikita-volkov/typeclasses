@@ -202,7 +202,8 @@ any : Monoid Bool
 any =
     semigroupAndIdentity Semigroup.or False
 
-
+{-| Instance for a -> a function
+-}
 composition : Monoid (a -> a)
 composition =
     semigroupAndIdentity Semigroup.composition Basics.identity

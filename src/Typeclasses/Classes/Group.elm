@@ -1,6 +1,6 @@
 module Typeclasses.Classes.Group exposing
     ( Group
-    , floatProduct, intProduct, numberSum
+    , floatProduct, numberSum
     )
 
 {-| Group typeclass definition and its instances for basic types.
@@ -30,16 +30,6 @@ floatProduct : Group Float
 floatProduct =
     { monoid = Typeclasses.Classes.Monoid.numberProduct
     , inverse = \number -> 1 / number
-    }
-
-
-{-| Construct an instance for Int
-Implements multiplication.
--}
-intProduct : Group Int
-intProduct =
-    { monoid = Typeclasses.Classes.Monoid.numberProduct
-    , inverse = \number -> 1 // number
     }
 
 

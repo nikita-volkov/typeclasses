@@ -100,4 +100,17 @@ suite =
                         Typeclasses.Classes.Monoid.any.semigroup.prepend Typeclasses.Classes.Monoid.any.identity a
                 in
                 Expect.true "All equal a" (aOrIdentity == a && identityOrA == a)
+        , Test.fuzz
+            Fuzz.unit
+            "tests () is commutattive"
+          <|
+            \a ->
+                let
+                    aOrIdentity =
+                        Typeclasses.Classes.Monoid.unit.semigroup.prepend a Typeclasses.Classes.Monoid.unit.identity
+
+                    identityOrA =
+                        Typeclasses.Classes.Monoid.unit.semigroup.prepend Typeclasses.Classes.Monoid.unit.identity a
+                in
+                Expect.true "All equal a" (aOrIdentity == a && identityOrA == a)
         ]

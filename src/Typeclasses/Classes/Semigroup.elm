@@ -2,7 +2,7 @@ module Typeclasses.Classes.Semigroup exposing
     ( Semigroup
     , prepend, concat, appendable, numberProduct, numberSum
     , map
-    , intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task, and, or, composition, unit
+    , intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task, and, or, composition, unit, xor
     )
 
 {-| Semigroup typeclass definition and its instances for basic types.
@@ -25,7 +25,7 @@ module Typeclasses.Classes.Semigroup exposing
 
 # Instances
 
-@docs intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task, and, or, composition, unit
+@docs intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task, and, or, composition, unit, xor
 
 -}
 
@@ -218,3 +218,8 @@ composition =
 unit : Semigroup ()
 unit =
     prepend (\() () -> ())
+
+
+xor : Semigroup Bool
+xor =
+    prepend Basics.xor

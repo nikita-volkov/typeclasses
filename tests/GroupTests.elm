@@ -31,4 +31,26 @@ suite =
                         && aPlusInverse
                         == Typeclasses.Classes.Group.numberSum.monoid.identity
                     )
+        , Test.fuzz
+            Fuzz.unit
+            "tests trivial group has an inverse"
+          <|
+            \a ->
+                let
+                    inversePlusA =
+                        Typeclasses.Classes.Group.trivialGroup.monoid.semigroup.prepend
+                            (Typeclasses.Classes.Group.trivialGroup.inverse a)
+                            a
+
+                    aPlusInverse =
+                        Typeclasses.Classes.Group.trivialGroup.monoid.semigroup.prepend
+                            a
+                            (Typeclasses.Classes.Group.trivialGroup.inverse a)
+                in
+                Expect.true "All equal a"
+                    (inversePlusA
+                        == Typeclasses.Classes.Group.trivialGroup.monoid.identity
+                        && aPlusInverse
+                        == Typeclasses.Classes.Group.trivialGroup.monoid.identity
+                    )
         ]

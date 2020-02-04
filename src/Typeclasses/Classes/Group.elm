@@ -1,6 +1,6 @@
 module Typeclasses.Classes.Group exposing
     ( Group
-    , floatProduct, numberSum
+    , floatProduct, numberSum, trivialGroup
     )
 
 {-| Group typeclass definition and its instances for basic types.
@@ -9,6 +9,10 @@ module Typeclasses.Classes.Group exposing
 # Definition
 
 @docs Group
+
+#Instances
+
+@docs floatProduct, numberSum, trivialGroup
 
 -}
 
@@ -40,4 +44,13 @@ numberSum : Group number
 numberSum =
     { monoid = Typeclasses.Classes.Monoid.numberSum
     , inverse = \number -> -number
+    }
+
+
+{-| Construct trivial group
+-}
+trivialGroup : Group ()
+trivialGroup =
+    { monoid = Typeclasses.Classes.Monoid.unit
+    , inverse = \() -> ()
     }

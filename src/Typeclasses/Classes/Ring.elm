@@ -12,20 +12,20 @@ module Typeclasses.Classes.Ring exposing
 
 -}
 
-import Typeclasses.Classes.AbelianGroup
+import Typeclasses.Classes.Group
 import Typeclasses.Classes.Monoid
 
 
 {-| Explicit typeclass which implements group operations for type `a`.
 -}
 type alias Ring a =
-    { addition : Typeclasses.Classes.AbelianGroup.AbelianGroup a
+    { addition : Typeclasses.Classes.Group.Group a
     , multiplication : Typeclasses.Classes.Monoid.Monoid a
     }
 
 
 numberRing : Ring number
 numberRing =
-    { addition = Typeclasses.Classes.AbelianGroup.numberSum
+    { addition = Typeclasses.Classes.Group.numberSum
     , multiplication = Typeclasses.Classes.Monoid.numberProduct
     }

@@ -48,47 +48,43 @@ suite =
                         && xPlusYTimesZ
                         == xTimesZPlusYTimesZ
                     )
+        , Test.fuzz3
+            Fuzz.bool
+            Fuzz.bool
+            Fuzz.bool
+            "tests exclusiveOrRing all distributes over xor"
+          <|
+            \x y z ->
+                let
+                    xAllYXorZ =
+                        Typeclasses.Classes.Ring.exclusiveOrRing.multiplication.semigroup.prepend
+                            x
+                            (Typeclasses.Classes.Ring.exclusiveOrRing.addition.monoid.semigroup.prepend y z)
 
-        -- , Test.fuzz
-        --     Fuzz.unit
-        --     "tests trivial group has an inverse"
-        --   <|
-        --     \a ->
-        --         let
-        --             inversePlusA =
-        --                 Typeclasses.Classes.Group.trivialGroup.monoid.semigroup.prepend
-        --                     (Typeclasses.Classes.Group.trivialGroup.inverse a)
-        --                     a
-        --             aPlusInverse =
-        --                 Typeclasses.Classes.Group.trivialGroup.monoid.semigroup.prepend
-        --                     a
-        --                     (Typeclasses.Classes.Group.trivialGroup.inverse a)
-        --         in
-        --         Expect.true "All equal a"
-        --             (inversePlusA
-        --                 == Typeclasses.Classes.Group.trivialGroup.monoid.identity
-        --                 && aPlusInverse
-        --                 == Typeclasses.Classes.Group.trivialGroup.monoid.identity
-        --             )
-        -- , Test.fuzz
-        --     Fuzz.bool
-        --     "tests exclusiveOr has an inverse"
-        --   <|
-        --     \a ->
-        --         let
-        --             inverseXorA =
-        --                 Typeclasses.Classes.Group.exclusiveOr.monoid.semigroup.prepend
-        --                     (Typeclasses.Classes.Group.exclusiveOr.inverse a)
-        --                     a
-        --             aXorInverse =
-        --                 Typeclasses.Classes.Group.exclusiveOr.monoid.semigroup.prepend
-        --                     a
-        --                     (Typeclasses.Classes.Group.exclusiveOr.inverse a)
-        --         in
-        --         Expect.true "All equal a"
-        --             (inverseXorA
-        --                 == Typeclasses.Classes.Group.exclusiveOr.monoid.identity
-        --                 && aXorInverse
-        --                 == Typeclasses.Classes.Group.exclusiveOr.monoid.identity
-        --             )
+                    xAllY =
+                        Typeclasses.Classes.Ring.exclusiveOrRing.multiplication.semigroup.prepend x y
+
+                    xAllZ =
+                        Typeclasses.Classes.Ring.exclusiveOrRing.multiplication.semigroup.prepend x z
+
+                    xAllYXorXAllZ =
+                        Typeclasses.Classes.Ring.exclusiveOrRing.addition.monoid.semigroup.prepend xAllY xAllZ
+
+                    xXorYAllZ =
+                        Typeclasses.Classes.Ring.exclusiveOrRing.multiplication.semigroup.prepend
+                            (Typeclasses.Classes.Ring.exclusiveOrRing.addition.monoid.semigroup.prepend x y)
+                            z
+
+                    yAllZ =
+                        Typeclasses.Classes.Ring.exclusiveOrRing.multiplication.semigroup.prepend y z
+
+                    xAllZXorYAllZ =
+                        Typeclasses.Classes.Ring.exclusiveOrRing.addition.monoid.semigroup.prepend xAllZ yAllZ
+                in
+                Expect.true "All equal a"
+                    (xAllYXorZ
+                        == xAllYXorXAllZ
+                        && xXorYAllZ
+                        == xAllZXorYAllZ
+                    )
         ]

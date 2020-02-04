@@ -9,13 +9,12 @@ module Typeclasses.Classes.Semiring exposing (Semiring)
 
 -}
 
-import Typeclasses.Classes.CommutativeMonoid
 import Typeclasses.Classes.Monoid
 
 
 {-| Explicit typeclass which implements group operations for type `a`.
 -}
 type alias Semiring a =
-    { addition : Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid a
+    { addition : Typeclasses.Classes.Monoid.Monoid a
     , multiplication : Typeclasses.Classes.Monoid.Monoid a
     }

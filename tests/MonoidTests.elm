@@ -113,4 +113,17 @@ suite =
                         Typeclasses.Classes.Monoid.unit.semigroup.prepend Typeclasses.Classes.Monoid.unit.identity a
                 in
                 Expect.true "All equal a" (aOrIdentity == a && identityOrA == a)
+        , Test.fuzz
+            Fuzz.bool
+            "tests exclusiveOr identity is identity and commutative"
+          <|
+            \a ->
+                let
+                    aXOrIdentity =
+                        Typeclasses.Classes.Monoid.exclusiveOr.semigroup.prepend a Typeclasses.Classes.Monoid.exclusiveOr.identity
+
+                    identityXOrA =
+                        Typeclasses.Classes.Monoid.exclusiveOr.semigroup.prepend Typeclasses.Classes.Monoid.exclusiveOr.identity a
+                in
+                Expect.true "All equal a" (aXOrIdentity == a && identityXOrA == a)
         ]

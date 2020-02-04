@@ -28,6 +28,8 @@ type alias Ring a =
     }
 
 
+{-| Construct real number ring
+-}
 numberRing : Ring number
 numberRing =
     { addition = Typeclasses.Classes.Group.numberSum
@@ -35,6 +37,8 @@ numberRing =
     }
 
 
+{-| Construct trivial ring
+-}
 trivialRing : Ring ()
 trivialRing =
     { addition = Typeclasses.Classes.Group.trivialGroup
@@ -42,6 +46,8 @@ trivialRing =
     }
 
 
+{-| Construct exclusive all ring
+-}
 exclusiveOrRing : Ring Bool
 exclusiveOrRing =
     { addition = Typeclasses.Classes.Group.exclusiveOr

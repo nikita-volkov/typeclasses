@@ -1,6 +1,6 @@
 module Typeclasses.Classes.Ring exposing
     ( Ring
-    , numberRing
+    , numberRing, trivialRing
     )
 
 {-| Ring typeclass definition and its instances for basic types.
@@ -9,6 +9,10 @@ module Typeclasses.Classes.Ring exposing
 # Definition
 
 @docs Ring
+
+#Instances
+
+@docs numberRing, trivialRing
 
 -}
 
@@ -28,4 +32,11 @@ numberRing : Ring number
 numberRing =
     { addition = Typeclasses.Classes.Group.numberSum
     , multiplication = Typeclasses.Classes.Monoid.numberProduct
+    }
+
+
+trivialRing : Ring ()
+trivialRing =
+    { addition = Typeclasses.Classes.Group.trivialGroup
+    , multiplication = Typeclasses.Classes.Monoid.unit
     }

@@ -53,4 +53,26 @@ suite =
                         && aPlusInverse
                         == Typeclasses.Classes.Group.trivialGroup.monoid.identity
                     )
+        , Test.fuzz
+            Fuzz.bool
+            "tests exclusiveOr has an inverse"
+          <|
+            \a ->
+                let
+                    inverseXorA =
+                        Typeclasses.Classes.Group.exclusiveOr.monoid.semigroup.prepend
+                            (Typeclasses.Classes.Group.exclusiveOr.inverse a)
+                            a
+
+                    aXorInverse =
+                        Typeclasses.Classes.Group.exclusiveOr.monoid.semigroup.prepend
+                            a
+                            (Typeclasses.Classes.Group.exclusiveOr.inverse a)
+                in
+                Expect.true "All equal a"
+                    (inverseXorA
+                        == Typeclasses.Classes.Group.exclusiveOr.monoid.identity
+                        && aXorInverse
+                        == Typeclasses.Classes.Group.exclusiveOr.monoid.identity
+                    )
         ]

@@ -1,6 +1,6 @@
 module Typeclasses.Classes.Group exposing
     ( Group
-    , floatProduct, numberSum, trivialGroup
+    , floatProduct, numberSum, trivialGroup, exclusiveOr
     )
 
 {-| Group typeclass definition and its instances for basic types.
@@ -12,10 +12,11 @@ module Typeclasses.Classes.Group exposing
 
 #Instances
 
-@docs floatProduct, numberSum, trivialGroup
+@docs floatProduct, numberSum, trivialGroup, exclusiveOr
 
 -}
 
+import Basics
 import Typeclasses.Classes.Monoid exposing (Monoid)
 
 
@@ -53,4 +54,13 @@ trivialGroup : Group ()
 trivialGroup =
     { monoid = Typeclasses.Classes.Monoid.unit
     , inverse = \() -> ()
+    }
+
+
+{-| Construct exclusive Or
+-}
+exclusiveOr : Group Bool
+exclusiveOr =
+    { monoid = Typeclasses.Classes.Monoid.exclusiveOr
+    , inverse = Basics.identity
     }

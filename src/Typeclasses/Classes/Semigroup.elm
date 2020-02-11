@@ -2,7 +2,7 @@ module Typeclasses.Classes.Semigroup exposing
     ( Semigroup
     , prepend, concat, appendable, numberProduct, numberSum
     , map
-    , intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task, and, or, composition, unit, xor
+    , intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task, and, or, composition, unit, xor, modularArithmetic
     )
 
 {-| Semigroup typeclass definition and its instances for basic types.
@@ -25,7 +25,7 @@ module Typeclasses.Classes.Semigroup exposing
 
 # Instances
 
-@docs intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task, and, or, composition, unit, xor
+@docs intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task, and, or, composition, unit, xor, modularArithmetic
 
 -}
 
@@ -223,3 +223,10 @@ unit =
 xor : Semigroup Bool
 xor =
     prepend Basics.xor
+
+
+{-| Instance for modularArithmetic semigroup
+-}
+modularArithmetic : Semigroup Int
+modularArithmetic =
+    prepend Basics.modBy

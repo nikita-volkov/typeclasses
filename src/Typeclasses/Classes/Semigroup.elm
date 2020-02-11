@@ -227,6 +227,11 @@ xor =
 
 {-| Instance for modularArithmetic semigroup
 -}
-modularArithmetic : Semigroup Int
-modularArithmetic =
-    prepend Basics.modBy
+modularArithmetic : Int -> Semigroup Int
+modularArithmetic divisor =
+    prepend
+        (\dividendOne dividendTwo ->
+            dividendOne
+                + dividendTwo
+                |> Basics.modBy divisor
+        )

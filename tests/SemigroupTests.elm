@@ -153,4 +153,20 @@ suite =
                 in
                 aOrBThenOrC
                     |> Expect.equal bOrCThenOrA
+        , Test.fuzz3
+            Fuzz.int
+            Fuzz.int
+            Fuzz.int
+            "tests modularArithmetic is associative"
+          <|
+            \a b c ->
+                let
+                    aPlusBThenPlusC =
+                        (Typeclasses.Classes.Semigroup.modularArithmetic 12).prepend ((Typeclasses.Classes.Semigroup.modularArithmetic 12).prepend a b) c
+
+                    bPlusCThenPlusA =
+                        (Typeclasses.Classes.Semigroup.modularArithmetic 12).prepend a ((Typeclasses.Classes.Semigroup.modularArithmetic 12).prepend b c)
+                in
+                aPlusBThenPlusC
+                    |> Expect.equal bPlusCThenPlusA
         ]

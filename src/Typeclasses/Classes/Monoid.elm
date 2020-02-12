@@ -2,7 +2,7 @@ module Typeclasses.Classes.Monoid exposing
     ( Monoid
     , identityAndConcat, semigroupAndIdentity, appendable, numberProduct, numberSum
     , map
-    , intProduct, intSum, string, maybeFirst, list, setUnion, setDifference, cmd, sub, task, all, any, composition, unit, exclusiveOr
+    , intProduct, intSum, string, maybeFirst, list, setUnion, setDifference, cmd, sub, task, all, any, composition, unit, exclusiveOr, modularArithmetic
     )
 
 {-| Monoid typeclass definition and its instances for basic types.
@@ -25,7 +25,7 @@ module Typeclasses.Classes.Monoid exposing
 
 # Instances
 
-@docs intProduct, intSum, string, maybeFirst, list, setUnion, setDifference, cmd, sub, task, all, any, composition, unit, exclusiveOr
+@docs intProduct, intSum, string, maybeFirst, list, setUnion, setDifference, cmd, sub, task, all, any, composition, unit, exclusiveOr, modularArithmetic
 
 -}
 
@@ -222,3 +222,10 @@ unit =
 exclusiveOr : Monoid Bool
 exclusiveOr =
     semigroupAndIdentity Semigroup.xor False
+
+
+{-| Instance for modularArithmetic
+-}
+modularArithmetic : Int -> Monoid Int
+modularArithmetic divisor =
+    semigroupAndIdentity (Semigroup.modularArithmetic divisor) divisor

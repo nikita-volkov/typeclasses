@@ -126,4 +126,17 @@ suite =
                         Typeclasses.Classes.Monoid.exclusiveOr.semigroup.prepend Typeclasses.Classes.Monoid.exclusiveOr.identity a
                 in
                 Expect.true "All equal a" (aXOrIdentity == a && identityXOrA == a)
+        , Test.fuzz
+            Fuzz.int
+            "tests modularArithmetic identity is identity and commutative"
+          <|
+            \a ->
+                let
+                    aTimesIdentity =
+                        (Typeclasses.Classes.Monoid.modularArithmetic 12).semigroup.prepend a (Typeclasses.Classes.Monoid.modularArithmetic 12).identity
+
+                    identityTimesA =
+                        (Typeclasses.Classes.Monoid.modularArithmetic 12).semigroup.prepend (Typeclasses.Classes.Monoid.modularArithmetic 12).identity a
+                in
+                Expect.true "All equal a" (aTimesIdentity == Basics.modBy 12 a && identityTimesA == Basics.modBy 12 a)
         ]

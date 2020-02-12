@@ -228,4 +228,4 @@ exclusiveOr =
 -}
 modularArithmetic : Int -> Monoid Int
 modularArithmetic divisor =
-    semigroupAndIdentity (Semigroup.modularArithmetic divisor) divisor
+    semigroupAndIdentity (Semigroup.modularArithmetic divisor) 0

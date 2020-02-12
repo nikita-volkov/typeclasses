@@ -1,6 +1,6 @@
 module Typeclasses.Classes.Group exposing
     ( Group
-    , floatProduct, numberSum, trivialGroup, exclusiveOr
+    , floatProduct, numberSum, trivialGroup, exclusiveOr, modularArithmetic
     )
 
 {-| Group typeclass definition and its instances for basic types.
@@ -12,7 +12,7 @@ module Typeclasses.Classes.Group exposing
 
 #Instances
 
-@docs floatProduct, numberSum, trivialGroup, exclusiveOr
+@docs floatProduct, numberSum, trivialGroup, exclusiveOr, modularArithmetic
 
 -}
 
@@ -63,4 +63,13 @@ exclusiveOr : Group Bool
 exclusiveOr =
     { monoid = Typeclasses.Classes.Monoid.exclusiveOr
     , inverse = Basics.identity
+    }
+
+
+{-| Instance for modularArithmetic
+-}
+modularArithmetic : Int -> Group Int
+modularArithmetic divisor =
+    { monoid = Typeclasses.Classes.Monoid.modularArithmetic divisor
+    , inverse = \a -> divisor - a
     }

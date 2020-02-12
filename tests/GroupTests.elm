@@ -75,4 +75,26 @@ suite =
                         && aXorInverse
                         == Typeclasses.Classes.Group.exclusiveOr.monoid.identity
                     )
+        , Test.fuzz
+            Fuzz.int
+            "tests modularArithmetic has an inverse"
+          <|
+            \a ->
+                let
+                    inversePlusA =
+                        (Typeclasses.Classes.Group.modularArithmetic 12).monoid.semigroup.prepend
+                            ((Typeclasses.Classes.Group.modularArithmetic 12).inverse a)
+                            a
+
+                    aPlusInverse =
+                        (Typeclasses.Classes.Group.modularArithmetic 12).monoid.semigroup.prepend
+                            a
+                            ((Typeclasses.Classes.Group.modularArithmetic 12).inverse a)
+                in
+                Expect.true "All equal a"
+                    (inversePlusA
+                        == (Typeclasses.Classes.Group.modularArithmetic 12).monoid.identity
+                        && aPlusInverse
+                        == (Typeclasses.Classes.Group.modularArithmetic 12).monoid.identity
+                    )
         ]

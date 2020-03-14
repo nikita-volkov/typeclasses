@@ -82,7 +82,11 @@ Implements multiplication.
 -}
 numberProduct : Monoid number
 numberProduct =
-    { semigroup = Semigroup.numberProduct, identity = 1, concat = List.product }
+    let
+        (Semigroup.CommutativeSemigroup numberProductSemigroup) =
+            Semigroup.numberProduct
+    in
+    { semigroup = numberProductSemigroup, identity = 1, concat = List.product }
 
 
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.

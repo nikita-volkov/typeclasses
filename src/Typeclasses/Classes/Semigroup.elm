@@ -3,6 +3,7 @@ module Typeclasses.Classes.Semigroup exposing
     , prepend, concat, appendable, numberProduct, numberSum
     , map
     , intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task, and, or, composition, unit, xor, modularArithmetic
+    , CommutativeSemigroup(..)
     )
 
 {-| Semigroup typeclass definition and its instances for basic types.
@@ -45,6 +46,10 @@ type alias Semigroup a =
     }
 
 
+type CommutativeSemigroup a
+    = CommutativeSemigroup (Semigroup a)
+
+
 
 -- * Constructors
 -------------------------
@@ -74,9 +79,10 @@ appendable =
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
 Implements multiplication.
 -}
-numberProduct : Semigroup number
+numberProduct : CommutativeSemigroup number
 numberProduct =
     prepend (*)
+        |> CommutativeSemigroup
 
 
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
@@ -110,7 +116,7 @@ map aToB bToA semigroupOfA =
 
 {-| Instance for integers under the multiplication operation.
 -}
-intProduct : Semigroup Int
+intProduct : CommutativeSemigroup Int
 intProduct =
     numberProduct
 

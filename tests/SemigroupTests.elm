@@ -17,14 +17,35 @@ suite =
           <|
             \a b c ->
                 let
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.Semigroup.intProduct
+
                     aTimesBThenTimesC =
-                        Typeclasses.Classes.Semigroup.intProduct.prepend (Typeclasses.Classes.Semigroup.intProduct.prepend a b) c
+                        semigroup.prepend (semigroup.prepend a b) c
 
                     bTimesCThenTimesA =
-                        Typeclasses.Classes.Semigroup.intProduct.prepend a (Typeclasses.Classes.Semigroup.intProduct.prepend b c)
+                        semigroup.prepend a (semigroup.prepend b c)
                 in
                 aTimesBThenTimesC
                     |> Expect.equal bTimesCThenTimesA
+        , Test.fuzz2
+            (Fuzz.intRange -100 100)
+            (Fuzz.intRange -100 100)
+            "tests intProduct is commutative"
+          <|
+            \a b ->
+                let
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.Semigroup.intProduct
+
+                    aTimesB =
+                        semigroup.prepend a b
+
+                    bTimesA =
+                        semigroup.prepend b a
+                in
+                aTimesB
+                    |> Expect.equal bTimesA
         , Test.fuzz3
             Fuzz.int
             Fuzz.int

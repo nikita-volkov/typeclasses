@@ -88,9 +88,10 @@ numberProduct =
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
 Implements sum.
 -}
-numberSum : Semigroup number
+numberSum : CommutativeSemigroup number
 numberSum =
     prepend (+)
+        |> CommutativeSemigroup
 
 
 
@@ -123,7 +124,7 @@ intProduct =
 
 {-| Instance for integers under the sum operation.
 -}
-intSum : Semigroup Int
+intSum : CommutativeSemigroup Int
 intSum =
     numberSum
 

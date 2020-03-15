@@ -94,7 +94,11 @@ Implements sum.
 -}
 numberSum : Monoid number
 numberSum =
-    { semigroup = Semigroup.numberSum, identity = 0, concat = List.sum }
+    let
+        (Semigroup.CommutativeSemigroup numberSumSemigroup) =
+            Semigroup.numberSum
+    in
+    { semigroup = numberSumSemigroup, identity = 0, concat = List.sum }
 
 
 

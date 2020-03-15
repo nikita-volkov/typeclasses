@@ -54,14 +54,35 @@ suite =
           <|
             \a b c ->
                 let
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.Semigroup.intSum
+
                     aPlusBThenPlusC =
-                        Typeclasses.Classes.Semigroup.numberSum.prepend (Typeclasses.Classes.Semigroup.numberSum.prepend a b) c
+                        semigroup.prepend (semigroup.prepend a b) c
 
                     bPlusCThenPlusA =
-                        Typeclasses.Classes.Semigroup.numberSum.prepend a (Typeclasses.Classes.Semigroup.numberSum.prepend b c)
+                        semigroup.prepend a (semigroup.prepend b c)
                 in
                 aPlusBThenPlusC
                     |> Expect.equal bPlusCThenPlusA
+        , Test.fuzz2
+            (Fuzz.intRange -100 100)
+            (Fuzz.intRange -100 100)
+            "tests numberSum is commutative"
+          <|
+            \a b ->
+                let
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.Semigroup.numberSum
+
+                    aPlusB =
+                        semigroup.prepend a b
+
+                    bPlusA =
+                        semigroup.prepend b a
+                in
+                aPlusB
+                    |> Expect.equal bPlusA
         , Test.fuzz3
             Fuzz.string
             Fuzz.string

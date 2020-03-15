@@ -236,4 +236,8 @@ exclusiveOr =
 -}
 modularArithmetic : Int -> Monoid Int
 modularArithmetic divisor =
-    semigroupAndIdentity (Semigroup.modularArithmetic divisor) 0
+    let
+        (Semigroup.CommutativeSemigroup modularArithmeticSemigroup) =
+            Semigroup.modularArithmetic divisor
+    in
+    semigroupAndIdentity modularArithmeticSemigroup 0

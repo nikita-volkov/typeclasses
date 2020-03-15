@@ -234,7 +234,7 @@ xor =
 
 {-| Instance for modularArithmetic semigroup
 -}
-modularArithmetic : Int -> Semigroup Int
+modularArithmetic : Int -> CommutativeSemigroup Int
 modularArithmetic divisor =
     prepend
         (\dividendOne dividendTwo ->
@@ -242,3 +242,4 @@ modularArithmetic divisor =
                 + dividendTwo
                 |> Basics.modBy divisor
         )
+        |> CommutativeSemigroup

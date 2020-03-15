@@ -203,12 +203,33 @@ suite =
           <|
             \a b c ->
                 let
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.Semigroup.modularArithmetic 12
+
                     aPlusBThenPlusC =
-                        (Typeclasses.Classes.Semigroup.modularArithmetic 12).prepend ((Typeclasses.Classes.Semigroup.modularArithmetic 12).prepend a b) c
+                        semigroup.prepend (semigroup.prepend a b) c
 
                     bPlusCThenPlusA =
-                        (Typeclasses.Classes.Semigroup.modularArithmetic 12).prepend a ((Typeclasses.Classes.Semigroup.modularArithmetic 12).prepend b c)
+                        semigroup.prepend a (semigroup.prepend b c)
                 in
                 aPlusBThenPlusC
                     |> Expect.equal bPlusCThenPlusA
+        , Test.fuzz2
+            (Fuzz.intRange -100 100)
+            (Fuzz.intRange -100 100)
+            "tests modularArithmetic is commutative"
+          <|
+            \a b ->
+                let
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.Semigroup.modularArithmetic 12
+
+                    aPlusB =
+                        semigroup.prepend a b
+
+                    bPlusA =
+                        semigroup.prepend b a
+                in
+                aPlusB
+                    |> Expect.equal bPlusA
         ]

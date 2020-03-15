@@ -2,6 +2,7 @@ module SemigroupTests exposing (suite)
 
 import Expect
 import Fuzz
+import Set
 import Test
 import Typeclasses.Classes.Semigroup
 
@@ -232,4 +233,20 @@ suite =
                 in
                 aPlusB
                     |> Expect.equal bPlusA
+        , Test.fuzz3
+            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+            "tests setUnion is associative"
+          <|
+            \a b c ->
+                let
+                    aUnionBThenUnionC =
+                        Typeclasses.Classes.Semigroup.setUnion.prepend (Typeclasses.Classes.Semigroup.setUnion.prepend a b) c
+
+                    bUnionCThenUnionA =
+                        Typeclasses.Classes.Semigroup.setUnion.prepend a (Typeclasses.Classes.Semigroup.setUnion.prepend b c)
+                in
+                aUnionBThenUnionC
+                    |> Expect.equal bUnionCThenUnionA
         ]

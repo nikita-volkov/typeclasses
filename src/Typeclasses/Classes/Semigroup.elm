@@ -226,9 +226,10 @@ composition =
 
 {-| Instance for trivial semigroup
 -}
-unit : Semigroup ()
+unit : CommutativeSemigroup ()
 unit =
     prepend (\() () -> ())
+        |> CommutativeSemigroup
 
 
 xor : CommutativeSemigroup Bool

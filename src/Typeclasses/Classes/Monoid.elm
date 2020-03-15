@@ -78,6 +78,21 @@ semigroupAndIdentity semigroup identity =
     }
 
 
+{-| Construct an instance by specifying a commutative semigroup instance and an identity value.
+-}
+commutativeSemigroupAndIdentity : Semigroup.CommutativeSemigroup a -> a -> CommutativeMonoid a
+commutativeSemigroupAndIdentity commutativeSemigroup identity =
+    let
+        (Semigroup.CommutativeSemigroup semigroup) =
+            commutativeSemigroup
+    in
+    { semigroup = commutativeSemigroup
+    , identity = identity
+    , concat = List.foldl semigroup.prepend identity
+    }
+        |> CommutativeMonoid
+
+
 {-| Construct an instance for any type which satisfies Elm's `appendable` magic constraint,
 by providing an identity value.
 -}
@@ -98,13 +113,10 @@ numberProduct =
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
 Implements sum.
 -}
-numberSum : Monoid number
+numberSum : CommutativeMonoid number
 numberSum =
-    let
-        (Semigroup.CommutativeSemigroup numberSumSemigroup) =
-            Semigroup.numberSum
-    in
-    { semigroup = numberSumSemigroup, identity = 0, concat = List.sum }
+    { semigroup = Semigroup.numberSum, identity = 0, concat = List.sum }
+        |> CommutativeMonoid
 
 
 
@@ -139,7 +151,7 @@ intProduct =
 
 {-| Instance for integers under the sum operation.
 -}
-intSum : Monoid Int
+intSum : CommutativeMonoid Int
 intSum =
     numberSum
 
@@ -209,24 +221,16 @@ task monoidOfA =
 
 {-| Instance for all
 -}
-all : Monoid Bool
+all : CommutativeMonoid Bool
 all =
-    let
-        (Semigroup.CommutativeSemigroup andSemigroup) =
-            Semigroup.and
-    in
-    semigroupAndIdentity andSemigroup True
+    commutativeSemigroupAndIdentity Semigroup.and True
 
 
 {-| Instance for any
 -}
-any : Monoid Bool
+any : CommutativeMonoid Bool
 any =
-    let
-        (Semigroup.CommutativeSemigroup orSemigroup) =
-            Semigroup.or
-    in
-    semigroupAndIdentity orSemigroup False
+    commutativeSemigroupAndIdentity Semigroup.or False
 
 
 {-| Instance for a -> a function
@@ -238,28 +242,20 @@ composition =
 
 {-| Instance for trivial monoid
 -}
-unit : Monoid ()
+unit : CommutativeMonoid ()
 unit =
-    semigroupAndIdentity Semigroup.unit ()
+    commutativeSemigroupAndIdentity Semigroup.unit ()
 
 
 {-| Instance for exclusiveOr
 -}
-exclusiveOr : Monoid Bool
+exclusiveOr : CommutativeMonoid Bool
 exclusiveOr =
-    let
-        (Semigroup.CommutativeSemigroup xorSemigroup) =
-            Semigroup.xor
-    in
-    semigroupAndIdentity xorSemigroup False
+    commutativeSemigroupAndIdentity Semigroup.xor False
 
 
 {-| Instance for modularArithmetic
 -}
-modularArithmetic : Int -> Monoid Int
+modularArithmetic : Int -> CommutativeMonoid Int
 modularArithmetic divisor =
-    let
-        (Semigroup.CommutativeSemigroup modularArithmeticSemigroup) =
-            Semigroup.modularArithmetic divisor
-    in
-    semigroupAndIdentity modularArithmeticSemigroup 0
+    commutativeSemigroupAndIdentity (Semigroup.modularArithmetic divisor) 0

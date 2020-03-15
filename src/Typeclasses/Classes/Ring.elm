@@ -1,6 +1,7 @@
 module Typeclasses.Classes.Ring exposing
     ( Ring
     , numberRing, trivialRing, exclusiveOrRing
+    , CommutativeRing(..)
     )
 
 {-| Ring typeclass definition and its instances for basic types.
@@ -23,14 +24,14 @@ import Typeclasses.Classes.Monoid
 {-| Explicit typeclass which implements group operations for type `a`.
 -}
 type alias Ring a =
-    { addition : Typeclasses.Classes.Group.Group a
+    { addition : Typeclasses.Classes.Group.AbelianGroup a
     , multiplication : Typeclasses.Classes.Monoid.Monoid a
     }
 
 
 type CommutativeRing a
     = CommutativeRing
-        { addition : Typeclasses.Classes.Group.Group a
+        { addition : Typeclasses.Classes.Group.AbelianGroup a
         , multiplication : Typeclasses.Classes.Monoid.CommutativeMonoid a
         }
 
@@ -47,17 +48,19 @@ numberRing =
 
 {-| Construct trivial ring
 -}
-trivialRing : Ring ()
+trivialRing : CommutativeRing ()
 trivialRing =
     { addition = Typeclasses.Classes.Group.trivialGroup
     , multiplication = Typeclasses.Classes.Monoid.unit
     }
+        |> CommutativeRing
 
 
 {-| Construct exclusive all ring
 -}
-exclusiveOrRing : Ring Bool
+exclusiveOrRing : CommutativeRing Bool
 exclusiveOrRing =
     { addition = Typeclasses.Classes.Group.exclusiveOr
     , multiplication = Typeclasses.Classes.Monoid.all
     }
+        |> CommutativeRing

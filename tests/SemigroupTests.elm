@@ -214,11 +214,14 @@ suite =
           <|
             \a b c ->
                 let
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.Semigroup.unit
+
                     aOrBThenOrC =
-                        Typeclasses.Classes.Semigroup.unit.prepend (Typeclasses.Classes.Semigroup.unit.prepend a b) c
+                        semigroup.prepend (semigroup.prepend a b) c
 
                     bOrCThenOrA =
-                        Typeclasses.Classes.Semigroup.unit.prepend a (Typeclasses.Classes.Semigroup.unit.prepend b c)
+                        semigroup.prepend a (semigroup.prepend b c)
                 in
                 aOrBThenOrC
                     |> Expect.equal bOrCThenOrA

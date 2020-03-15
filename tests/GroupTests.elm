@@ -4,6 +4,8 @@ import Expect
 import Fuzz
 import Test
 import Typeclasses.Classes.Group
+import Typeclasses.Classes.Monoid
+import Typeclasses.Classes.Semigroup
 
 
 suite : Test.Test
@@ -15,21 +17,30 @@ suite =
           <|
             \a ->
                 let
+                    (Typeclasses.Classes.Group.AbelianGroup group) =
+                        Typeclasses.Classes.Group.numberSum
+
+                    (Typeclasses.Classes.Monoid.CommutativeMonoid monoid) =
+                        group.monoid
+
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        monoid.semigroup
+
                     inversePlusA =
-                        Typeclasses.Classes.Group.numberSum.monoid.semigroup.prepend
-                            (Typeclasses.Classes.Group.numberSum.inverse a)
+                        semigroup.prepend
+                            (group.inverse a)
                             a
 
                     aPlusInverse =
-                        Typeclasses.Classes.Group.numberSum.monoid.semigroup.prepend
+                        semigroup.prepend
                             a
-                            (Typeclasses.Classes.Group.numberSum.inverse a)
+                            (group.inverse a)
                 in
                 Expect.true "All equal a"
                     (inversePlusA
-                        == Typeclasses.Classes.Group.numberSum.monoid.identity
+                        == monoid.identity
                         && aPlusInverse
-                        == Typeclasses.Classes.Group.numberSum.monoid.identity
+                        == monoid.identity
                     )
         , Test.fuzz
             Fuzz.unit
@@ -37,21 +48,30 @@ suite =
           <|
             \a ->
                 let
+                    (Typeclasses.Classes.Group.AbelianGroup group) =
+                        Typeclasses.Classes.Group.trivialGroup
+
+                    (Typeclasses.Classes.Monoid.CommutativeMonoid monoid) =
+                        group.monoid
+
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        monoid.semigroup
+
                     inversePlusA =
-                        Typeclasses.Classes.Group.trivialGroup.monoid.semigroup.prepend
-                            (Typeclasses.Classes.Group.trivialGroup.inverse a)
+                        semigroup.prepend
+                            (group.inverse a)
                             a
 
                     aPlusInverse =
-                        Typeclasses.Classes.Group.trivialGroup.monoid.semigroup.prepend
+                        semigroup.prepend
                             a
-                            (Typeclasses.Classes.Group.trivialGroup.inverse a)
+                            (group.inverse a)
                 in
                 Expect.true "All equal a"
                     (inversePlusA
-                        == Typeclasses.Classes.Group.trivialGroup.monoid.identity
+                        == monoid.identity
                         && aPlusInverse
-                        == Typeclasses.Classes.Group.trivialGroup.monoid.identity
+                        == monoid.identity
                     )
         , Test.fuzz
             Fuzz.bool
@@ -59,21 +79,30 @@ suite =
           <|
             \a ->
                 let
+                    (Typeclasses.Classes.Group.AbelianGroup group) =
+                        Typeclasses.Classes.Group.exclusiveOr
+
+                    (Typeclasses.Classes.Monoid.CommutativeMonoid monoid) =
+                        group.monoid
+
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        monoid.semigroup
+
                     inverseXorA =
-                        Typeclasses.Classes.Group.exclusiveOr.monoid.semigroup.prepend
-                            (Typeclasses.Classes.Group.exclusiveOr.inverse a)
+                        semigroup.prepend
+                            (group.inverse a)
                             a
 
                     aXorInverse =
-                        Typeclasses.Classes.Group.exclusiveOr.monoid.semigroup.prepend
+                        semigroup.prepend
                             a
-                            (Typeclasses.Classes.Group.exclusiveOr.inverse a)
+                            (group.inverse a)
                 in
                 Expect.true "All equal a"
                     (inverseXorA
-                        == Typeclasses.Classes.Group.exclusiveOr.monoid.identity
+                        == monoid.identity
                         && aXorInverse
-                        == Typeclasses.Classes.Group.exclusiveOr.monoid.identity
+                        == monoid.identity
                     )
         , Test.fuzz
             Fuzz.int
@@ -81,20 +110,29 @@ suite =
           <|
             \a ->
                 let
+                    (Typeclasses.Classes.Group.AbelianGroup group) =
+                        Typeclasses.Classes.Group.modularArithmetic 12
+
+                    (Typeclasses.Classes.Monoid.CommutativeMonoid monoid) =
+                        group.monoid
+
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        monoid.semigroup
+
                     inversePlusA =
-                        (Typeclasses.Classes.Group.modularArithmetic 12).monoid.semigroup.prepend
-                            ((Typeclasses.Classes.Group.modularArithmetic 12).inverse a)
+                        semigroup.prepend
+                            (group.inverse a)
                             a
 
                     aPlusInverse =
-                        (Typeclasses.Classes.Group.modularArithmetic 12).monoid.semigroup.prepend
+                        semigroup.prepend
                             a
-                            ((Typeclasses.Classes.Group.modularArithmetic 12).inverse a)
+                            (group.inverse a)
                 in
                 Expect.true "All equal a"
                     (inversePlusA
-                        == (Typeclasses.Classes.Group.modularArithmetic 12).monoid.identity
+                        == monoid.identity
                         && aPlusInverse
-                        == (Typeclasses.Classes.Group.modularArithmetic 12).monoid.identity
+                        == monoid.identity
                     )
         ]

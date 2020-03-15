@@ -1,6 +1,7 @@
 module Typeclasses.Classes.Group exposing
     ( Group
     , floatProduct, numberSum, trivialGroup, exclusiveOr, modularArithmetic
+    , AbelianGroup(..)
     )
 
 {-| Group typeclass definition and its instances for basic types.
@@ -49,35 +50,39 @@ floatProduct =
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
 Implements sum.
 -}
-numberSum : Group number
+numberSum : AbelianGroup number
 numberSum =
     { monoid = Typeclasses.Classes.Monoid.numberSum
     , inverse = \number -> -number
     }
+        |> AbelianGroup
 
 
 {-| Construct trivial group
 -}
-trivialGroup : Group ()
+trivialGroup : AbelianGroup ()
 trivialGroup =
     { monoid = Typeclasses.Classes.Monoid.unit
     , inverse = \() -> ()
     }
+        |> AbelianGroup
 
 
 {-| Construct exclusive Or
 -}
-exclusiveOr : Group Bool
+exclusiveOr : AbelianGroup Bool
 exclusiveOr =
     { monoid = Typeclasses.Classes.Monoid.exclusiveOr
     , inverse = Basics.identity
     }
+        |> AbelianGroup
 
 
 {-| Instance for modularArithmetic
 -}
-modularArithmetic : Int -> Group Int
+modularArithmetic : Int -> AbelianGroup Int
 modularArithmetic divisor =
     { monoid = Typeclasses.Classes.Monoid.modularArithmetic divisor
     , inverse = \a -> divisor - a
     }
+        |> AbelianGroup

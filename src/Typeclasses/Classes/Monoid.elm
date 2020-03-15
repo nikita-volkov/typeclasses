@@ -3,6 +3,7 @@ module Typeclasses.Classes.Monoid exposing
     , identityAndConcat, semigroupAndIdentity, appendable, numberProduct, numberSum
     , map
     , intProduct, intSum, string, maybeFirst, list, setUnion, setDifference, cmd, sub, task, all, any, composition, unit, exclusiveOr, modularArithmetic
+    , CommutativeMonoid(..)
     )
 
 {-| Monoid typeclass definition and its instances for basic types.
@@ -44,6 +45,14 @@ type alias Monoid a =
     }
 
 
+type CommutativeMonoid a
+    = CommutativeMonoid
+        { semigroup : Semigroup.CommutativeSemigroup a
+        , identity : a
+        , concat : List a -> a
+        }
+
+
 
 -- * Construction utilities
 -------------------------
@@ -80,13 +89,10 @@ appendable =
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
 Implements multiplication.
 -}
-numberProduct : Monoid number
+numberProduct : CommutativeMonoid number
 numberProduct =
-    let
-        (Semigroup.CommutativeSemigroup numberProductSemigroup) =
-            Semigroup.numberProduct
-    in
-    { semigroup = numberProductSemigroup, identity = 1, concat = List.product }
+    { semigroup = Semigroup.numberProduct, identity = 1, concat = List.product }
+        |> CommutativeMonoid
 
 
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
@@ -126,7 +132,7 @@ map aToB bToA monoidOfA =
 
 {-| Instance for integers under the multiplication operation.
 -}
-intProduct : Monoid Int
+intProduct : CommutativeMonoid Int
 intProduct =
     numberProduct
 

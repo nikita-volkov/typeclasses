@@ -28,13 +28,21 @@ type alias Ring a =
     }
 
 
+type CommutativeRing a
+    = CommutativeRing
+        { addition : Typeclasses.Classes.Group.Group a
+        , multiplication : Typeclasses.Classes.Monoid.CommutativeMonoid a
+        }
+
+
 {-| Construct real number ring
 -}
-numberRing : Ring number
+numberRing : CommutativeRing number
 numberRing =
     { addition = Typeclasses.Classes.Group.numberSum
     , multiplication = Typeclasses.Classes.Monoid.numberProduct
     }
+        |> CommutativeRing
 
 
 {-| Construct trivial ring

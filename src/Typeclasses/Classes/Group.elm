@@ -28,14 +28,22 @@ type alias Group a =
     }
 
 
+type AbelianGroup a
+    = AbelianGroup
+        { monoid : Typeclasses.Classes.Monoid.CommutativeMonoid a
+        , inverse : a -> a
+        }
+
+
 {-| Construct an instance for Float.
 Implements multiplication.
 -}
-floatProduct : Group Float
+floatProduct : AbelianGroup Float
 floatProduct =
     { monoid = Typeclasses.Classes.Monoid.numberProduct
     , inverse = \number -> 1 / number
     }
+        |> AbelianGroup
 
 
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.

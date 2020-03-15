@@ -4,6 +4,7 @@ import Expect
 import Fuzz
 import Test
 import Typeclasses.Classes.Monoid
+import Typeclasses.Classes.Semigroup
 
 
 suite : Test.Test
@@ -15,11 +16,17 @@ suite =
           <|
             \a ->
                 let
+                    (Typeclasses.Classes.Monoid.CommutativeMonoid monoid) =
+                        Typeclasses.Classes.Monoid.intProduct
+
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        monoid.semigroup
+
                     aTimesIdentity =
-                        Typeclasses.Classes.Monoid.intProduct.semigroup.prepend a Typeclasses.Classes.Monoid.intProduct.identity
+                        semigroup.prepend a monoid.identity
 
                     identityTimesA =
-                        Typeclasses.Classes.Monoid.intProduct.semigroup.prepend Typeclasses.Classes.Monoid.intProduct.identity a
+                        semigroup.prepend monoid.identity a
                 in
                 Expect.true "All equal a" (aTimesIdentity == a && identityTimesA == a)
         , Test.fuzz

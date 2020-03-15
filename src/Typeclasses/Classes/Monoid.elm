@@ -205,7 +205,11 @@ task monoidOfA =
 -}
 all : Monoid Bool
 all =
-    semigroupAndIdentity Semigroup.and True
+    let
+        (Semigroup.CommutativeSemigroup andSemigroup) =
+            Semigroup.and
+    in
+    semigroupAndIdentity andSemigroup True
 
 
 {-| Instance for any

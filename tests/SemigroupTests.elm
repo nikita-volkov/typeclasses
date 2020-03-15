@@ -140,14 +140,35 @@ suite =
           <|
             \a b c ->
                 let
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.Semigroup.and
+
                     aAndBThenAndC =
-                        Typeclasses.Classes.Semigroup.and.prepend (Typeclasses.Classes.Semigroup.and.prepend a b) c
+                        semigroup.prepend (semigroup.prepend a b) c
 
                     bAndCThenAndA =
-                        Typeclasses.Classes.Semigroup.and.prepend a (Typeclasses.Classes.Semigroup.and.prepend b c)
+                        semigroup.prepend a (semigroup.prepend b c)
                 in
                 aAndBThenAndC
                     |> Expect.equal bAndCThenAndA
+        , Test.fuzz2
+            Fuzz.bool
+            Fuzz.bool
+            "tests and is commutative"
+          <|
+            \a b ->
+                let
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.Semigroup.and
+
+                    aAndB =
+                        semigroup.prepend a b
+
+                    bAndA =
+                        semigroup.prepend b a
+                in
+                aAndB
+                    |> Expect.equal bAndA
         , Test.fuzz3
             Fuzz.bool
             Fuzz.bool

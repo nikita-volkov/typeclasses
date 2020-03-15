@@ -203,9 +203,10 @@ task semigroupOfA =
 
 {-| Instance for and
 -}
-and : Semigroup Bool
+and : CommutativeSemigroup Bool
 and =
     prepend (&&)
+        |> CommutativeSemigroup
 
 
 {-| Instance for or

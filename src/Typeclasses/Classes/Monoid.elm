@@ -216,7 +216,11 @@ all =
 -}
 any : Monoid Bool
 any =
-    semigroupAndIdentity Semigroup.or False
+    let
+        (Semigroup.CommutativeSemigroup orSemigroup) =
+            Semigroup.or
+    in
+    semigroupAndIdentity orSemigroup False
 
 
 {-| Instance for a -> a function

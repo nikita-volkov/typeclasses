@@ -211,9 +211,10 @@ and =
 
 {-| Instance for or
 -}
-or : Semigroup Bool
+or : CommutativeSemigroup Bool
 or =
     prepend (||)
+        |> CommutativeSemigroup
 
 
 {-| Instance for a -> a function

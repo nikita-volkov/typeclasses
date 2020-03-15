@@ -230,14 +230,35 @@ suite =
           <|
             \a b c ->
                 let
-                    aOrBThenOrC =
-                        Typeclasses.Classes.Semigroup.xor.prepend (Typeclasses.Classes.Semigroup.xor.prepend a b) c
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.Semigroup.xor
 
-                    bOrCThenOrA =
-                        Typeclasses.Classes.Semigroup.xor.prepend a (Typeclasses.Classes.Semigroup.xor.prepend b c)
+                    aXorBThenXorC =
+                        semigroup.prepend (semigroup.prepend a b) c
+
+                    bXorCThenXorA =
+                        semigroup.prepend a (semigroup.prepend b c)
                 in
-                aOrBThenOrC
-                    |> Expect.equal bOrCThenOrA
+                aXorBThenXorC
+                    |> Expect.equal bXorCThenXorA
+        , Test.fuzz2
+            Fuzz.bool
+            Fuzz.bool
+            "tests xor is commutative"
+          <|
+            \a b ->
+                let
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.Semigroup.xor
+
+                    aXorB =
+                        semigroup.prepend a b
+
+                    bXorA =
+                        semigroup.prepend b a
+                in
+                aXorB
+                    |> Expect.equal bXorA
         , Test.fuzz3
             Fuzz.int
             Fuzz.int

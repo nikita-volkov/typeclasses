@@ -231,9 +231,10 @@ unit =
     prepend (\() () -> ())
 
 
-xor : Semigroup Bool
+xor : CommutativeSemigroup Bool
 xor =
     prepend Basics.xor
+        |> CommutativeSemigroup
 
 
 {-| Instance for modularArithmetic semigroup

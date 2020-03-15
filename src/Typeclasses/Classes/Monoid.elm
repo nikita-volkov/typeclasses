@@ -241,7 +241,11 @@ unit =
 -}
 exclusiveOr : Monoid Bool
 exclusiveOr =
-    semigroupAndIdentity Semigroup.xor False
+    let
+        (Semigroup.CommutativeSemigroup xorSemigroup) =
+            Semigroup.xor
+    in
+    semigroupAndIdentity xorSemigroup False
 
 
 {-| Instance for modularArithmetic

@@ -163,7 +163,11 @@ list =
 -}
 setUnion : Monoid (Set comparable)
 setUnion =
-    semigroupAndIdentity Semigroup.setUnion Set.empty
+    let
+        (Semigroup.CommutativeSemigroup setUnionSemigroup) =
+            Semigroup.setUnion
+    in
+    semigroupAndIdentity setUnionSemigroup Set.empty
 
 
 {-| Instance for set under the difference operation.

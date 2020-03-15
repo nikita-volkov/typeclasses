@@ -159,9 +159,10 @@ list =
 
 {-| Instance for set under the union operation.
 -}
-setUnion : Semigroup (Set comparable)
+setUnion : CommutativeSemigroup (Set comparable)
 setUnion =
     prepend Set.union
+        |> CommutativeSemigroup
 
 
 {-| Instance for set under the intersection operation.

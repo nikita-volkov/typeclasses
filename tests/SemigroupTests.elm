@@ -241,12 +241,33 @@ suite =
           <|
             \a b c ->
                 let
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.Semigroup.setUnion
+
                     aUnionBThenUnionC =
-                        Typeclasses.Classes.Semigroup.setUnion.prepend (Typeclasses.Classes.Semigroup.setUnion.prepend a b) c
+                        semigroup.prepend (semigroup.prepend a b) c
 
                     bUnionCThenUnionA =
-                        Typeclasses.Classes.Semigroup.setUnion.prepend a (Typeclasses.Classes.Semigroup.setUnion.prepend b c)
+                        semigroup.prepend a (semigroup.prepend b c)
                 in
                 aUnionBThenUnionC
                     |> Expect.equal bUnionCThenUnionA
+        , Test.fuzz2
+            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+            "tests setUnion is commutative"
+          <|
+            \a b ->
+                let
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.Semigroup.setUnion
+
+                    aSetUnionB =
+                        semigroup.prepend a b
+
+                    bSetUnionA =
+                        semigroup.prepend b a
+                in
+                aSetUnionB
+                    |> Expect.equal bSetUnionA
         ]

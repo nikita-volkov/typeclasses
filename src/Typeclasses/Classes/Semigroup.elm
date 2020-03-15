@@ -167,9 +167,10 @@ setUnion =
 
 {-| Instance for set under the intersection operation.
 -}
-setIntersection : Semigroup (Set comparable)
+setIntersection : CommutativeSemigroup (Set comparable)
 setIntersection =
     prepend Set.intersect
+        |> CommutativeSemigroup
 
 
 {-| Instance for set under the difference operation.

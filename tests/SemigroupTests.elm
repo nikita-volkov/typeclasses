@@ -270,4 +270,41 @@ suite =
                 in
                 aSetUnionB
                     |> Expect.equal bSetUnionA
+        , Test.fuzz3
+            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+            "tests setIntersection is associative"
+          <|
+            \a b c ->
+                let
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.Semigroup.setIntersection
+
+                    aIntersectionBThenIntersectionC =
+                        semigroup.prepend (semigroup.prepend a b) c
+
+                    bIntersectionCThenIntersectionA =
+                        semigroup.prepend a (semigroup.prepend b c)
+                in
+                aIntersectionBThenIntersectionC
+                    |> Expect.equal bIntersectionCThenIntersectionA
+        , Test.fuzz2
+            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+            "tests setIntersection is commutative"
+          <|
+            \a b ->
+                let
+                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.Semigroup.setIntersection
+
+                    aSetIntersectionB =
+                        semigroup.prepend a b
+
+                    bSetIntersectionA =
+                        semigroup.prepend b a
+                in
+                aSetIntersectionB
+                    |> Expect.equal bSetIntersectionA
         ]

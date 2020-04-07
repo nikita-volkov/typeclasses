@@ -1,9 +1,8 @@
 module Typeclasses.Classes.Semigroup exposing
     ( Semigroup
-    , prepend, concat, appendable, numberProduct, numberSum
+    , prepend, concat, appendable
     , map
-    , intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task, and, or, composition, unit, xor, modularArithmetic
-    , CommutativeSemigroup(..)
+    , string, maybeFirst, list, setDifference, cmd, sub, task, composition
     )
 
 {-| Semigroup typeclass definition and its instances for basic types.
@@ -46,10 +45,6 @@ type alias Semigroup a =
     }
 
 
-type CommutativeSemigroup a
-    = CommutativeSemigroup (Semigroup a)
-
-
 
 -- * Constructors
 -------------------------
@@ -76,24 +71,6 @@ appendable =
     prepend (++)
 
 
-{-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
-Implements multiplication.
--}
-numberProduct : CommutativeSemigroup number
-numberProduct =
-    prepend (*)
-        |> CommutativeSemigroup
-
-
-{-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
-Implements sum.
--}
-numberSum : CommutativeSemigroup number
-numberSum =
-    prepend (+)
-        |> CommutativeSemigroup
-
-
 
 -- * Transformation utilities
 -------------------------
@@ -113,20 +90,6 @@ map aToB bToA semigroupOfA =
 
 -- * Instances
 -------------------------
-
-
-{-| Instance for integers under the multiplication operation.
--}
-intProduct : CommutativeSemigroup Int
-intProduct =
-    numberProduct
-
-
-{-| Instance for integers under the sum operation.
--}
-intSum : CommutativeSemigroup Int
-intSum =
-    numberSum
 
 
 {-| Instance for strings under the appending operation.
@@ -157,22 +120,6 @@ list =
     appendable
 
 
-{-| Instance for set under the union operation.
--}
-setUnion : CommutativeSemigroup (Set comparable)
-setUnion =
-    prepend Set.union
-        |> CommutativeSemigroup
-
-
-{-| Instance for set under the intersection operation.
--}
-setIntersection : CommutativeSemigroup (Set comparable)
-setIntersection =
-    prepend Set.intersect
-        |> CommutativeSemigroup
-
-
 {-| Instance for set under the difference operation.
 -}
 setDifference : Semigroup (Set comparable)
@@ -201,51 +148,8 @@ task semigroupOfA =
     prepend <| \l r -> l |> Task.andThen (\la -> Task.map (semigroupOfA.prepend la) r)
 
 
-{-| Instance for and
--}
-and : CommutativeSemigroup Bool
-and =
-    prepend (&&)
-        |> CommutativeSemigroup
-
-
-{-| Instance for or
--}
-or : CommutativeSemigroup Bool
-or =
-    prepend (||)
-        |> CommutativeSemigroup
-
-
 {-| Instance for a -> a function
 -}
 composition : Semigroup (a -> a)
 composition =
     prepend (>>)
-
-
-{-| Instance for trivial semigroup
--}
-unit : CommutativeSemigroup ()
-unit =
-    prepend (\() () -> ())
-        |> CommutativeSemigroup
-
-
-xor : CommutativeSemigroup Bool
-xor =
-    prepend Basics.xor
-        |> CommutativeSemigroup
-
-
-{-| Instance for modularArithmetic semigroup
--}
-modularArithmetic : Int -> CommutativeSemigroup Int
-modularArithmetic divisor =
-    prepend
-        (\dividendOne dividendTwo ->
-            dividendOne
-                + dividendTwo
-                |> Basics.modBy divisor
-        )
-        |> CommutativeSemigroup

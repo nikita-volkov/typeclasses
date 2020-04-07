@@ -4,6 +4,7 @@ import Expect
 import Fuzz
 import Set
 import Test
+import Typeclasses.Classes.CommutativeSemigroup
 import Typeclasses.Classes.Semigroup
 
 
@@ -18,8 +19,8 @@ suite =
           <|
             \a b c ->
                 let
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.Semigroup.intProduct
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.CommutativeSemigroup.intProduct
 
                     aTimesBThenTimesC =
                         semigroup.prepend (semigroup.prepend a b) c
@@ -36,8 +37,8 @@ suite =
           <|
             \a b ->
                 let
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.Semigroup.intProduct
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.CommutativeSemigroup.intProduct
 
                     aTimesB =
                         semigroup.prepend a b
@@ -55,8 +56,8 @@ suite =
           <|
             \a b c ->
                 let
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.Semigroup.intSum
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.CommutativeSemigroup.intSum
 
                     aPlusBThenPlusC =
                         semigroup.prepend (semigroup.prepend a b) c
@@ -73,8 +74,8 @@ suite =
           <|
             \a b ->
                 let
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.Semigroup.numberSum
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.CommutativeSemigroup.numberSum
 
                     aPlusB =
                         semigroup.prepend a b
@@ -140,8 +141,8 @@ suite =
           <|
             \a b c ->
                 let
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.Semigroup.and
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.CommutativeSemigroup.and
 
                     aAndBThenAndC =
                         semigroup.prepend (semigroup.prepend a b) c
@@ -158,8 +159,8 @@ suite =
           <|
             \a b ->
                 let
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.Semigroup.and
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.CommutativeSemigroup.and
 
                     aAndB =
                         semigroup.prepend a b
@@ -177,8 +178,8 @@ suite =
           <|
             \a b c ->
                 let
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.Semigroup.or
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.CommutativeSemigroup.or
 
                     aOrBThenOrC =
                         semigroup.prepend (semigroup.prepend a b) c
@@ -195,8 +196,8 @@ suite =
           <|
             \a b ->
                 let
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.Semigroup.or
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.CommutativeSemigroup.or
 
                     aOrB =
                         semigroup.prepend a b
@@ -214,8 +215,8 @@ suite =
           <|
             \a b c ->
                 let
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.Semigroup.unit
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.CommutativeSemigroup.unit
 
                     aOrBThenOrC =
                         semigroup.prepend (semigroup.prepend a b) c
@@ -233,8 +234,8 @@ suite =
           <|
             \a b c ->
                 let
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.Semigroup.xor
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.CommutativeSemigroup.xor
 
                     aXorBThenXorC =
                         semigroup.prepend (semigroup.prepend a b) c
@@ -251,8 +252,8 @@ suite =
           <|
             \a b ->
                 let
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.Semigroup.xor
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.CommutativeSemigroup.xor
 
                     aXorB =
                         semigroup.prepend a b
@@ -270,8 +271,8 @@ suite =
           <|
             \a b c ->
                 let
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.Semigroup.modularArithmetic 12
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.CommutativeSemigroup.modularArithmetic 12
 
                     aPlusBThenPlusC =
                         semigroup.prepend (semigroup.prepend a b) c
@@ -288,8 +289,8 @@ suite =
           <|
             \a b ->
                 let
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.Semigroup.modularArithmetic 12
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.CommutativeSemigroup.modularArithmetic 12
 
                     aPlusB =
                         semigroup.prepend a b
@@ -307,8 +308,8 @@ suite =
           <|
             \a b c ->
                 let
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.Semigroup.setUnion
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.CommutativeSemigroup.setUnion
 
                     aUnionBThenUnionC =
                         semigroup.prepend (semigroup.prepend a b) c
@@ -325,8 +326,8 @@ suite =
           <|
             \a b ->
                 let
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.Semigroup.setUnion
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.CommutativeSemigroup.setUnion
 
                     aSetUnionB =
                         semigroup.prepend a b
@@ -344,8 +345,8 @@ suite =
           <|
             \a b c ->
                 let
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.Semigroup.setIntersection
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.CommutativeSemigroup.setIntersection
 
                     aIntersectionBThenIntersectionC =
                         semigroup.prepend (semigroup.prepend a b) c
@@ -362,8 +363,8 @@ suite =
           <|
             \a b ->
                 let
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.Semigroup.setIntersection
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                        Typeclasses.Classes.CommutativeSemigroup.setIntersection
 
                     aSetIntersectionB =
                         semigroup.prepend a b

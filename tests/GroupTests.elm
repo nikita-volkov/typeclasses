@@ -5,6 +5,7 @@ import Fuzz
 import Test
 import Typeclasses.Classes.AbelianGroup
 import Typeclasses.Classes.CommutativeMonoid
+import Typeclasses.Classes.CommutativeSemigroup
 import Typeclasses.Classes.Group
 import Typeclasses.Classes.Monoid
 import Typeclasses.Classes.Semigroup
@@ -25,7 +26,7 @@ suite =
                     (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
                         group.monoid
 
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
                         monoid.semigroup
 
                     inversePlusA =
@@ -56,7 +57,7 @@ suite =
                     (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
                         group.monoid
 
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
                         monoid.semigroup
 
                     inversePlusA =
@@ -87,7 +88,7 @@ suite =
                     (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
                         group.monoid
 
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
                         monoid.semigroup
 
                     inverseXorA =
@@ -118,7 +119,7 @@ suite =
                     (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
                         group.monoid
 
-                    (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
+                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
                         monoid.semigroup
 
                     inversePlusA =

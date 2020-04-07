@@ -32,6 +32,7 @@ module Typeclasses.Classes.Monoid exposing
 import Either exposing (Either(..))
 import Set exposing (Set)
 import Task exposing (Task)
+import Typeclasses.Classes.CommutativeSemigroup
 import Typeclasses.Classes.Semigroup as Semigroup exposing (Semigroup)
 
 
@@ -126,8 +127,8 @@ list =
 setUnion : Monoid (Set comparable)
 setUnion =
     let
-        (Semigroup.CommutativeSemigroup setUnionSemigroup) =
-            Semigroup.setUnion
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup setUnionSemigroup) =
+            Typeclasses.Classes.CommutativeSemigroup.setUnion
     in
     semigroupAndIdentity setUnionSemigroup Set.empty
 

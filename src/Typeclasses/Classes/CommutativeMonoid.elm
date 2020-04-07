@@ -14,12 +14,12 @@ module Typeclasses.Classes.CommutativeMonoid exposing
 import Either exposing (Either(..))
 import Set exposing (Set)
 import Task exposing (Task)
-import Typeclasses.Classes.Semigroup as Semigroup exposing (Semigroup)
+import Typeclasses.Classes.CommutativeSemigroup
 
 
 type CommutativeMonoid a
     = CommutativeMonoid
-        { semigroup : Semigroup.CommutativeSemigroup a
+        { semigroup : Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup a
         , identity : a
         , concat : List a -> a
         }
@@ -27,10 +27,10 @@ type CommutativeMonoid a
 
 {-| Construct an instance by specifying a commutative semigroup instance and an identity value.
 -}
-commutativeSemigroupAndIdentity : Semigroup.CommutativeSemigroup a -> a -> CommutativeMonoid a
+commutativeSemigroupAndIdentity : Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup a -> a -> CommutativeMonoid a
 commutativeSemigroupAndIdentity commutativeSemigroup identity =
     let
-        (Semigroup.CommutativeSemigroup semigroup) =
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
             commutativeSemigroup
     in
     { semigroup = commutativeSemigroup
@@ -45,7 +45,7 @@ Implements multiplication.
 -}
 numberProduct : CommutativeMonoid number
 numberProduct =
-    { semigroup = Semigroup.numberProduct, identity = 1, concat = List.product }
+    { semigroup = Typeclasses.Classes.CommutativeSemigroup.numberProduct, identity = 1, concat = List.product }
         |> CommutativeMonoid
 
 
@@ -54,7 +54,7 @@ Implements sum.
 -}
 numberSum : CommutativeMonoid number
 numberSum =
-    { semigroup = Semigroup.numberSum, identity = 0, concat = List.sum }
+    { semigroup = Typeclasses.Classes.CommutativeSemigroup.numberSum, identity = 0, concat = List.sum }
         |> CommutativeMonoid
 
 
@@ -76,32 +76,32 @@ intSum =
 -}
 all : CommutativeMonoid Bool
 all =
-    commutativeSemigroupAndIdentity Semigroup.and True
+    commutativeSemigroupAndIdentity Typeclasses.Classes.CommutativeSemigroup.and True
 
 
 {-| Instance for any
 -}
 any : CommutativeMonoid Bool
 any =
-    commutativeSemigroupAndIdentity Semigroup.or False
+    commutativeSemigroupAndIdentity Typeclasses.Classes.CommutativeSemigroup.or False
 
 
 {-| Instance for trivial monoid
 -}
 unit : CommutativeMonoid ()
 unit =
-    commutativeSemigroupAndIdentity Semigroup.unit ()
+    commutativeSemigroupAndIdentity Typeclasses.Classes.CommutativeSemigroup.unit ()
 
 
 {-| Instance for exclusiveOr
 -}
 exclusiveOr : CommutativeMonoid Bool
 exclusiveOr =
-    commutativeSemigroupAndIdentity Semigroup.xor False
+    commutativeSemigroupAndIdentity Typeclasses.Classes.CommutativeSemigroup.xor False
 
 
 {-| Instance for modularArithmetic
 -}
 modularArithmetic : Int -> CommutativeMonoid Int
 modularArithmetic divisor =
-    commutativeSemigroupAndIdentity (Semigroup.modularArithmetic divisor) 0
+    commutativeSemigroupAndIdentity (Typeclasses.Classes.CommutativeSemigroup.modularArithmetic divisor) 0

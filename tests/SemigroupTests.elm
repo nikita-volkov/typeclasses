@@ -11,80 +11,323 @@ import Typeclasses.Classes.Semigroup
 suite : Test.Test
 suite =
     Test.describe "The Semigroup abstraction"
-        [ Test.fuzz3
-            (Fuzz.intRange -100 100)
-            (Fuzz.intRange -100 100)
-            (Fuzz.intRange -100 100)
-            "tests intProduct is associative"
-          <|
-            \a b c ->
-                let
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.CommutativeSemigroup.intProduct
+        [ Test.describe "Commutative Semigroup"
+            [ Test.fuzz3
+                (Fuzz.intRange -100 100)
+                (Fuzz.intRange -100 100)
+                (Fuzz.intRange -100 100)
+                "tests intProduct is associative"
+              <|
+                \a b c ->
+                    let
+                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            Typeclasses.Classes.CommutativeSemigroup.intProduct
 
-                    aTimesBThenTimesC =
-                        semigroup.prepend (semigroup.prepend a b) c
+                        aTimesBThenTimesC =
+                            semigroup.prepend (semigroup.prepend a b) c
 
-                    bTimesCThenTimesA =
-                        semigroup.prepend a (semigroup.prepend b c)
-                in
-                aTimesBThenTimesC
-                    |> Expect.equal bTimesCThenTimesA
-        , Test.fuzz2
-            (Fuzz.intRange -100 100)
-            (Fuzz.intRange -100 100)
-            "tests intProduct is commutative"
-          <|
-            \a b ->
-                let
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.CommutativeSemigroup.intProduct
+                        bTimesCThenTimesA =
+                            semigroup.prepend a (semigroup.prepend b c)
+                    in
+                    aTimesBThenTimesC
+                        |> Expect.equal bTimesCThenTimesA
+            , Test.fuzz2
+                (Fuzz.intRange -100 100)
+                (Fuzz.intRange -100 100)
+                "tests intProduct is commutative"
+              <|
+                \a b ->
+                    let
+                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            Typeclasses.Classes.CommutativeSemigroup.intProduct
 
-                    aTimesB =
-                        semigroup.prepend a b
+                        aTimesB =
+                            semigroup.prepend a b
 
-                    bTimesA =
-                        semigroup.prepend b a
-                in
-                aTimesB
-                    |> Expect.equal bTimesA
-        , Test.fuzz3
-            Fuzz.int
-            Fuzz.int
-            Fuzz.int
-            "tests numberSum is associative"
-          <|
-            \a b c ->
-                let
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.CommutativeSemigroup.intSum
+                        bTimesA =
+                            semigroup.prepend b a
+                    in
+                    aTimesB
+                        |> Expect.equal bTimesA
+            , Test.fuzz3
+                Fuzz.int
+                Fuzz.int
+                Fuzz.int
+                "tests numberSum is associative"
+              <|
+                \a b c ->
+                    let
+                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            Typeclasses.Classes.CommutativeSemigroup.intSum
 
-                    aPlusBThenPlusC =
-                        semigroup.prepend (semigroup.prepend a b) c
+                        aPlusBThenPlusC =
+                            semigroup.prepend (semigroup.prepend a b) c
 
-                    bPlusCThenPlusA =
-                        semigroup.prepend a (semigroup.prepend b c)
-                in
-                aPlusBThenPlusC
-                    |> Expect.equal bPlusCThenPlusA
-        , Test.fuzz2
-            (Fuzz.intRange -100 100)
-            (Fuzz.intRange -100 100)
-            "tests numberSum is commutative"
-          <|
-            \a b ->
-                let
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.CommutativeSemigroup.numberSum
+                        bPlusCThenPlusA =
+                            semigroup.prepend a (semigroup.prepend b c)
+                    in
+                    aPlusBThenPlusC
+                        |> Expect.equal bPlusCThenPlusA
+            , Test.fuzz2
+                (Fuzz.intRange -100 100)
+                (Fuzz.intRange -100 100)
+                "tests numberSum is commutative"
+              <|
+                \a b ->
+                    let
+                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            Typeclasses.Classes.CommutativeSemigroup.numberSum
 
-                    aPlusB =
-                        semigroup.prepend a b
+                        aPlusB =
+                            semigroup.prepend a b
 
-                    bPlusA =
-                        semigroup.prepend b a
-                in
-                aPlusB
-                    |> Expect.equal bPlusA
+                        bPlusA =
+                            semigroup.prepend b a
+                    in
+                    aPlusB
+                        |> Expect.equal bPlusA
+            , Test.fuzz3
+                Fuzz.bool
+                Fuzz.bool
+                Fuzz.bool
+                "tests and is associative"
+              <|
+                \a b c ->
+                    let
+                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            Typeclasses.Classes.CommutativeSemigroup.and
+
+                        aAndBThenAndC =
+                            semigroup.prepend (semigroup.prepend a b) c
+
+                        bAndCThenAndA =
+                            semigroup.prepend a (semigroup.prepend b c)
+                    in
+                    aAndBThenAndC
+                        |> Expect.equal bAndCThenAndA
+            , Test.fuzz2
+                Fuzz.bool
+                Fuzz.bool
+                "tests and is commutative"
+              <|
+                \a b ->
+                    let
+                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            Typeclasses.Classes.CommutativeSemigroup.and
+
+                        aAndB =
+                            semigroup.prepend a b
+
+                        bAndA =
+                            semigroup.prepend b a
+                    in
+                    aAndB
+                        |> Expect.equal bAndA
+            , Test.fuzz3
+                Fuzz.bool
+                Fuzz.bool
+                Fuzz.bool
+                "tests or is associative"
+              <|
+                \a b c ->
+                    let
+                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            Typeclasses.Classes.CommutativeSemigroup.or
+
+                        aOrBThenOrC =
+                            semigroup.prepend (semigroup.prepend a b) c
+
+                        bOrCThenOrA =
+                            semigroup.prepend a (semigroup.prepend b c)
+                    in
+                    aOrBThenOrC
+                        |> Expect.equal bOrCThenOrA
+            , Test.fuzz2
+                Fuzz.bool
+                Fuzz.bool
+                "tests or is commutative"
+              <|
+                \a b ->
+                    let
+                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            Typeclasses.Classes.CommutativeSemigroup.or
+
+                        aOrB =
+                            semigroup.prepend a b
+
+                        bOrA =
+                            semigroup.prepend b a
+                    in
+                    aOrB
+                        |> Expect.equal bOrA
+            , Test.fuzz3
+                Fuzz.unit
+                Fuzz.unit
+                Fuzz.unit
+                "tests unit is associative"
+              <|
+                \a b c ->
+                    let
+                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            Typeclasses.Classes.CommutativeSemigroup.unit
+
+                        aOrBThenOrC =
+                            semigroup.prepend (semigroup.prepend a b) c
+
+                        bOrCThenOrA =
+                            semigroup.prepend a (semigroup.prepend b c)
+                    in
+                    aOrBThenOrC
+                        |> Expect.equal bOrCThenOrA
+            , Test.fuzz3
+                Fuzz.bool
+                Fuzz.bool
+                Fuzz.bool
+                "tests xor is associative"
+              <|
+                \a b c ->
+                    let
+                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            Typeclasses.Classes.CommutativeSemigroup.xor
+
+                        aXorBThenXorC =
+                            semigroup.prepend (semigroup.prepend a b) c
+
+                        bXorCThenXorA =
+                            semigroup.prepend a (semigroup.prepend b c)
+                    in
+                    aXorBThenXorC
+                        |> Expect.equal bXorCThenXorA
+            , Test.fuzz2
+                Fuzz.bool
+                Fuzz.bool
+                "tests xor is commutative"
+              <|
+                \a b ->
+                    let
+                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            Typeclasses.Classes.CommutativeSemigroup.xor
+
+                        aXorB =
+                            semigroup.prepend a b
+
+                        bXorA =
+                            semigroup.prepend b a
+                    in
+                    aXorB
+                        |> Expect.equal bXorA
+            , Test.fuzz3
+                Fuzz.int
+                Fuzz.int
+                Fuzz.int
+                "tests modularArithmetic is associative"
+              <|
+                \a b c ->
+                    let
+                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            Typeclasses.Classes.CommutativeSemigroup.modularArithmetic 12
+
+                        aPlusBThenPlusC =
+                            semigroup.prepend (semigroup.prepend a b) c
+
+                        bPlusCThenPlusA =
+                            semigroup.prepend a (semigroup.prepend b c)
+                    in
+                    aPlusBThenPlusC
+                        |> Expect.equal bPlusCThenPlusA
+            , Test.fuzz2
+                (Fuzz.intRange -100 100)
+                (Fuzz.intRange -100 100)
+                "tests modularArithmetic is commutative"
+              <|
+                \a b ->
+                    let
+                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            Typeclasses.Classes.CommutativeSemigroup.modularArithmetic 12
+
+                        aPlusB =
+                            semigroup.prepend a b
+
+                        bPlusA =
+                            semigroup.prepend b a
+                    in
+                    aPlusB
+                        |> Expect.equal bPlusA
+            , Test.fuzz3
+                (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+                (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+                (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+                "tests setUnion is associative"
+              <|
+                \a b c ->
+                    let
+                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            Typeclasses.Classes.CommutativeSemigroup.setUnion
+
+                        aUnionBThenUnionC =
+                            semigroup.prepend (semigroup.prepend a b) c
+
+                        bUnionCThenUnionA =
+                            semigroup.prepend a (semigroup.prepend b c)
+                    in
+                    aUnionBThenUnionC
+                        |> Expect.equal bUnionCThenUnionA
+            , Test.fuzz2
+                (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+                (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+                "tests setUnion is commutative"
+              <|
+                \a b ->
+                    let
+                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            Typeclasses.Classes.CommutativeSemigroup.setUnion
+
+                        aSetUnionB =
+                            semigroup.prepend a b
+
+                        bSetUnionA =
+                            semigroup.prepend b a
+                    in
+                    aSetUnionB
+                        |> Expect.equal bSetUnionA
+            , Test.fuzz3
+                (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+                (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+                (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+                "tests setIntersection is associative"
+              <|
+                \a b c ->
+                    let
+                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            Typeclasses.Classes.CommutativeSemigroup.setIntersection
+
+                        aIntersectionBThenIntersectionC =
+                            semigroup.prepend (semigroup.prepend a b) c
+
+                        bIntersectionCThenIntersectionA =
+                            semigroup.prepend a (semigroup.prepend b c)
+                    in
+                    aIntersectionBThenIntersectionC
+                        |> Expect.equal bIntersectionCThenIntersectionA
+            , Test.fuzz2
+                (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+                (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
+                "tests setIntersection is commutative"
+              <|
+                \a b ->
+                    let
+                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            Typeclasses.Classes.CommutativeSemigroup.setIntersection
+
+                        aSetIntersectionB =
+                            semigroup.prepend a b
+
+                        bSetIntersectionA =
+                            semigroup.prepend b a
+                    in
+                    aSetIntersectionB
+                        |> Expect.equal bSetIntersectionA
+            ]
         , Test.fuzz3
             Fuzz.string
             Fuzz.string
@@ -133,245 +376,4 @@ suite =
                 in
                 aAppendBThenAppendC
                     |> Expect.equal bAppendCThenAppendA
-        , Test.fuzz3
-            Fuzz.bool
-            Fuzz.bool
-            Fuzz.bool
-            "tests and is associative"
-          <|
-            \a b c ->
-                let
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.CommutativeSemigroup.and
-
-                    aAndBThenAndC =
-                        semigroup.prepend (semigroup.prepend a b) c
-
-                    bAndCThenAndA =
-                        semigroup.prepend a (semigroup.prepend b c)
-                in
-                aAndBThenAndC
-                    |> Expect.equal bAndCThenAndA
-        , Test.fuzz2
-            Fuzz.bool
-            Fuzz.bool
-            "tests and is commutative"
-          <|
-            \a b ->
-                let
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.CommutativeSemigroup.and
-
-                    aAndB =
-                        semigroup.prepend a b
-
-                    bAndA =
-                        semigroup.prepend b a
-                in
-                aAndB
-                    |> Expect.equal bAndA
-        , Test.fuzz3
-            Fuzz.bool
-            Fuzz.bool
-            Fuzz.bool
-            "tests or is associative"
-          <|
-            \a b c ->
-                let
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.CommutativeSemigroup.or
-
-                    aOrBThenOrC =
-                        semigroup.prepend (semigroup.prepend a b) c
-
-                    bOrCThenOrA =
-                        semigroup.prepend a (semigroup.prepend b c)
-                in
-                aOrBThenOrC
-                    |> Expect.equal bOrCThenOrA
-        , Test.fuzz2
-            Fuzz.bool
-            Fuzz.bool
-            "tests or is commutative"
-          <|
-            \a b ->
-                let
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.CommutativeSemigroup.or
-
-                    aOrB =
-                        semigroup.prepend a b
-
-                    bOrA =
-                        semigroup.prepend b a
-                in
-                aOrB
-                    |> Expect.equal bOrA
-        , Test.fuzz3
-            Fuzz.unit
-            Fuzz.unit
-            Fuzz.unit
-            "tests unit is associative"
-          <|
-            \a b c ->
-                let
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.CommutativeSemigroup.unit
-
-                    aOrBThenOrC =
-                        semigroup.prepend (semigroup.prepend a b) c
-
-                    bOrCThenOrA =
-                        semigroup.prepend a (semigroup.prepend b c)
-                in
-                aOrBThenOrC
-                    |> Expect.equal bOrCThenOrA
-        , Test.fuzz3
-            Fuzz.bool
-            Fuzz.bool
-            Fuzz.bool
-            "tests xor is associative"
-          <|
-            \a b c ->
-                let
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.CommutativeSemigroup.xor
-
-                    aXorBThenXorC =
-                        semigroup.prepend (semigroup.prepend a b) c
-
-                    bXorCThenXorA =
-                        semigroup.prepend a (semigroup.prepend b c)
-                in
-                aXorBThenXorC
-                    |> Expect.equal bXorCThenXorA
-        , Test.fuzz2
-            Fuzz.bool
-            Fuzz.bool
-            "tests xor is commutative"
-          <|
-            \a b ->
-                let
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.CommutativeSemigroup.xor
-
-                    aXorB =
-                        semigroup.prepend a b
-
-                    bXorA =
-                        semigroup.prepend b a
-                in
-                aXorB
-                    |> Expect.equal bXorA
-        , Test.fuzz3
-            Fuzz.int
-            Fuzz.int
-            Fuzz.int
-            "tests modularArithmetic is associative"
-          <|
-            \a b c ->
-                let
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.CommutativeSemigroup.modularArithmetic 12
-
-                    aPlusBThenPlusC =
-                        semigroup.prepend (semigroup.prepend a b) c
-
-                    bPlusCThenPlusA =
-                        semigroup.prepend a (semigroup.prepend b c)
-                in
-                aPlusBThenPlusC
-                    |> Expect.equal bPlusCThenPlusA
-        , Test.fuzz2
-            (Fuzz.intRange -100 100)
-            (Fuzz.intRange -100 100)
-            "tests modularArithmetic is commutative"
-          <|
-            \a b ->
-                let
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.CommutativeSemigroup.modularArithmetic 12
-
-                    aPlusB =
-                        semigroup.prepend a b
-
-                    bPlusA =
-                        semigroup.prepend b a
-                in
-                aPlusB
-                    |> Expect.equal bPlusA
-        , Test.fuzz3
-            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
-            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
-            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
-            "tests setUnion is associative"
-          <|
-            \a b c ->
-                let
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.CommutativeSemigroup.setUnion
-
-                    aUnionBThenUnionC =
-                        semigroup.prepend (semigroup.prepend a b) c
-
-                    bUnionCThenUnionA =
-                        semigroup.prepend a (semigroup.prepend b c)
-                in
-                aUnionBThenUnionC
-                    |> Expect.equal bUnionCThenUnionA
-        , Test.fuzz2
-            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
-            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
-            "tests setUnion is commutative"
-          <|
-            \a b ->
-                let
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.CommutativeSemigroup.setUnion
-
-                    aSetUnionB =
-                        semigroup.prepend a b
-
-                    bSetUnionA =
-                        semigroup.prepend b a
-                in
-                aSetUnionB
-                    |> Expect.equal bSetUnionA
-        , Test.fuzz3
-            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
-            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
-            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
-            "tests setIntersection is associative"
-          <|
-            \a b c ->
-                let
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.CommutativeSemigroup.setIntersection
-
-                    aIntersectionBThenIntersectionC =
-                        semigroup.prepend (semigroup.prepend a b) c
-
-                    bIntersectionCThenIntersectionA =
-                        semigroup.prepend a (semigroup.prepend b c)
-                in
-                aIntersectionBThenIntersectionC
-                    |> Expect.equal bIntersectionCThenIntersectionA
-        , Test.fuzz2
-            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
-            (Fuzz.map Set.fromList (Fuzz.list Fuzz.int))
-            "tests setIntersection is commutative"
-          <|
-            \a b ->
-                let
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        Typeclasses.Classes.CommutativeSemigroup.setIntersection
-
-                    aSetIntersectionB =
-                        semigroup.prepend a b
-
-                    bSetIntersectionA =
-                        semigroup.prepend b a
-                in
-                aSetIntersectionB
-                    |> Expect.equal bSetIntersectionA
         ]

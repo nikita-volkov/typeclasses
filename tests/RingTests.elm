@@ -5,6 +5,7 @@ import Fuzz
 import Test
 import Typeclasses.Classes.AbelianGroup
 import Typeclasses.Classes.CommutativeMonoid
+import Typeclasses.Classes.CommutativeRing
 import Typeclasses.Classes.CommutativeSemigroup
 import Typeclasses.Classes.Ring
 
@@ -20,8 +21,8 @@ suite =
           <|
             \x y z ->
                 let
-                    (Typeclasses.Classes.Ring.CommutativeRing commutativeRing) =
-                        Typeclasses.Classes.Ring.trivialRing
+                    (Typeclasses.Classes.CommutativeRing.CommutativeRing commutativeRing) =
+                        Typeclasses.Classes.CommutativeRing.trivialRing
 
                     multiplication =
                         commutativeRing.multiplication
@@ -83,8 +84,8 @@ suite =
           <|
             \x y z ->
                 let
-                    (Typeclasses.Classes.Ring.CommutativeRing commutativeRing) =
-                        Typeclasses.Classes.Ring.exclusiveOrRing
+                    (Typeclasses.Classes.CommutativeRing.CommutativeRing commutativeRing) =
+                        Typeclasses.Classes.CommutativeRing.exclusiveOrRing
 
                     multiplication =
                         commutativeRing.multiplication

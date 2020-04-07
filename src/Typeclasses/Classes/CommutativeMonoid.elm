@@ -15,6 +15,29 @@ import Either exposing (Either(..))
 import Typeclasses.Classes.CommutativeSemigroup
 
 
+{-| Commutative Monoid typeclass definition and its instances for basic types.
+
+
+# Definition
+
+@docs CommutativeMonoid
+
+
+# Construction utilities
+
+@docs commutativeSemigroupAndIdentity
+
+
+# Instance transformation utilities
+
+@docs map
+
+
+# Instances
+
+@docs numberProduct, numberSum, intProduct, intSum, all, any, unit, exclusiveOr, modularArithmetic
+
+-}
 type CommutativeMonoid a
     = CommutativeMonoid
         { semigroup : Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup a

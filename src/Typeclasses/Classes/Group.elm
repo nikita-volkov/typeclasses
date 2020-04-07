@@ -7,10 +7,6 @@ module Typeclasses.Classes.Group exposing (Group)
 
 @docs Group
 
-#Instances
-
-@docs floatProduct, numberSum, trivialGroup, exclusiveOr, modularArithmetic
-
 -}
 
 import Typeclasses.Classes.Monoid exposing (Monoid)

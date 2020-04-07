@@ -1,14 +1,14 @@
 module Typeclasses.Classes.AbelianGroup exposing
-    ( floatProduct, numberSum, trivialGroup, exclusiveOr, modularArithmetic
-    , AbelianGroup(..)
+    ( AbelianGroup(..)
+    , floatProduct, numberSum, trivialGroup, exclusiveOr, modularArithmetic
     )
 
-{-| Group typeclass definition and its instances for basic types.
+{-| Abelian Group typeclass definition and its instances for basic types.
 
 
 # Definition
 
-@docs Group
+@docs AbelianGroup
 
 #Instances
 

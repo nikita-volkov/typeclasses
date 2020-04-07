@@ -1,17 +1,22 @@
 module Typeclasses.Classes.CommutativeSemigroup exposing
     ( CommutativeSemigroup(..)
-    , and
-    , intProduct
-    , intSum
-    , modularArithmetic
-    , numberProduct
-    , numberSum
-    , or
-    , setIntersection
-    , setUnion
-    , unit
-    , xor
+    , intProduct, intSum, setUnion, setIntersection, and, or, unit, xor, modularArithmetic
+    , numberProduct, numberSum
     )
+
+{-| Commutative Semigroup typeclass definition and its instances for basic types.
+
+
+# Definition
+
+@docs CommutativeSemigroup
+
+
+# Instances
+
+@docs intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task, and, or, composition, unit, xor, modularArithmetic
+
+-}
 
 import Set
 import Typeclasses.Classes.Semigroup

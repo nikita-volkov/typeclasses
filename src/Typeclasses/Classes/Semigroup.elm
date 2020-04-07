@@ -2,7 +2,7 @@ module Typeclasses.Classes.Semigroup exposing
     ( Semigroup
     , prepend, concat, appendable
     , map
-    , string, maybeFirst, list, setDifference, cmd, sub, task, composition
+    , string, maybeFirst, list, cmd, sub, task, composition, setDifference
     )
 
 {-| Semigroup typeclass definition and its instances for basic types.
@@ -15,7 +15,7 @@ module Typeclasses.Classes.Semigroup exposing
 
 # Construction utilities
 
-@docs prepend, concat, appendable, numberProduct, numberSum
+@docs prepend, concat, appendable
 
 
 # Instance transformation utilities
@@ -25,7 +25,7 @@ module Typeclasses.Classes.Semigroup exposing
 
 # Instances
 
-@docs intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task, and, or, composition, unit, xor, modularArithmetic
+@docs string, maybeFirst, list, cmd, sub, task, composition, setDifference
 
 -}
 

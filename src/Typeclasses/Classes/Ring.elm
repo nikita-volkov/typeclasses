@@ -19,7 +19,6 @@ module Typeclasses.Classes.Ring exposing
 
 import Typeclasses.Classes.AbelianGroup
 import Typeclasses.Classes.CommutativeMonoid
-import Typeclasses.Classes.Group
 import Typeclasses.Classes.Monoid
 
 

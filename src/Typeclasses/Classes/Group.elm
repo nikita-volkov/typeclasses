@@ -13,7 +13,6 @@ module Typeclasses.Classes.Group exposing (Group)
 
 -}
 
-import Basics
 import Typeclasses.Classes.Monoid exposing (Monoid)
 
 

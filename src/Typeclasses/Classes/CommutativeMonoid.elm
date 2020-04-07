@@ -12,8 +12,6 @@ module Typeclasses.Classes.CommutativeMonoid exposing
     )
 
 import Either exposing (Either(..))
-import Set exposing (Set)
-import Task exposing (Task)
 import Typeclasses.Classes.CommutativeSemigroup
 
 

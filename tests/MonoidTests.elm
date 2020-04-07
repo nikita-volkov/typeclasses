@@ -4,7 +4,6 @@ import Expect
 import Fuzz
 import Test
 import Typeclasses.Classes.Monoid
-import Typeclasses.Classes.Semigroup
 
 
 suite : Test.Test

@@ -6,10 +6,7 @@ import Test
 import Typeclasses.Classes.AbelianGroup
 import Typeclasses.Classes.CommutativeMonoid
 import Typeclasses.Classes.CommutativeSemigroup
-import Typeclasses.Classes.Group
-import Typeclasses.Classes.Monoid
 import Typeclasses.Classes.Ring
-import Typeclasses.Classes.Semigroup
 
 
 suite : Test.Test

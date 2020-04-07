@@ -1,7 +1,4 @@
-module Typeclasses.Classes.Group exposing
-    ( Group
-    , floatProduct, numberSum, trivialGroup, exclusiveOr, modularArithmetic
-    )
+module Typeclasses.Classes.Group exposing (Group)
 
 {-| Group typeclass definition and its instances for basic types.
 
@@ -16,7 +13,6 @@ module Typeclasses.Classes.Group exposing
 
 -}
 
-import Basics
 import Typeclasses.Classes.Monoid exposing (Monoid)
 
 
@@ -25,51 +21,4 @@ import Typeclasses.Classes.Monoid exposing (Monoid)
 type alias Group a =
     { monoid : Monoid a
     , inverse : a -> a
-    }
-
-
-{-| Construct an instance for Float.
-Implements multiplication.
--}
-floatProduct : Group Float
-floatProduct =
-    { monoid = Typeclasses.Classes.Monoid.numberProduct
-    , inverse = \number -> 1 / number
-    }
-
-
-{-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
-Implements sum.
--}
-numberSum : Group number
-numberSum =
-    { monoid = Typeclasses.Classes.Monoid.numberSum
-    , inverse = \number -> -number
-    }
-
-
-{-| Construct trivial group
--}
-trivialGroup : Group ()
-trivialGroup =
-    { monoid = Typeclasses.Classes.Monoid.unit
-    , inverse = \() -> ()
-    }
-
-
-{-| Construct exclusive Or
--}
-exclusiveOr : Group Bool
-exclusiveOr =
-    { monoid = Typeclasses.Classes.Monoid.exclusiveOr
-    , inverse = Basics.identity
-    }
-
-
-{-| Instance for modularArithmetic
--}
-modularArithmetic : Int -> Group Int
-modularArithmetic divisor =
-    { monoid = Typeclasses.Classes.Monoid.modularArithmetic divisor
-    , inverse = \a -> divisor - a
     }

@@ -1,8 +1,8 @@
 module Typeclasses.Classes.Monoid exposing
     ( Monoid
-    , identityAndConcat, semigroupAndIdentity, appendable, numberProduct, numberSum
+    , identityAndConcat, semigroupAndIdentity, appendable
     , map
-    , intProduct, intSum, string, maybeFirst, list, setUnion, setDifference, cmd, sub, task, all, any, composition, unit, exclusiveOr, modularArithmetic
+    , string, maybeFirst, list, setUnion, setDifference, cmd, sub, task, composition
     )
 
 {-| Monoid typeclass definition and its instances for basic types.
@@ -32,6 +32,7 @@ module Typeclasses.Classes.Monoid exposing
 import Either exposing (Either(..))
 import Set exposing (Set)
 import Task exposing (Task)
+import Typeclasses.Classes.CommutativeSemigroup
 import Typeclasses.Classes.Semigroup as Semigroup exposing (Semigroup)
 
 
@@ -77,22 +78,6 @@ appendable =
     semigroupAndIdentity Semigroup.appendable
 
 
-{-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
-Implements multiplication.
--}
-numberProduct : Monoid number
-numberProduct =
-    { semigroup = Semigroup.numberProduct, identity = 1, concat = List.product }
-
-
-{-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
-Implements sum.
--}
-numberSum : Monoid number
-numberSum =
-    { semigroup = Semigroup.numberSum, identity = 0, concat = List.sum }
-
-
 
 -- * Transformation utilities
 -------------------------
@@ -114,20 +99,6 @@ map aToB bToA monoidOfA =
 
 -- * Instances
 -------------------------
-
-
-{-| Instance for integers under the multiplication operation.
--}
-intProduct : Monoid Int
-intProduct =
-    numberProduct
-
-
-{-| Instance for integers under the sum operation.
--}
-intSum : Monoid Int
-intSum =
-    numberSum
 
 
 {-| Instance for strings under the appending operation.
@@ -155,7 +126,11 @@ list =
 -}
 setUnion : Monoid (Set comparable)
 setUnion =
-    semigroupAndIdentity Semigroup.setUnion Set.empty
+    let
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup setUnionSemigroup) =
+            Typeclasses.Classes.CommutativeSemigroup.setUnion
+    in
+    semigroupAndIdentity setUnionSemigroup Set.empty
 
 
 {-| Instance for set under the difference operation.
@@ -189,43 +164,8 @@ task monoidOfA =
     }
 
 
-{-| Instance for all
--}
-all : Monoid Bool
-all =
-    semigroupAndIdentity Semigroup.and True
-
-
-{-| Instance for any
--}
-any : Monoid Bool
-any =
-    semigroupAndIdentity Semigroup.or False
-
-
 {-| Instance for a -> a function
 -}
 composition : Monoid (a -> a)
 composition =
     semigroupAndIdentity Semigroup.composition Basics.identity
-
-
-{-| Instance for trivial monoid
--}
-unit : Monoid ()
-unit =
-    semigroupAndIdentity Semigroup.unit ()
-
-
-{-| Instance for exclusiveOr
--}
-exclusiveOr : Monoid Bool
-exclusiveOr =
-    semigroupAndIdentity Semigroup.xor False
-
-
-{-| Instance for modularArithmetic
--}
-modularArithmetic : Int -> Monoid Int
-modularArithmetic divisor =
-    semigroupAndIdentity (Semigroup.modularArithmetic divisor) 0

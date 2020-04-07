@@ -1,8 +1,8 @@
 module Typeclasses.Classes.Semigroup exposing
     ( Semigroup
-    , prepend, concat, appendable, numberProduct, numberSum
+    , prepend, concat, appendable
     , map
-    , intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task, and, or, composition, unit, xor, modularArithmetic
+    , string, maybeFirst, list, setDifference, cmd, sub, task, composition
     )
 
 {-| Semigroup typeclass definition and its instances for basic types.
@@ -71,22 +71,6 @@ appendable =
     prepend (++)
 
 
-{-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
-Implements multiplication.
--}
-numberProduct : Semigroup number
-numberProduct =
-    prepend (*)
-
-
-{-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
-Implements sum.
--}
-numberSum : Semigroup number
-numberSum =
-    prepend (+)
-
-
 
 -- * Transformation utilities
 -------------------------
@@ -106,20 +90,6 @@ map aToB bToA semigroupOfA =
 
 -- * Instances
 -------------------------
-
-
-{-| Instance for integers under the multiplication operation.
--}
-intProduct : Semigroup Int
-intProduct =
-    numberProduct
-
-
-{-| Instance for integers under the sum operation.
--}
-intSum : Semigroup Int
-intSum =
-    numberSum
 
 
 {-| Instance for strings under the appending operation.
@@ -150,20 +120,6 @@ list =
     appendable
 
 
-{-| Instance for set under the union operation.
--}
-setUnion : Semigroup (Set comparable)
-setUnion =
-    prepend Set.union
-
-
-{-| Instance for set under the intersection operation.
--}
-setIntersection : Semigroup (Set comparable)
-setIntersection =
-    prepend Set.intersect
-
-
 {-| Instance for set under the difference operation.
 -}
 setDifference : Semigroup (Set comparable)
@@ -192,46 +148,8 @@ task semigroupOfA =
     prepend <| \l r -> l |> Task.andThen (\la -> Task.map (semigroupOfA.prepend la) r)
 
 
-{-| Instance for and
--}
-and : Semigroup Bool
-and =
-    prepend (&&)
-
-
-{-| Instance for or
--}
-or : Semigroup Bool
-or =
-    prepend (||)
-
-
 {-| Instance for a -> a function
 -}
 composition : Semigroup (a -> a)
 composition =
     prepend (>>)
-
-
-{-| Instance for trivial semigroup
--}
-unit : Semigroup ()
-unit =
-    prepend (\() () -> ())
-
-
-xor : Semigroup Bool
-xor =
-    prepend Basics.xor
-
-
-{-| Instance for modularArithmetic semigroup
--}
-modularArithmetic : Int -> Semigroup Int
-modularArithmetic divisor =
-    prepend
-        (\dividendOne dividendTwo ->
-            dividendOne
-                + dividendTwo
-                |> Basics.modBy divisor
-        )

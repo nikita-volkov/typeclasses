@@ -1,14 +1,14 @@
 module Typeclasses.Classes.CommutativeRing exposing
-    ( numberRing, trivialRing, exclusiveOrRing
-    , CommutativeRing(..)
+    ( CommutativeRing(..)
+    , numberRing, trivialRing, exclusiveOrRing
     )
 
-{-| Ring typeclass definition and its instances for basic types.
+{-| Commutative Ring typeclass definition and its instances for basic types.
 
 
 # Definition
 
-@docs Ring
+@docs CommutativeRing
 
 #Instances
 

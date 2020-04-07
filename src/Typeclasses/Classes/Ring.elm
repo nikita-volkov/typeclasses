@@ -7,10 +7,6 @@ module Typeclasses.Classes.Ring exposing (Ring)
 
 @docs Ring
 
-#Instances
-
-@docs numberRing, trivialRing, exclusiveOrRing
-
 -}
 
 import Typeclasses.Classes.AbelianGroup

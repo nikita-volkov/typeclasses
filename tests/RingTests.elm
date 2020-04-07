@@ -3,6 +3,7 @@ module RingTests exposing (suite)
 import Expect
 import Fuzz
 import Test
+import Typeclasses.Classes.AbelianGroup
 import Typeclasses.Classes.Group
 import Typeclasses.Classes.Monoid
 import Typeclasses.Classes.Ring
@@ -35,7 +36,7 @@ suite =
                     (Typeclasses.Classes.Semigroup.CommutativeSemigroup multiplicationCommutativeSemigroup) =
                         multiplicationCommutativeMonoid.semigroup
 
-                    (Typeclasses.Classes.Group.AbelianGroup additionAbelianGroup) =
+                    (Typeclasses.Classes.AbelianGroup.AbelianGroup additionAbelianGroup) =
                         addition
 
                     (Typeclasses.Classes.Monoid.CommutativeMonoid additionCommutativeMonoid) =
@@ -98,7 +99,7 @@ suite =
                     (Typeclasses.Classes.Semigroup.CommutativeSemigroup multiplicationCommutativeSemigroup) =
                         multiplicationCommutativeMonoid.semigroup
 
-                    (Typeclasses.Classes.Group.AbelianGroup additionAbelianGroup) =
+                    (Typeclasses.Classes.AbelianGroup.AbelianGroup additionAbelianGroup) =
                         addition
 
                     (Typeclasses.Classes.Monoid.CommutativeMonoid additionCommutativeMonoid) =

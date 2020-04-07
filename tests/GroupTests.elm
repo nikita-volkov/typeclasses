@@ -3,6 +3,7 @@ module GroupTests exposing (suite)
 import Expect
 import Fuzz
 import Test
+import Typeclasses.Classes.AbelianGroup
 import Typeclasses.Classes.Group
 import Typeclasses.Classes.Monoid
 import Typeclasses.Classes.Semigroup
@@ -17,8 +18,8 @@ suite =
           <|
             \a ->
                 let
-                    (Typeclasses.Classes.Group.AbelianGroup group) =
-                        Typeclasses.Classes.Group.numberSum
+                    (Typeclasses.Classes.AbelianGroup.AbelianGroup group) =
+                        Typeclasses.Classes.AbelianGroup.numberSum
 
                     (Typeclasses.Classes.Monoid.CommutativeMonoid monoid) =
                         group.monoid
@@ -48,8 +49,8 @@ suite =
           <|
             \a ->
                 let
-                    (Typeclasses.Classes.Group.AbelianGroup group) =
-                        Typeclasses.Classes.Group.trivialGroup
+                    (Typeclasses.Classes.AbelianGroup.AbelianGroup group) =
+                        Typeclasses.Classes.AbelianGroup.trivialGroup
 
                     (Typeclasses.Classes.Monoid.CommutativeMonoid monoid) =
                         group.monoid
@@ -79,8 +80,8 @@ suite =
           <|
             \a ->
                 let
-                    (Typeclasses.Classes.Group.AbelianGroup group) =
-                        Typeclasses.Classes.Group.exclusiveOr
+                    (Typeclasses.Classes.AbelianGroup.AbelianGroup group) =
+                        Typeclasses.Classes.AbelianGroup.exclusiveOr
 
                     (Typeclasses.Classes.Monoid.CommutativeMonoid monoid) =
                         group.monoid
@@ -110,8 +111,8 @@ suite =
           <|
             \a ->
                 let
-                    (Typeclasses.Classes.Group.AbelianGroup group) =
-                        Typeclasses.Classes.Group.modularArithmetic 12
+                    (Typeclasses.Classes.AbelianGroup.AbelianGroup group) =
+                        Typeclasses.Classes.AbelianGroup.modularArithmetic 12
 
                     (Typeclasses.Classes.Monoid.CommutativeMonoid monoid) =
                         group.monoid

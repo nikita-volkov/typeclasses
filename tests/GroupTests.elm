@@ -4,6 +4,7 @@ import Expect
 import Fuzz
 import Test
 import Typeclasses.Classes.AbelianGroup
+import Typeclasses.Classes.CommutativeMonoid
 import Typeclasses.Classes.Group
 import Typeclasses.Classes.Monoid
 import Typeclasses.Classes.Semigroup
@@ -21,7 +22,7 @@ suite =
                     (Typeclasses.Classes.AbelianGroup.AbelianGroup group) =
                         Typeclasses.Classes.AbelianGroup.numberSum
 
-                    (Typeclasses.Classes.Monoid.CommutativeMonoid monoid) =
+                    (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
                         group.monoid
 
                     (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
@@ -52,7 +53,7 @@ suite =
                     (Typeclasses.Classes.AbelianGroup.AbelianGroup group) =
                         Typeclasses.Classes.AbelianGroup.trivialGroup
 
-                    (Typeclasses.Classes.Monoid.CommutativeMonoid monoid) =
+                    (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
                         group.monoid
 
                     (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
@@ -83,7 +84,7 @@ suite =
                     (Typeclasses.Classes.AbelianGroup.AbelianGroup group) =
                         Typeclasses.Classes.AbelianGroup.exclusiveOr
 
-                    (Typeclasses.Classes.Monoid.CommutativeMonoid monoid) =
+                    (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
                         group.monoid
 
                     (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =
@@ -114,7 +115,7 @@ suite =
                     (Typeclasses.Classes.AbelianGroup.AbelianGroup group) =
                         Typeclasses.Classes.AbelianGroup.modularArithmetic 12
 
-                    (Typeclasses.Classes.Monoid.CommutativeMonoid monoid) =
+                    (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
                         group.monoid
 
                     (Typeclasses.Classes.Semigroup.CommutativeSemigroup semigroup) =

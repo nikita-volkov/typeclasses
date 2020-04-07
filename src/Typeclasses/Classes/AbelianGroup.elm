@@ -17,12 +17,12 @@ module Typeclasses.Classes.AbelianGroup exposing
 -}
 
 import Basics
-import Typeclasses.Classes.Monoid
+import Typeclasses.Classes.CommutativeMonoid
 
 
 type AbelianGroup a
     = AbelianGroup
-        { monoid : Typeclasses.Classes.Monoid.CommutativeMonoid a
+        { monoid : Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid a
         , inverse : a -> a
         }
 
@@ -32,7 +32,7 @@ Implements multiplication.
 -}
 floatProduct : AbelianGroup Float
 floatProduct =
-    { monoid = Typeclasses.Classes.Monoid.numberProduct
+    { monoid = Typeclasses.Classes.CommutativeMonoid.numberProduct
     , inverse = \number -> 1 / number
     }
         |> AbelianGroup
@@ -43,7 +43,7 @@ Implements sum.
 -}
 numberSum : AbelianGroup number
 numberSum =
-    { monoid = Typeclasses.Classes.Monoid.numberSum
+    { monoid = Typeclasses.Classes.CommutativeMonoid.numberSum
     , inverse = \number -> -number
     }
         |> AbelianGroup
@@ -53,7 +53,7 @@ numberSum =
 -}
 trivialGroup : AbelianGroup ()
 trivialGroup =
-    { monoid = Typeclasses.Classes.Monoid.unit
+    { monoid = Typeclasses.Classes.CommutativeMonoid.unit
     , inverse = \() -> ()
     }
         |> AbelianGroup
@@ -63,7 +63,7 @@ trivialGroup =
 -}
 exclusiveOr : AbelianGroup Bool
 exclusiveOr =
-    { monoid = Typeclasses.Classes.Monoid.exclusiveOr
+    { monoid = Typeclasses.Classes.CommutativeMonoid.exclusiveOr
     , inverse = Basics.identity
     }
         |> AbelianGroup
@@ -73,7 +73,7 @@ exclusiveOr =
 -}
 modularArithmetic : Int -> AbelianGroup Int
 modularArithmetic divisor =
-    { monoid = Typeclasses.Classes.Monoid.modularArithmetic divisor
+    { monoid = Typeclasses.Classes.CommutativeMonoid.modularArithmetic divisor
     , inverse = \a -> divisor - a
     }
         |> AbelianGroup

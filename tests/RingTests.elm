@@ -4,6 +4,7 @@ import Expect
 import Fuzz
 import Test
 import Typeclasses.Classes.AbelianGroup
+import Typeclasses.Classes.CommutativeMonoid
 import Typeclasses.Classes.Group
 import Typeclasses.Classes.Monoid
 import Typeclasses.Classes.Ring
@@ -30,7 +31,7 @@ suite =
                     addition =
                         commutativeRing.addition
 
-                    (Typeclasses.Classes.Monoid.CommutativeMonoid multiplicationCommutativeMonoid) =
+                    (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid multiplicationCommutativeMonoid) =
                         multiplication
 
                     (Typeclasses.Classes.Semigroup.CommutativeSemigroup multiplicationCommutativeSemigroup) =
@@ -39,7 +40,7 @@ suite =
                     (Typeclasses.Classes.AbelianGroup.AbelianGroup additionAbelianGroup) =
                         addition
 
-                    (Typeclasses.Classes.Monoid.CommutativeMonoid additionCommutativeMonoid) =
+                    (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid additionCommutativeMonoid) =
                         additionAbelianGroup.monoid
 
                     (Typeclasses.Classes.Semigroup.CommutativeSemigroup additionCommutativeSemigroup) =
@@ -93,7 +94,7 @@ suite =
                     addition =
                         commutativeRing.addition
 
-                    (Typeclasses.Classes.Monoid.CommutativeMonoid multiplicationCommutativeMonoid) =
+                    (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid multiplicationCommutativeMonoid) =
                         multiplication
 
                     (Typeclasses.Classes.Semigroup.CommutativeSemigroup multiplicationCommutativeSemigroup) =
@@ -102,7 +103,7 @@ suite =
                     (Typeclasses.Classes.AbelianGroup.AbelianGroup additionAbelianGroup) =
                         addition
 
-                    (Typeclasses.Classes.Monoid.CommutativeMonoid additionCommutativeMonoid) =
+                    (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid additionCommutativeMonoid) =
                         additionAbelianGroup.monoid
 
                     (Typeclasses.Classes.Semigroup.CommutativeSemigroup additionCommutativeSemigroup) =

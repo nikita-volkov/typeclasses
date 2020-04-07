@@ -18,6 +18,7 @@ module Typeclasses.Classes.Ring exposing
 -}
 
 import Typeclasses.Classes.AbelianGroup
+import Typeclasses.Classes.CommutativeMonoid
 import Typeclasses.Classes.Group
 import Typeclasses.Classes.Monoid
 
@@ -33,7 +34,7 @@ type alias Ring a =
 type CommutativeRing a
     = CommutativeRing
         { addition : Typeclasses.Classes.AbelianGroup.AbelianGroup a
-        , multiplication : Typeclasses.Classes.Monoid.CommutativeMonoid a
+        , multiplication : Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid a
         }
 
 
@@ -42,7 +43,7 @@ type CommutativeRing a
 numberRing : CommutativeRing number
 numberRing =
     { addition = Typeclasses.Classes.AbelianGroup.numberSum
-    , multiplication = Typeclasses.Classes.Monoid.numberProduct
+    , multiplication = Typeclasses.Classes.CommutativeMonoid.numberProduct
     }
         |> CommutativeRing
 
@@ -52,7 +53,7 @@ numberRing =
 trivialRing : CommutativeRing ()
 trivialRing =
     { addition = Typeclasses.Classes.AbelianGroup.trivialGroup
-    , multiplication = Typeclasses.Classes.Monoid.unit
+    , multiplication = Typeclasses.Classes.CommutativeMonoid.unit
     }
         |> CommutativeRing
 
@@ -62,6 +63,6 @@ trivialRing =
 exclusiveOrRing : CommutativeRing Bool
 exclusiveOrRing =
     { addition = Typeclasses.Classes.AbelianGroup.exclusiveOr
-    , multiplication = Typeclasses.Classes.Monoid.all
+    , multiplication = Typeclasses.Classes.CommutativeMonoid.all
     }
         |> CommutativeRing

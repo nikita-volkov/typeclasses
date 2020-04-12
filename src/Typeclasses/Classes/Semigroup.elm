@@ -3,6 +3,7 @@ module Typeclasses.Classes.Semigroup exposing
     , prepend, concat, appendable
     , map
     , string, maybeFirst, list, cmd, sub, task, composition, setDifference
+    , and, intProduct, intSum, modularArithmetic, numberProduct, numberSum, or, setIntersection, setUnion, unit, xor
     )
 
 {-| Semigroup typeclass definition and its instances for basic types.
@@ -32,6 +33,7 @@ module Typeclasses.Classes.Semigroup exposing
 import Either exposing (Either(..))
 import Set exposing (Set)
 import Task exposing (Task)
+import Typeclasses.Classes.CommutativeSemigroup
 import Typeclasses.Classes.Magma
 
 
@@ -90,6 +92,123 @@ map aToB bToA semigroupOfA =
 
 -- * Instances
 -------------------------
+
+
+{-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
+Implements multiplication.
+-}
+numberProduct : Semigroup number
+numberProduct =
+    let
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            Typeclasses.Classes.CommutativeSemigroup.numberProduct
+    in
+    semigroup
+
+
+{-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
+Implements sum.
+-}
+numberSum : Semigroup number
+numberSum =
+    let
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            Typeclasses.Classes.CommutativeSemigroup.numberSum
+    in
+    semigroup
+
+
+{-| Instance for integers under the multiplication operation.
+-}
+intProduct : Semigroup Int
+intProduct =
+    let
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            Typeclasses.Classes.CommutativeSemigroup.intProduct
+    in
+    semigroup
+
+
+{-| Instance for integers under the sum operation.
+-}
+intSum : Semigroup Int
+intSum =
+    numberSum
+
+
+{-| Instance for set under the union operation.
+-}
+setUnion : Semigroup (Set.Set comparable)
+setUnion =
+    let
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            Typeclasses.Classes.CommutativeSemigroup.setUnion
+    in
+    semigroup
+
+
+{-| Instance for set under the intersection operation.
+-}
+setIntersection : Semigroup (Set.Set comparable)
+setIntersection =
+    let
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            Typeclasses.Classes.CommutativeSemigroup.setIntersection
+    in
+    semigroup
+
+
+{-| Instance for and
+-}
+and : Semigroup Bool
+and =
+    let
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            Typeclasses.Classes.CommutativeSemigroup.and
+    in
+    semigroup
+
+
+{-| Instance for or
+-}
+or : Semigroup Bool
+or =
+    let
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            Typeclasses.Classes.CommutativeSemigroup.or
+    in
+    semigroup
+
+
+{-| Instance for trivial semigroup
+-}
+unit : Semigroup ()
+unit =
+    let
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            Typeclasses.Classes.CommutativeSemigroup.unit
+    in
+    semigroup
+
+
+xor : Semigroup Bool
+xor =
+    let
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            Typeclasses.Classes.CommutativeSemigroup.xor
+    in
+    semigroup
+
+
+{-| Instance for modularArithmetic semigroup
+-}
+modularArithmetic : Int -> Semigroup Int
+modularArithmetic divisor =
+    let
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            Typeclasses.Classes.CommutativeSemigroup.modularArithmetic divisor
+    in
+    semigroup
 
 
 {-| Instance for strings under the appending operation.

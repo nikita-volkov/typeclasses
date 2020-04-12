@@ -32,6 +32,7 @@ module Typeclasses.Classes.Semigroup exposing
 import Either exposing (Either(..))
 import Set exposing (Set)
 import Task exposing (Task)
+import Typeclasses.Classes.Magma
 
 
 {-| Explicit typeclass which implements semigroup operations for type `a`.
@@ -41,8 +42,7 @@ because it follows the convention of having the context value come as the last v
 
 -}
 type alias Semigroup a =
-    { prepend : a -> a -> a
-    }
+    Typeclasses.Classes.Magma.Magma a
 
 
 

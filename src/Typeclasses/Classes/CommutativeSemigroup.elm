@@ -19,11 +19,12 @@ module Typeclasses.Classes.CommutativeSemigroup exposing
 -}
 
 import Set
+import Typeclasses.Classes.Magma
 import Typeclasses.Classes.Semigroup
 
 
 type CommutativeSemigroup a
-    = CommutativeSemigroup (Typeclasses.Classes.Semigroup.Semigroup a)
+    = CommutativeSemigroup (Typeclasses.Classes.Magma.Magma a)
 
 
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.

@@ -3,6 +3,7 @@ module Typeclasses.Classes.Monoid exposing
     , identityAndConcat, semigroupAndIdentity, appendable
     , map
     , string, maybeFirst, list, cmd, sub, task, composition, setDifference, setUnion
+    , all, any, exclusiveOr, intProduct, intSum, modularArithmetic, numberProduct, numberSum, unit
     )
 
 {-| Monoid typeclass definition and its instances for basic types.
@@ -32,6 +33,7 @@ module Typeclasses.Classes.Monoid exposing
 import Either exposing (Either(..))
 import Set exposing (Set)
 import Task exposing (Task)
+import Typeclasses.Classes.CommutativeMonoid
 import Typeclasses.Classes.CommutativeSemigroup
 import Typeclasses.Classes.Semigroup as Semigroup exposing (Semigroup)
 
@@ -99,6 +101,120 @@ map aToB bToA monoidOfA =
 
 -- * Instances
 -------------------------
+
+
+{-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
+Implements multiplication.
+-}
+numberProduct : Monoid number
+numberProduct =
+    let
+        (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
+            Typeclasses.Classes.CommutativeMonoid.numberProduct
+
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            monoid.semigroup
+    in
+    semigroupAndIdentity semigroup monoid.identity
+
+
+{-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
+Implements sum.
+-}
+numberSum : Monoid number
+numberSum =
+    let
+        (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
+            Typeclasses.Classes.CommutativeMonoid.numberSum
+
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            monoid.semigroup
+    in
+    semigroupAndIdentity semigroup monoid.identity
+
+
+{-| Instance for integers under the multiplication operation.
+-}
+intProduct : Monoid Int
+intProduct =
+    numberProduct
+
+
+{-| Instance for integers under the sum operation.
+-}
+intSum : Monoid Int
+intSum =
+    numberSum
+
+
+{-| Instance for all
+-}
+all : Monoid Bool
+all =
+    let
+        (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
+            Typeclasses.Classes.CommutativeMonoid.all
+
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            monoid.semigroup
+    in
+    semigroupAndIdentity semigroup monoid.identity
+
+
+{-| Instance for any
+-}
+any : Monoid Bool
+any =
+    let
+        (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
+            Typeclasses.Classes.CommutativeMonoid.any
+
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            monoid.semigroup
+    in
+    semigroupAndIdentity semigroup monoid.identity
+
+
+{-| Instance for trivial monoid
+-}
+unit : Monoid ()
+unit =
+    let
+        (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
+            Typeclasses.Classes.CommutativeMonoid.unit
+
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            monoid.semigroup
+    in
+    semigroupAndIdentity semigroup monoid.identity
+
+
+{-| Instance for exclusiveOr
+-}
+exclusiveOr : Monoid Bool
+exclusiveOr =
+    let
+        (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
+            Typeclasses.Classes.CommutativeMonoid.exclusiveOr
+
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            monoid.semigroup
+    in
+    semigroupAndIdentity semigroup monoid.identity
+
+
+{-| Instance for modularArithmetic
+-}
+modularArithmetic : Int -> Monoid Int
+modularArithmetic divisor =
+    let
+        (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
+            Typeclasses.Classes.CommutativeMonoid.modularArithmetic divisor
+
+        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            monoid.semigroup
+    in
+    semigroupAndIdentity semigroup monoid.identity
 
 
 {-| Instance for strings under the appending operation.

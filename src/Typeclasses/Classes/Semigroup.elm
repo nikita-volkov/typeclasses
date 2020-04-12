@@ -54,7 +54,7 @@ type alias Semigroup a =
 -}
 prepend : (a -> a -> a) -> Semigroup a
 prepend prepend_ =
-    { prepend = prepend_ }
+    Typeclasses.Classes.Magma.prepend prepend_
 
 
 {-| Construct from a concatenation function.
@@ -84,7 +84,7 @@ You need to provide both a covariant and a contravariant mapping
 -}
 map : (a -> b) -> (b -> a) -> Semigroup a -> Semigroup b
 map aToB bToA semigroupOfA =
-    prepend (\lb rb -> aToB (semigroupOfA.prepend (bToA lb) (bToA rb)))
+    prepend (\lb rb -> aToB (semigroupOfA (bToA lb) (bToA rb)))
 
 
 
@@ -145,7 +145,7 @@ sub =
 -}
 task : Semigroup a -> Semigroup (Task x a)
 task semigroupOfA =
-    prepend <| \l r -> l |> Task.andThen (\la -> Task.map (semigroupOfA.prepend la) r)
+    prepend <| \l r -> l |> Task.andThen (\la -> Task.map (semigroupOfA la) r)
 
 
 {-| Instance for a -> a function

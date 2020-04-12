@@ -20,7 +20,6 @@ module Typeclasses.Classes.CommutativeSemigroup exposing
 
 import Set
 import Typeclasses.Classes.Magma
-import Typeclasses.Classes.Semigroup
 
 
 type CommutativeSemigroup a
@@ -32,7 +31,7 @@ Implements multiplication.
 -}
 numberProduct : CommutativeSemigroup number
 numberProduct =
-    Typeclasses.Classes.Semigroup.prepend (*)
+    Typeclasses.Classes.Magma.prepend (*)
         |> CommutativeSemigroup
 
 
@@ -41,7 +40,7 @@ Implements sum.
 -}
 numberSum : CommutativeSemigroup number
 numberSum =
-    Typeclasses.Classes.Semigroup.prepend (+)
+    Typeclasses.Classes.Magma.prepend (+)
         |> CommutativeSemigroup
 
 
@@ -63,7 +62,7 @@ intSum =
 -}
 setUnion : CommutativeSemigroup (Set.Set comparable)
 setUnion =
-    Typeclasses.Classes.Semigroup.prepend Set.union
+    Typeclasses.Classes.Magma.prepend Set.union
         |> CommutativeSemigroup
 
 
@@ -71,7 +70,7 @@ setUnion =
 -}
 setIntersection : CommutativeSemigroup (Set.Set comparable)
 setIntersection =
-    Typeclasses.Classes.Semigroup.prepend Set.intersect
+    Typeclasses.Classes.Magma.prepend Set.intersect
         |> CommutativeSemigroup
 
 
@@ -79,7 +78,7 @@ setIntersection =
 -}
 and : CommutativeSemigroup Bool
 and =
-    Typeclasses.Classes.Semigroup.prepend (&&)
+    Typeclasses.Classes.Magma.prepend (&&)
         |> CommutativeSemigroup
 
 
@@ -87,7 +86,7 @@ and =
 -}
 or : CommutativeSemigroup Bool
 or =
-    Typeclasses.Classes.Semigroup.prepend (||)
+    Typeclasses.Classes.Magma.prepend (||)
         |> CommutativeSemigroup
 
 
@@ -95,13 +94,13 @@ or =
 -}
 unit : CommutativeSemigroup ()
 unit =
-    Typeclasses.Classes.Semigroup.prepend (\() () -> ())
+    Typeclasses.Classes.Magma.prepend (\() () -> ())
         |> CommutativeSemigroup
 
 
 xor : CommutativeSemigroup Bool
 xor =
-    Typeclasses.Classes.Semigroup.prepend Basics.xor
+    Typeclasses.Classes.Magma.prepend Basics.xor
         |> CommutativeSemigroup
 
 
@@ -109,7 +108,7 @@ xor =
 -}
 modularArithmetic : Int -> CommutativeSemigroup Int
 modularArithmetic divisor =
-    Typeclasses.Classes.Semigroup.prepend
+    Typeclasses.Classes.Magma.prepend
         (\dividendOne dividendTwo ->
             dividendOne
                 + dividendTwo

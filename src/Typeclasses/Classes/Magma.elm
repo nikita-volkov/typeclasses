@@ -1,4 +1,7 @@
-module Typeclasses.Classes.Magma exposing (Magma)
+module Typeclasses.Classes.Magma exposing
+    ( prepend
+    , Magma
+    )
 
 {-| Semigroup typeclass definition and its instances for basic types.
 
@@ -32,5 +35,11 @@ because it follows the convention of having the context value come as the last v
 
 -}
 type alias Magma a =
-    { prepend : a -> a -> a
-    }
+    a -> a -> a
+
+
+{-| Construct from a prepend function.
+-}
+prepend : (a -> a -> a) -> Magma a
+prepend prepend_ =
+    prepend_

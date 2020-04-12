@@ -66,7 +66,7 @@ semigroupAndIdentity : Semigroup a -> a -> Monoid a
 semigroupAndIdentity semigroup identity =
     { semigroup = semigroup
     , identity = identity
-    , concat = List.foldl semigroup.prepend identity
+    , concat = List.foldl semigroup identity
     }
 
 

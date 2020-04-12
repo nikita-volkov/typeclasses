@@ -56,7 +56,7 @@ commutativeSemigroupAndIdentity commutativeSemigroup identity =
     in
     { semigroup = commutativeSemigroup
     , identity = identity
-    , concat = List.foldl semigroup.prepend identity
+    , concat = List.foldl semigroup identity
     }
         |> CommutativeMonoid
 

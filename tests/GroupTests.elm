@@ -27,12 +27,12 @@ suite =
                         monoid.semigroup
 
                     inversePlusA =
-                        semigroup.prepend
+                        semigroup
                             (group.inverse a)
                             a
 
                     aPlusInverse =
-                        semigroup.prepend
+                        semigroup
                             a
                             (group.inverse a)
                 in
@@ -58,12 +58,12 @@ suite =
                         monoid.semigroup
 
                     inversePlusA =
-                        semigroup.prepend
+                        semigroup
                             (group.inverse a)
                             a
 
                     aPlusInverse =
-                        semigroup.prepend
+                        semigroup
                             a
                             (group.inverse a)
                 in
@@ -89,12 +89,12 @@ suite =
                         monoid.semigroup
 
                     inverseXorA =
-                        semigroup.prepend
+                        semigroup
                             (group.inverse a)
                             a
 
                     aXorInverse =
-                        semigroup.prepend
+                        semigroup
                             a
                             (group.inverse a)
                 in
@@ -120,12 +120,12 @@ suite =
                         monoid.semigroup
 
                     inversePlusA =
-                        semigroup.prepend
+                        semigroup
                             (group.inverse a)
                             a
 
                     aPlusInverse =
-                        semigroup.prepend
+                        semigroup
                             a
                             (group.inverse a)
                 in

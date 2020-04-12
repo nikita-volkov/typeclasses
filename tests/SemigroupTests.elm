@@ -24,10 +24,10 @@ suite =
                             Typeclasses.Classes.CommutativeSemigroup.intProduct
 
                         aTimesBThenTimesC =
-                            semigroup.prepend (semigroup.prepend a b) c
+                            semigroup (semigroup a b) c
 
                         bTimesCThenTimesA =
-                            semigroup.prepend a (semigroup.prepend b c)
+                            semigroup a (semigroup b c)
                     in
                     aTimesBThenTimesC
                         |> Expect.equal bTimesCThenTimesA
@@ -42,10 +42,10 @@ suite =
                             Typeclasses.Classes.CommutativeSemigroup.intProduct
 
                         aTimesB =
-                            semigroup.prepend a b
+                            semigroup a b
 
                         bTimesA =
-                            semigroup.prepend b a
+                            semigroup b a
                     in
                     aTimesB
                         |> Expect.equal bTimesA
@@ -61,10 +61,10 @@ suite =
                             Typeclasses.Classes.CommutativeSemigroup.intSum
 
                         aPlusBThenPlusC =
-                            semigroup.prepend (semigroup.prepend a b) c
+                            semigroup (semigroup a b) c
 
                         bPlusCThenPlusA =
-                            semigroup.prepend a (semigroup.prepend b c)
+                            semigroup a (semigroup b c)
                     in
                     aPlusBThenPlusC
                         |> Expect.equal bPlusCThenPlusA
@@ -79,10 +79,10 @@ suite =
                             Typeclasses.Classes.CommutativeSemigroup.numberSum
 
                         aPlusB =
-                            semigroup.prepend a b
+                            semigroup a b
 
                         bPlusA =
-                            semigroup.prepend b a
+                            semigroup b a
                     in
                     aPlusB
                         |> Expect.equal bPlusA
@@ -98,10 +98,10 @@ suite =
                             Typeclasses.Classes.CommutativeSemigroup.and
 
                         aAndBThenAndC =
-                            semigroup.prepend (semigroup.prepend a b) c
+                            semigroup (semigroup a b) c
 
                         bAndCThenAndA =
-                            semigroup.prepend a (semigroup.prepend b c)
+                            semigroup a (semigroup b c)
                     in
                     aAndBThenAndC
                         |> Expect.equal bAndCThenAndA
@@ -116,10 +116,10 @@ suite =
                             Typeclasses.Classes.CommutativeSemigroup.and
 
                         aAndB =
-                            semigroup.prepend a b
+                            semigroup a b
 
                         bAndA =
-                            semigroup.prepend b a
+                            semigroup b a
                     in
                     aAndB
                         |> Expect.equal bAndA
@@ -135,10 +135,10 @@ suite =
                             Typeclasses.Classes.CommutativeSemigroup.or
 
                         aOrBThenOrC =
-                            semigroup.prepend (semigroup.prepend a b) c
+                            semigroup (semigroup a b) c
 
                         bOrCThenOrA =
-                            semigroup.prepend a (semigroup.prepend b c)
+                            semigroup a (semigroup b c)
                     in
                     aOrBThenOrC
                         |> Expect.equal bOrCThenOrA
@@ -153,10 +153,10 @@ suite =
                             Typeclasses.Classes.CommutativeSemigroup.or
 
                         aOrB =
-                            semigroup.prepend a b
+                            semigroup a b
 
                         bOrA =
-                            semigroup.prepend b a
+                            semigroup b a
                     in
                     aOrB
                         |> Expect.equal bOrA
@@ -172,10 +172,10 @@ suite =
                             Typeclasses.Classes.CommutativeSemigroup.unit
 
                         aOrBThenOrC =
-                            semigroup.prepend (semigroup.prepend a b) c
+                            semigroup (semigroup a b) c
 
                         bOrCThenOrA =
-                            semigroup.prepend a (semigroup.prepend b c)
+                            semigroup a (semigroup b c)
                     in
                     aOrBThenOrC
                         |> Expect.equal bOrCThenOrA
@@ -191,10 +191,10 @@ suite =
                             Typeclasses.Classes.CommutativeSemigroup.xor
 
                         aXorBThenXorC =
-                            semigroup.prepend (semigroup.prepend a b) c
+                            semigroup (semigroup a b) c
 
                         bXorCThenXorA =
-                            semigroup.prepend a (semigroup.prepend b c)
+                            semigroup a (semigroup b c)
                     in
                     aXorBThenXorC
                         |> Expect.equal bXorCThenXorA
@@ -209,10 +209,10 @@ suite =
                             Typeclasses.Classes.CommutativeSemigroup.xor
 
                         aXorB =
-                            semigroup.prepend a b
+                            semigroup a b
 
                         bXorA =
-                            semigroup.prepend b a
+                            semigroup b a
                     in
                     aXorB
                         |> Expect.equal bXorA
@@ -228,10 +228,10 @@ suite =
                             Typeclasses.Classes.CommutativeSemigroup.modularArithmetic 12
 
                         aPlusBThenPlusC =
-                            semigroup.prepend (semigroup.prepend a b) c
+                            semigroup (semigroup a b) c
 
                         bPlusCThenPlusA =
-                            semigroup.prepend a (semigroup.prepend b c)
+                            semigroup a (semigroup b c)
                     in
                     aPlusBThenPlusC
                         |> Expect.equal bPlusCThenPlusA
@@ -246,10 +246,10 @@ suite =
                             Typeclasses.Classes.CommutativeSemigroup.modularArithmetic 12
 
                         aPlusB =
-                            semigroup.prepend a b
+                            semigroup a b
 
                         bPlusA =
-                            semigroup.prepend b a
+                            semigroup b a
                     in
                     aPlusB
                         |> Expect.equal bPlusA
@@ -265,10 +265,10 @@ suite =
                             Typeclasses.Classes.CommutativeSemigroup.setUnion
 
                         aUnionBThenUnionC =
-                            semigroup.prepend (semigroup.prepend a b) c
+                            semigroup (semigroup a b) c
 
                         bUnionCThenUnionA =
-                            semigroup.prepend a (semigroup.prepend b c)
+                            semigroup a (semigroup b c)
                     in
                     aUnionBThenUnionC
                         |> Expect.equal bUnionCThenUnionA
@@ -283,10 +283,10 @@ suite =
                             Typeclasses.Classes.CommutativeSemigroup.setUnion
 
                         aSetUnionB =
-                            semigroup.prepend a b
+                            semigroup a b
 
                         bSetUnionA =
-                            semigroup.prepend b a
+                            semigroup b a
                     in
                     aSetUnionB
                         |> Expect.equal bSetUnionA
@@ -302,10 +302,10 @@ suite =
                             Typeclasses.Classes.CommutativeSemigroup.setIntersection
 
                         aIntersectionBThenIntersectionC =
-                            semigroup.prepend (semigroup.prepend a b) c
+                            semigroup (semigroup a b) c
 
                         bIntersectionCThenIntersectionA =
-                            semigroup.prepend a (semigroup.prepend b c)
+                            semigroup a (semigroup b c)
                     in
                     aIntersectionBThenIntersectionC
                         |> Expect.equal bIntersectionCThenIntersectionA
@@ -320,10 +320,10 @@ suite =
                             Typeclasses.Classes.CommutativeSemigroup.setIntersection
 
                         aSetIntersectionB =
-                            semigroup.prepend a b
+                            semigroup a b
 
                         bSetIntersectionA =
-                            semigroup.prepend b a
+                            semigroup b a
                     in
                     aSetIntersectionB
                         |> Expect.equal bSetIntersectionA
@@ -337,10 +337,10 @@ suite =
             \a b c ->
                 let
                     aAppendBThenAppendC =
-                        Typeclasses.Classes.Semigroup.string.prepend (Typeclasses.Classes.Semigroup.string.prepend a b) c
+                        Typeclasses.Classes.Semigroup.string (Typeclasses.Classes.Semigroup.string a b) c
 
                     bAppendCThenAppendA =
-                        Typeclasses.Classes.Semigroup.string.prepend a (Typeclasses.Classes.Semigroup.string.prepend b c)
+                        Typeclasses.Classes.Semigroup.string a (Typeclasses.Classes.Semigroup.string b c)
                 in
                 aAppendBThenAppendC
                     |> Expect.equal bAppendCThenAppendA
@@ -353,10 +353,10 @@ suite =
             \a b c ->
                 let
                     aMaybeFirstBThenMaybeFirstC =
-                        Typeclasses.Classes.Semigroup.maybeFirst.prepend (Typeclasses.Classes.Semigroup.maybeFirst.prepend a b) c
+                        Typeclasses.Classes.Semigroup.maybeFirst (Typeclasses.Classes.Semigroup.maybeFirst a b) c
 
                     bMaybeFirstCThenMaybeFirstA =
-                        Typeclasses.Classes.Semigroup.maybeFirst.prepend a (Typeclasses.Classes.Semigroup.maybeFirst.prepend b c)
+                        Typeclasses.Classes.Semigroup.maybeFirst a (Typeclasses.Classes.Semigroup.maybeFirst b c)
                 in
                 aMaybeFirstBThenMaybeFirstC
                     |> Expect.equal bMaybeFirstCThenMaybeFirstA
@@ -369,10 +369,10 @@ suite =
             \a b c ->
                 let
                     aAppendBThenAppendC =
-                        Typeclasses.Classes.Semigroup.list.prepend (Typeclasses.Classes.Semigroup.list.prepend a b) c
+                        Typeclasses.Classes.Semigroup.list (Typeclasses.Classes.Semigroup.list a b) c
 
                     bAppendCThenAppendA =
-                        Typeclasses.Classes.Semigroup.list.prepend a (Typeclasses.Classes.Semigroup.list.prepend b c)
+                        Typeclasses.Classes.Semigroup.list a (Typeclasses.Classes.Semigroup.list b c)
                 in
                 aAppendBThenAppendC
                     |> Expect.equal bAppendCThenAppendA

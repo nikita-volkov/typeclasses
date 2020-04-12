@@ -46,29 +46,29 @@ suite =
                         additionCommutativeMonoid.semigroup
 
                     xTimesYPlusZ =
-                        multiplicationCommutativeSemigroup.prepend
+                        multiplicationCommutativeSemigroup
                             x
-                            (additionCommutativeSemigroup.prepend y z)
+                            (additionCommutativeSemigroup y z)
 
                     xTimesY =
-                        multiplicationCommutativeSemigroup.prepend x y
+                        multiplicationCommutativeSemigroup x y
 
                     xTimesZ =
-                        multiplicationCommutativeSemigroup.prepend x z
+                        multiplicationCommutativeSemigroup x z
 
                     xTimesYPlusXTimesZ =
-                        additionCommutativeSemigroup.prepend xTimesY xTimesZ
+                        additionCommutativeSemigroup xTimesY xTimesZ
 
                     xPlusYTimesZ =
-                        multiplicationCommutativeSemigroup.prepend
-                            (additionCommutativeSemigroup.prepend x y)
+                        multiplicationCommutativeSemigroup
+                            (additionCommutativeSemigroup x y)
                             z
 
                     yTimesZ =
-                        multiplicationCommutativeSemigroup.prepend y z
+                        multiplicationCommutativeSemigroup y z
 
                     xTimesZPlusYTimesZ =
-                        additionCommutativeSemigroup.prepend xTimesZ yTimesZ
+                        additionCommutativeSemigroup xTimesZ yTimesZ
                 in
                 Expect.true "All equal a"
                     (xTimesYPlusZ
@@ -109,29 +109,29 @@ suite =
                         additionCommutativeMonoid.semigroup
 
                     xAllYXorZ =
-                        multiplicationCommutativeSemigroup.prepend
+                        multiplicationCommutativeSemigroup
                             x
-                            (additionCommutativeSemigroup.prepend y z)
+                            (additionCommutativeSemigroup y z)
 
                     xAllY =
-                        multiplicationCommutativeSemigroup.prepend x y
+                        multiplicationCommutativeSemigroup x y
 
                     xAllZ =
-                        multiplicationCommutativeSemigroup.prepend x z
+                        multiplicationCommutativeSemigroup x z
 
                     xAllYXorXAllZ =
-                        additionCommutativeSemigroup.prepend xAllY xAllZ
+                        additionCommutativeSemigroup xAllY xAllZ
 
                     xXorYAllZ =
-                        multiplicationCommutativeSemigroup.prepend
-                            (additionCommutativeSemigroup.prepend x y)
+                        multiplicationCommutativeSemigroup
+                            (additionCommutativeSemigroup x y)
                             z
 
                     yAllZ =
-                        multiplicationCommutativeSemigroup.prepend y z
+                        multiplicationCommutativeSemigroup y z
 
                     xAllZXorYAllZ =
-                        additionCommutativeSemigroup.prepend xAllZ yAllZ
+                        additionCommutativeSemigroup xAllZ yAllZ
                 in
                 Expect.true "All equal a"
                     (xAllYXorZ

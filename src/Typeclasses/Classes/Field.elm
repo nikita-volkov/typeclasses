@@ -1,5 +1,5 @@
 module Typeclasses.Classes.Field exposing
-    ( Field
+    ( Field(..)
     , exclusiveOrField, numberField, trivialField
     )
 

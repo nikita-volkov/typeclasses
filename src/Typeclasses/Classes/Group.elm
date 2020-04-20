@@ -1,6 +1,6 @@
 module Typeclasses.Classes.Group exposing
     ( Group
-    , exclusiveOr, floatProduct, modularArithmetic, numberSum, trivialGroup
+    , exclusiveOr, modularArithmetic, numberSum, trivialGroup
     )
 
 {-| Group typeclass definition and its instances for basic types.
@@ -23,20 +23,6 @@ import Typeclasses.Classes.Monoid exposing (Monoid)
 type alias Group a =
     { monoid : Monoid a
     , inverse : a -> a
-    }
-
-
-{-| Construct an instance for Float.
-Implements multiplication.
--}
-floatProduct : Group Float
-floatProduct =
-    let
-        (Typeclasses.Classes.AbelianGroup.AbelianGroup group) =
-            Typeclasses.Classes.AbelianGroup.floatProduct
-    in
-    { monoid = Typeclasses.Classes.Monoid.numberProduct
-    , inverse = group.inverse
     }
 
 

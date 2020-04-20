@@ -1,6 +1,6 @@
 module Typeclasses.Classes.AbelianGroup exposing
     ( AbelianGroup(..)
-    , floatProduct, numberSum, trivialGroup, exclusiveOr, modularArithmetic
+    , numberSum, trivialGroup, exclusiveOr, modularArithmetic
     )
 
 {-| Abelian Group typeclass definition and its instances for basic types.
@@ -12,7 +12,7 @@ module Typeclasses.Classes.AbelianGroup exposing
 
 #Instances
 
-@docs floatProduct, numberSum, trivialGroup, exclusiveOr, modularArithmetic
+@docs numberSum, trivialGroup, exclusiveOr, modularArithmetic
 
 -}
 
@@ -25,17 +25,6 @@ type AbelianGroup a
         { monoid : Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid a
         , inverse : a -> a
         }
-
-
-{-| Construct an instance for Float.
-Implements multiplication.
--}
-floatProduct : AbelianGroup Float
-floatProduct =
-    { monoid = Typeclasses.Classes.CommutativeMonoid.numberProduct
-    , inverse = \number -> 1 / number
-    }
-        |> AbelianGroup
 
 
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.

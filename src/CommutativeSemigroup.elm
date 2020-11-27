@@ -20,6 +20,8 @@ module CommutativeSemigroup exposing
 import Set
 
 
+{-| Explicit typeclass which implements semigroup operations for type `a` when the operation is commutative.
+-}
 type CommutativeSemigroup a
     = CommutativeSemigroup (a -> a -> a)
 

@@ -1,7 +1,6 @@
 module CommutativeMonoid exposing
     ( CommutativeMonoid(..)
-    , numberProduct, intProduct, numberSum, intSum, unit, modularArithmetic
-    , all, any, exclusiveOr
+    , numberProduct, intProduct, numberSum, intSum, unit, modularArithmetic, all, any, exclusiveOr
     )
 
 {-| Commutative Monoid typeclass definition and its instances for basic types.
@@ -14,35 +13,14 @@ module CommutativeMonoid exposing
 
 # Instances
 
-@docs numberProduct, intProduct, numberSum, intSum, setUnion, setIntersection, and, or, unit, xor, modularArithmetic
+@docs numberProduct, intProduct, numberSum, intSum, unit, modularArithmetic, all, any, exclusiveOr
 
 -}
 
 import CommutativeSemigroup
 
 
-{-| Commutative Monoid typeclass definition and its instances for basic types.
-
-
-# Definition
-
-@docs CommutativeMonoid
-
-
-# Construction utilities
-
-@docs commutativeSemigroupAndIdentity
-
-
-# Instance transformation utilities
-
-@docs map
-
-
-# Instances
-
-@docs numberProduct, intProduct, numberSum, intSum, unit, modularArithmetic, all, any, exclusiveOr
-
+{-| Explicit typeclass which implements monoid operations for type `a` when the operation is commutative.
 -}
 type CommutativeMonoid a
     = CommutativeMonoid

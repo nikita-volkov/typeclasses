@@ -98,6 +98,8 @@ unit =
     prepend (\() () -> ())
 
 
+{-| Instance for xor
+-}
 xor : CommutativeSemigroup Bool
 xor =
     prepend Basics.xor

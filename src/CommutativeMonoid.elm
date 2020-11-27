@@ -41,7 +41,7 @@ import CommutativeSemigroup
 
 # Instances
 
-@docs numberProduct, numberSum, intProduct, intSum, all, any, unit, exclusiveOr, modularArithmetic
+@docs numberProduct, intProduct, numberSum, intSum, unit, modularArithmetic, all, any, exclusiveOr
 
 -}
 type CommutativeMonoid a

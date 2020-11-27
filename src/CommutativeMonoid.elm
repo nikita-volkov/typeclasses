@@ -12,7 +12,6 @@ module CommutativeMonoid exposing
     )
 
 import CommutativeSemigroup
-import Either exposing (Either(..))
 
 
 {-| Commutative Monoid typeclass definition and its instances for basic types.

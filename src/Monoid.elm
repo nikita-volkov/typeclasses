@@ -32,7 +32,6 @@ module Monoid exposing
 
 import CommutativeMonoid
 import CommutativeSemigroup
-import Either exposing (Either(..))
 import Semigroup as Semigroup exposing (Semigroup)
 import Set exposing (Set)
 import Task exposing (Task)

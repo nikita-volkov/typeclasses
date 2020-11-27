@@ -1,6 +1,6 @@
 module CommutativeMonoid exposing
     ( CommutativeMonoid(..)
-    , numberProduct, intProduct, numberSum, intSum, unit, modularArithmetic, all, any, exclusiveOr
+    , numberProduct, intProduct, numberSum, intSum, unit, modularArithmetic, all, any, exclusiveOr, commutativeSemigroupAndIdentity
     )
 
 {-| Commutative Monoid typeclass definition and its instances for basic types.
@@ -13,7 +13,7 @@ module CommutativeMonoid exposing
 
 # Instances
 
-@docs numberProduct, intProduct, numberSum, intSum, unit, modularArithmetic, all, any, exclusiveOr
+@docs numberProduct, intProduct, numberSum, intSum, unit, modularArithmetic, all, any, exclusiveOr, commutativeSemigroupAndIdentity
 
 -}
 

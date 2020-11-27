@@ -1,12 +1,21 @@
 {
     "type": "package",
-    "name": "nikita-volkov/typeclasses",
-    "summary": "Explicit typeclasses",
+    "name": "jonathanfishbein1/numeric-typeclasses",
+    "summary": "Numeric typeclasses",
     "license": "MIT",
     "version": "1.8.0",
     "exposed-modules": [
         "Monoid",
-        "Semigroup"
+        "Semigroup",
+        "AbelianGroup",
+        "CommutativeMonoid",
+        "CommutativeRing",
+        "CommutativeSemigroup",
+        "Field",
+        "Group",
+        "Ring",
+        "Semigroup",
+        "Semiring"
     ],
     "elm-version": "0.19.0 <= v < 0.20.0",
     "dependencies": {

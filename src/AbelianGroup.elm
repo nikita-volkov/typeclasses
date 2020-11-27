@@ -20,6 +20,8 @@ import Basics
 import CommutativeMonoid
 
 
+{-| Explicit typeclass which implements group operations for type `a` when the operation is commutative.
+-}
 type AbelianGroup a
     = AbelianGroup
         { monoid : CommutativeMonoid.CommutativeMonoid a

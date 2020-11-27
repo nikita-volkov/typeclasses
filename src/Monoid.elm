@@ -2,8 +2,7 @@ module Monoid exposing
     ( Monoid
     , identityAndConcat, semigroupAndIdentity, appendable
     , map
-    , string, maybeFirst, list, cmd, sub, task, composition, setDifference, setUnion
-    , all, any, exclusiveOr, intProduct, intSum, modularArithmetic, numberProduct, numberSum, unit
+    , string, maybeFirst, list, cmd, sub, task, composition, setDifference, setUnion, all, any, exclusiveOr, intProduct, intSum, modularArithmetic, numberProduct, numberSum, unit
     )
 
 {-| Monoid typeclass definition and its instances for basic types.
@@ -26,7 +25,7 @@ module Monoid exposing
 
 # Instances
 
-@docs string, maybeFirst, list, cmd, sub, task, composition, setDifference, setUnion
+@docs string, maybeFirst, list, cmd, sub, task, composition, setDifference, setUnion, all, any, exclusiveOr, intProduct, intSum, modularArithmetic, numberProduct, numberSum, unit
 
 -}
 

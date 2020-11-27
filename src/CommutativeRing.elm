@@ -20,6 +20,8 @@ import AbelianGroup
 import CommutativeMonoid
 
 
+{-| Explicit typeclass which implements ring operations for type `a` when the multiplication operation is commutative.
+-}
 type CommutativeRing a
     = CommutativeRing
         { addition : AbelianGroup.AbelianGroup a

@@ -1,6 +1,6 @@
 module Group exposing
     ( Group
-    , exclusiveOr, modularArithmetic, numberSum, trivialGroup
+    , numberSum, trivialGroup, exclusiveOr, modularArithmetic
     )
 
 {-| Group typeclass definition and its instances for basic types.
@@ -9,6 +9,10 @@ module Group exposing
 # Definition
 
 @docs Group
+
+#Instances
+
+@docs numberSum, trivialGroup, exclusiveOr, modularArithmetic
 
 -}
 

@@ -1,6 +1,6 @@
 module Semiring exposing
     ( Semiring
-    , exclusiveOrRing, numberRing, trivialRing
+    , numberRing, trivialRing, exclusiveOrRing
     )
 
 {-| Semiring typeclass definition and its instances for basic types.
@@ -9,6 +9,10 @@ module Semiring exposing
 # Definition
 
 @docs Semiring
+
+#Instances
+
+@docs numberRing, trivialRing, exclusiveOrRing
 
 -}
 

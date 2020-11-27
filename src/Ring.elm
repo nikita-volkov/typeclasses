@@ -10,6 +10,10 @@ module Ring exposing
 
 @docs Ring
 
+#Instances
+
+@docs exclusiveOrRing, numberRing, trivialRing
+
 -}
 
 import AbelianGroup
@@ -17,7 +21,7 @@ import CommutativeRing
 import Monoid
 
 
-{-| Explicit typeclass which implements group operations for type `a`.
+{-| Explicit typeclass which implements ring operations for type `a`.
 -}
 type alias Ring a =
     { addition : AbelianGroup.AbelianGroup a

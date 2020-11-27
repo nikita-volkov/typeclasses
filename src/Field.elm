@@ -10,6 +10,10 @@ module Field exposing
 
 @docs Field
 
+#Instances
+
+@docs exclusiveOrField, numberField, trivialField
+
 -}
 
 import CommutativeRing

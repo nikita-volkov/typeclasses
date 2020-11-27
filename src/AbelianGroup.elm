@@ -1,4 +1,4 @@
-module Typeclasses.Classes.AbelianGroup exposing
+module AbelianGroup exposing
     ( AbelianGroup(..)
     , numberSum, trivialGroup, exclusiveOr, modularArithmetic
     )
@@ -17,12 +17,12 @@ module Typeclasses.Classes.AbelianGroup exposing
 -}
 
 import Basics
-import Typeclasses.Classes.CommutativeMonoid
+import CommutativeMonoid
 
 
 type AbelianGroup a
     = AbelianGroup
-        { monoid : Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid a
+        { monoid : CommutativeMonoid.CommutativeMonoid a
         , inverse : a -> a
         }
 
@@ -32,7 +32,7 @@ Implements sum.
 -}
 numberSum : AbelianGroup number
 numberSum =
-    { monoid = Typeclasses.Classes.CommutativeMonoid.numberSum
+    { monoid = CommutativeMonoid.numberSum
     , inverse = \number -> -number
     }
         |> AbelianGroup
@@ -42,7 +42,7 @@ numberSum =
 -}
 trivialGroup : AbelianGroup ()
 trivialGroup =
-    { monoid = Typeclasses.Classes.CommutativeMonoid.unit
+    { monoid = CommutativeMonoid.unit
     , inverse = \() -> ()
     }
         |> AbelianGroup
@@ -52,7 +52,7 @@ trivialGroup =
 -}
 exclusiveOr : AbelianGroup Bool
 exclusiveOr =
-    { monoid = Typeclasses.Classes.CommutativeMonoid.exclusiveOr
+    { monoid = CommutativeMonoid.exclusiveOr
     , inverse = Basics.identity
     }
         |> AbelianGroup
@@ -62,7 +62,7 @@ exclusiveOr =
 -}
 modularArithmetic : Int -> AbelianGroup Int
 modularArithmetic divisor =
-    { monoid = Typeclasses.Classes.CommutativeMonoid.modularArithmetic divisor
+    { monoid = CommutativeMonoid.modularArithmetic divisor
     , inverse = \a -> divisor - a
     }
         |> AbelianGroup

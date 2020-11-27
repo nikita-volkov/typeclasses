@@ -1,4 +1,4 @@
-module Typeclasses.Classes.CommutativeMonoid exposing
+module CommutativeMonoid exposing
     ( CommutativeMonoid(..)
     , all
     , any
@@ -11,8 +11,8 @@ module Typeclasses.Classes.CommutativeMonoid exposing
     , unit
     )
 
+import CommutativeSemigroup
 import Either exposing (Either(..))
-import Typeclasses.Classes.CommutativeSemigroup
 
 
 {-| Commutative Monoid typeclass definition and its instances for basic types.
@@ -40,7 +40,7 @@ import Typeclasses.Classes.CommutativeSemigroup
 -}
 type CommutativeMonoid a
     = CommutativeMonoid
-        { semigroup : Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup a
+        { semigroup : CommutativeSemigroup.CommutativeSemigroup a
         , identity : a
         , concat : List a -> a
         }
@@ -48,10 +48,10 @@ type CommutativeMonoid a
 
 {-| Construct an instance by specifying a commutative semigroup instance and an identity value.
 -}
-commutativeSemigroupAndIdentity : Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup a -> a -> CommutativeMonoid a
+commutativeSemigroupAndIdentity : CommutativeSemigroup.CommutativeSemigroup a -> a -> CommutativeMonoid a
 commutativeSemigroupAndIdentity commutativeSemigroup identity =
     let
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
             commutativeSemigroup
     in
     { semigroup = commutativeSemigroup
@@ -66,7 +66,7 @@ Implements multiplication.
 -}
 numberProduct : CommutativeMonoid number
 numberProduct =
-    { semigroup = Typeclasses.Classes.CommutativeSemigroup.numberProduct, identity = 1, concat = List.product }
+    { semigroup = CommutativeSemigroup.numberProduct, identity = 1, concat = List.product }
         |> CommutativeMonoid
 
 
@@ -75,7 +75,7 @@ Implements sum.
 -}
 numberSum : CommutativeMonoid number
 numberSum =
-    { semigroup = Typeclasses.Classes.CommutativeSemigroup.numberSum, identity = 0, concat = List.sum }
+    { semigroup = CommutativeSemigroup.numberSum, identity = 0, concat = List.sum }
         |> CommutativeMonoid
 
 
@@ -97,32 +97,32 @@ intSum =
 -}
 all : CommutativeMonoid Bool
 all =
-    commutativeSemigroupAndIdentity Typeclasses.Classes.CommutativeSemigroup.and True
+    commutativeSemigroupAndIdentity CommutativeSemigroup.and True
 
 
 {-| Instance for any
 -}
 any : CommutativeMonoid Bool
 any =
-    commutativeSemigroupAndIdentity Typeclasses.Classes.CommutativeSemigroup.or False
+    commutativeSemigroupAndIdentity CommutativeSemigroup.or False
 
 
 {-| Instance for trivial monoid
 -}
 unit : CommutativeMonoid ()
 unit =
-    commutativeSemigroupAndIdentity Typeclasses.Classes.CommutativeSemigroup.unit ()
+    commutativeSemigroupAndIdentity CommutativeSemigroup.unit ()
 
 
 {-| Instance for exclusiveOr
 -}
 exclusiveOr : CommutativeMonoid Bool
 exclusiveOr =
-    commutativeSemigroupAndIdentity Typeclasses.Classes.CommutativeSemigroup.xor False
+    commutativeSemigroupAndIdentity CommutativeSemigroup.xor False
 
 
 {-| Instance for modularArithmetic
 -}
 modularArithmetic : Int -> CommutativeMonoid Int
 modularArithmetic divisor =
-    commutativeSemigroupAndIdentity (Typeclasses.Classes.CommutativeSemigroup.modularArithmetic divisor) 0
+    commutativeSemigroupAndIdentity (CommutativeSemigroup.modularArithmetic divisor) 0

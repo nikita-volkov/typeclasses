@@ -1,4 +1,4 @@
-module Typeclasses.Classes.Semigroup exposing
+module Semigroup exposing
     ( Semigroup
     , prepend, concat, appendable
     , map
@@ -30,10 +30,10 @@ module Typeclasses.Classes.Semigroup exposing
 
 -}
 
+import CommutativeSemigroup
 import Either exposing (Either(..))
 import Set exposing (Set)
 import Task exposing (Task)
-import Typeclasses.Classes.CommutativeSemigroup
 
 
 {-| Explicit typeclass which implements semigroup operations for type `a`.
@@ -99,8 +99,8 @@ Implements multiplication.
 numberProduct : Semigroup number
 numberProduct =
     let
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            Typeclasses.Classes.CommutativeSemigroup.numberProduct
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            CommutativeSemigroup.numberProduct
     in
     semigroup
 
@@ -111,8 +111,8 @@ Implements sum.
 numberSum : Semigroup number
 numberSum =
     let
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            Typeclasses.Classes.CommutativeSemigroup.numberSum
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            CommutativeSemigroup.numberSum
     in
     semigroup
 
@@ -122,8 +122,8 @@ numberSum =
 intProduct : Semigroup Int
 intProduct =
     let
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            Typeclasses.Classes.CommutativeSemigroup.intProduct
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            CommutativeSemigroup.intProduct
     in
     semigroup
 
@@ -140,8 +140,8 @@ intSum =
 setUnion : Semigroup (Set.Set comparable)
 setUnion =
     let
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            Typeclasses.Classes.CommutativeSemigroup.setUnion
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            CommutativeSemigroup.setUnion
     in
     semigroup
 
@@ -151,8 +151,8 @@ setUnion =
 setIntersection : Semigroup (Set.Set comparable)
 setIntersection =
     let
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            Typeclasses.Classes.CommutativeSemigroup.setIntersection
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            CommutativeSemigroup.setIntersection
     in
     semigroup
 
@@ -162,8 +162,8 @@ setIntersection =
 and : Semigroup Bool
 and =
     let
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            Typeclasses.Classes.CommutativeSemigroup.and
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            CommutativeSemigroup.and
     in
     semigroup
 
@@ -173,8 +173,8 @@ and =
 or : Semigroup Bool
 or =
     let
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            Typeclasses.Classes.CommutativeSemigroup.or
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            CommutativeSemigroup.or
     in
     semigroup
 
@@ -184,8 +184,8 @@ or =
 unit : Semigroup ()
 unit =
     let
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            Typeclasses.Classes.CommutativeSemigroup.unit
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            CommutativeSemigroup.unit
     in
     semigroup
 
@@ -193,8 +193,8 @@ unit =
 xor : Semigroup Bool
 xor =
     let
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            Typeclasses.Classes.CommutativeSemigroup.xor
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            CommutativeSemigroup.xor
     in
     semigroup
 
@@ -204,8 +204,8 @@ xor =
 modularArithmetic : Int -> Semigroup Int
 modularArithmetic divisor =
     let
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            Typeclasses.Classes.CommutativeSemigroup.modularArithmetic divisor
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+            CommutativeSemigroup.modularArithmetic divisor
     in
     semigroup
 

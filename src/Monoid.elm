@@ -1,4 +1,4 @@
-module Typeclasses.Classes.Monoid exposing
+module Monoid exposing
     ( Monoid
     , identityAndConcat, semigroupAndIdentity, appendable
     , map
@@ -30,12 +30,12 @@ module Typeclasses.Classes.Monoid exposing
 
 -}
 
+import CommutativeMonoid
+import CommutativeSemigroup
 import Either exposing (Either(..))
+import Semigroup as Semigroup exposing (Semigroup)
 import Set exposing (Set)
 import Task exposing (Task)
-import Typeclasses.Classes.CommutativeMonoid
-import Typeclasses.Classes.CommutativeSemigroup
-import Typeclasses.Classes.Semigroup as Semigroup exposing (Semigroup)
 
 
 {-| Explicit typeclass which implements monoid operations for type `a`.
@@ -109,10 +109,10 @@ Implements multiplication.
 numberProduct : Monoid number
 numberProduct =
     let
-        (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
-            Typeclasses.Classes.CommutativeMonoid.numberProduct
+        (CommutativeMonoid.CommutativeMonoid monoid) =
+            CommutativeMonoid.numberProduct
 
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
             monoid.semigroup
     in
     semigroupAndIdentity semigroup monoid.identity
@@ -124,10 +124,10 @@ Implements sum.
 numberSum : Monoid number
 numberSum =
     let
-        (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
-            Typeclasses.Classes.CommutativeMonoid.numberSum
+        (CommutativeMonoid.CommutativeMonoid monoid) =
+            CommutativeMonoid.numberSum
 
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
             monoid.semigroup
     in
     semigroupAndIdentity semigroup monoid.identity
@@ -152,10 +152,10 @@ intSum =
 all : Monoid Bool
 all =
     let
-        (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
-            Typeclasses.Classes.CommutativeMonoid.all
+        (CommutativeMonoid.CommutativeMonoid monoid) =
+            CommutativeMonoid.all
 
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
             monoid.semigroup
     in
     semigroupAndIdentity semigroup monoid.identity
@@ -166,10 +166,10 @@ all =
 any : Monoid Bool
 any =
     let
-        (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
-            Typeclasses.Classes.CommutativeMonoid.any
+        (CommutativeMonoid.CommutativeMonoid monoid) =
+            CommutativeMonoid.any
 
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
             monoid.semigroup
     in
     semigroupAndIdentity semigroup monoid.identity
@@ -180,10 +180,10 @@ any =
 unit : Monoid ()
 unit =
     let
-        (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
-            Typeclasses.Classes.CommutativeMonoid.unit
+        (CommutativeMonoid.CommutativeMonoid monoid) =
+            CommutativeMonoid.unit
 
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
             monoid.semigroup
     in
     semigroupAndIdentity semigroup monoid.identity
@@ -194,10 +194,10 @@ unit =
 exclusiveOr : Monoid Bool
 exclusiveOr =
     let
-        (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
-            Typeclasses.Classes.CommutativeMonoid.exclusiveOr
+        (CommutativeMonoid.CommutativeMonoid monoid) =
+            CommutativeMonoid.exclusiveOr
 
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
             monoid.semigroup
     in
     semigroupAndIdentity semigroup monoid.identity
@@ -208,10 +208,10 @@ exclusiveOr =
 modularArithmetic : Int -> Monoid Int
 modularArithmetic divisor =
     let
-        (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
-            Typeclasses.Classes.CommutativeMonoid.modularArithmetic divisor
+        (CommutativeMonoid.CommutativeMonoid monoid) =
+            CommutativeMonoid.modularArithmetic divisor
 
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
             monoid.semigroup
     in
     semigroupAndIdentity semigroup monoid.identity
@@ -243,8 +243,8 @@ list =
 setUnion : Monoid (Set comparable)
 setUnion =
     let
-        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup setUnionSemigroup) =
-            Typeclasses.Classes.CommutativeSemigroup.setUnion
+        (CommutativeSemigroup.CommutativeSemigroup setUnionSemigroup) =
+            CommutativeSemigroup.setUnion
     in
     semigroupAndIdentity setUnionSemigroup Set.empty
 

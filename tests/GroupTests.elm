@@ -1,11 +1,11 @@
 module GroupTests exposing (suite)
 
+import AbelianGroup
+import CommutativeMonoid
+import CommutativeSemigroup
 import Expect
 import Fuzz
 import Test
-import Typeclasses.Classes.AbelianGroup
-import Typeclasses.Classes.CommutativeMonoid
-import Typeclasses.Classes.CommutativeSemigroup
 
 
 suite : Test.Test
@@ -17,13 +17,13 @@ suite =
           <|
             \a ->
                 let
-                    (Typeclasses.Classes.AbelianGroup.AbelianGroup group) =
-                        Typeclasses.Classes.AbelianGroup.numberSum
+                    (AbelianGroup.AbelianGroup group) =
+                        AbelianGroup.numberSum
 
-                    (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
+                    (CommutativeMonoid.CommutativeMonoid monoid) =
                         group.monoid
 
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                    (CommutativeSemigroup.CommutativeSemigroup semigroup) =
                         monoid.semigroup
 
                     inversePlusA =
@@ -48,13 +48,13 @@ suite =
           <|
             \a ->
                 let
-                    (Typeclasses.Classes.AbelianGroup.AbelianGroup group) =
-                        Typeclasses.Classes.AbelianGroup.trivialGroup
+                    (AbelianGroup.AbelianGroup group) =
+                        AbelianGroup.trivialGroup
 
-                    (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
+                    (CommutativeMonoid.CommutativeMonoid monoid) =
                         group.monoid
 
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                    (CommutativeSemigroup.CommutativeSemigroup semigroup) =
                         monoid.semigroup
 
                     inversePlusA =
@@ -79,13 +79,13 @@ suite =
           <|
             \a ->
                 let
-                    (Typeclasses.Classes.AbelianGroup.AbelianGroup group) =
-                        Typeclasses.Classes.AbelianGroup.exclusiveOr
+                    (AbelianGroup.AbelianGroup group) =
+                        AbelianGroup.exclusiveOr
 
-                    (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
+                    (CommutativeMonoid.CommutativeMonoid monoid) =
                         group.monoid
 
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                    (CommutativeSemigroup.CommutativeSemigroup semigroup) =
                         monoid.semigroup
 
                     inverseXorA =
@@ -110,13 +110,13 @@ suite =
           <|
             \a ->
                 let
-                    (Typeclasses.Classes.AbelianGroup.AbelianGroup group) =
-                        Typeclasses.Classes.AbelianGroup.modularArithmetic 12
+                    (AbelianGroup.AbelianGroup group) =
+                        AbelianGroup.modularArithmetic 12
 
-                    (Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid monoid) =
+                    (CommutativeMonoid.CommutativeMonoid monoid) =
                         group.monoid
 
-                    (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                    (CommutativeSemigroup.CommutativeSemigroup semigroup) =
                         monoid.semigroup
 
                     inversePlusA =

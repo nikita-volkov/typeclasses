@@ -1,11 +1,11 @@
 module SemigroupTests exposing (suite)
 
+import CommutativeSemigroup
 import Expect
 import Fuzz
+import Semigroup
 import Set
 import Test
-import Typeclasses.Classes.CommutativeSemigroup
-import Typeclasses.Classes.Semigroup
 
 
 suite : Test.Test
@@ -20,8 +20,8 @@ suite =
               <|
                 \a b c ->
                     let
-                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            Typeclasses.Classes.CommutativeSemigroup.intProduct
+                        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            CommutativeSemigroup.intProduct
 
                         aTimesBThenTimesC =
                             semigroup (semigroup a b) c
@@ -38,8 +38,8 @@ suite =
               <|
                 \a b ->
                     let
-                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            Typeclasses.Classes.CommutativeSemigroup.intProduct
+                        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            CommutativeSemigroup.intProduct
 
                         aTimesB =
                             semigroup a b
@@ -57,8 +57,8 @@ suite =
               <|
                 \a b c ->
                     let
-                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            Typeclasses.Classes.CommutativeSemigroup.intSum
+                        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            CommutativeSemigroup.intSum
 
                         aPlusBThenPlusC =
                             semigroup (semigroup a b) c
@@ -75,8 +75,8 @@ suite =
               <|
                 \a b ->
                     let
-                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            Typeclasses.Classes.CommutativeSemigroup.numberSum
+                        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            CommutativeSemigroup.numberSum
 
                         aPlusB =
                             semigroup a b
@@ -94,8 +94,8 @@ suite =
               <|
                 \a b c ->
                     let
-                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            Typeclasses.Classes.CommutativeSemigroup.and
+                        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            CommutativeSemigroup.and
 
                         aAndBThenAndC =
                             semigroup (semigroup a b) c
@@ -112,8 +112,8 @@ suite =
               <|
                 \a b ->
                     let
-                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            Typeclasses.Classes.CommutativeSemigroup.and
+                        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            CommutativeSemigroup.and
 
                         aAndB =
                             semigroup a b
@@ -131,8 +131,8 @@ suite =
               <|
                 \a b c ->
                     let
-                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            Typeclasses.Classes.CommutativeSemigroup.or
+                        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            CommutativeSemigroup.or
 
                         aOrBThenOrC =
                             semigroup (semigroup a b) c
@@ -149,8 +149,8 @@ suite =
               <|
                 \a b ->
                     let
-                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            Typeclasses.Classes.CommutativeSemigroup.or
+                        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            CommutativeSemigroup.or
 
                         aOrB =
                             semigroup a b
@@ -168,8 +168,8 @@ suite =
               <|
                 \a b c ->
                     let
-                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            Typeclasses.Classes.CommutativeSemigroup.unit
+                        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            CommutativeSemigroup.unit
 
                         aOrBThenOrC =
                             semigroup (semigroup a b) c
@@ -187,8 +187,8 @@ suite =
               <|
                 \a b c ->
                     let
-                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            Typeclasses.Classes.CommutativeSemigroup.xor
+                        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            CommutativeSemigroup.xor
 
                         aXorBThenXorC =
                             semigroup (semigroup a b) c
@@ -205,8 +205,8 @@ suite =
               <|
                 \a b ->
                     let
-                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            Typeclasses.Classes.CommutativeSemigroup.xor
+                        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            CommutativeSemigroup.xor
 
                         aXorB =
                             semigroup a b
@@ -224,8 +224,8 @@ suite =
               <|
                 \a b c ->
                     let
-                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            Typeclasses.Classes.CommutativeSemigroup.modularArithmetic 12
+                        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            CommutativeSemigroup.modularArithmetic 12
 
                         aPlusBThenPlusC =
                             semigroup (semigroup a b) c
@@ -242,8 +242,8 @@ suite =
               <|
                 \a b ->
                     let
-                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            Typeclasses.Classes.CommutativeSemigroup.modularArithmetic 12
+                        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            CommutativeSemigroup.modularArithmetic 12
 
                         aPlusB =
                             semigroup a b
@@ -261,8 +261,8 @@ suite =
               <|
                 \a b c ->
                     let
-                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            Typeclasses.Classes.CommutativeSemigroup.setUnion
+                        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            CommutativeSemigroup.setUnion
 
                         aUnionBThenUnionC =
                             semigroup (semigroup a b) c
@@ -279,8 +279,8 @@ suite =
               <|
                 \a b ->
                     let
-                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            Typeclasses.Classes.CommutativeSemigroup.setUnion
+                        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            CommutativeSemigroup.setUnion
 
                         aSetUnionB =
                             semigroup a b
@@ -298,8 +298,8 @@ suite =
               <|
                 \a b c ->
                     let
-                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            Typeclasses.Classes.CommutativeSemigroup.setIntersection
+                        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            CommutativeSemigroup.setIntersection
 
                         aIntersectionBThenIntersectionC =
                             semigroup (semigroup a b) c
@@ -316,8 +316,8 @@ suite =
               <|
                 \a b ->
                     let
-                        (Typeclasses.Classes.CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            Typeclasses.Classes.CommutativeSemigroup.setIntersection
+                        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
+                            CommutativeSemigroup.setIntersection
 
                         aSetIntersectionB =
                             semigroup a b
@@ -337,10 +337,10 @@ suite =
             \a b c ->
                 let
                     aAppendBThenAppendC =
-                        Typeclasses.Classes.Semigroup.string (Typeclasses.Classes.Semigroup.string a b) c
+                        Semigroup.string (Semigroup.string a b) c
 
                     bAppendCThenAppendA =
-                        Typeclasses.Classes.Semigroup.string a (Typeclasses.Classes.Semigroup.string b c)
+                        Semigroup.string a (Semigroup.string b c)
                 in
                 aAppendBThenAppendC
                     |> Expect.equal bAppendCThenAppendA
@@ -353,10 +353,10 @@ suite =
             \a b c ->
                 let
                     aMaybeFirstBThenMaybeFirstC =
-                        Typeclasses.Classes.Semigroup.maybeFirst (Typeclasses.Classes.Semigroup.maybeFirst a b) c
+                        Semigroup.maybeFirst (Semigroup.maybeFirst a b) c
 
                     bMaybeFirstCThenMaybeFirstA =
-                        Typeclasses.Classes.Semigroup.maybeFirst a (Typeclasses.Classes.Semigroup.maybeFirst b c)
+                        Semigroup.maybeFirst a (Semigroup.maybeFirst b c)
                 in
                 aMaybeFirstBThenMaybeFirstC
                     |> Expect.equal bMaybeFirstCThenMaybeFirstA
@@ -369,10 +369,10 @@ suite =
             \a b c ->
                 let
                     aAppendBThenAppendC =
-                        Typeclasses.Classes.Semigroup.list (Typeclasses.Classes.Semigroup.list a b) c
+                        Semigroup.list (Semigroup.list a b) c
 
                     bAppendCThenAppendA =
-                        Typeclasses.Classes.Semigroup.list a (Typeclasses.Classes.Semigroup.list b c)
+                        Semigroup.list a (Semigroup.list b c)
                 in
                 aAppendBThenAppendC
                     |> Expect.equal bAppendCThenAppendA

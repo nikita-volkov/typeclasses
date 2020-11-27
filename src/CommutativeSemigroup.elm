@@ -1,4 +1,4 @@
-module Typeclasses.Classes.CommutativeSemigroup exposing
+module CommutativeSemigroup exposing
     ( CommutativeSemigroup(..)
     , intProduct, intSum, setUnion, setIntersection, and, or, unit, xor, modularArithmetic
     , numberProduct, numberSum

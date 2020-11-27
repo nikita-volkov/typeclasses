@@ -1,6 +1,6 @@
-module Typeclasses.Classes.AbelianGroup exposing
+module AbelianGroup exposing
     ( AbelianGroup(..)
-    , floatProduct, numberSum, trivialGroup, exclusiveOr, modularArithmetic
+    , numberSum, trivialGroup, exclusiveOr, modularArithmetic
     )
 
 {-| Abelian Group typeclass definition and its instances for basic types.
@@ -12,30 +12,19 @@ module Typeclasses.Classes.AbelianGroup exposing
 
 #Instances
 
-@docs floatProduct, numberSum, trivialGroup, exclusiveOr, modularArithmetic
+@docs numberSum, trivialGroup, exclusiveOr, modularArithmetic
 
 -}
 
 import Basics
-import Typeclasses.Classes.CommutativeMonoid
+import CommutativeMonoid
 
 
 type AbelianGroup a
     = AbelianGroup
-        { monoid : Typeclasses.Classes.CommutativeMonoid.CommutativeMonoid a
+        { monoid : CommutativeMonoid.CommutativeMonoid a
         , inverse : a -> a
         }
-
-
-{-| Construct an instance for Float.
-Implements multiplication.
--}
-floatProduct : AbelianGroup Float
-floatProduct =
-    { monoid = Typeclasses.Classes.CommutativeMonoid.numberProduct
-    , inverse = \number -> 1 / number
-    }
-        |> AbelianGroup
 
 
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
@@ -43,7 +32,7 @@ Implements sum.
 -}
 numberSum : AbelianGroup number
 numberSum =
-    { monoid = Typeclasses.Classes.CommutativeMonoid.numberSum
+    { monoid = CommutativeMonoid.numberSum
     , inverse = \number -> -number
     }
         |> AbelianGroup
@@ -53,7 +42,7 @@ numberSum =
 -}
 trivialGroup : AbelianGroup ()
 trivialGroup =
-    { monoid = Typeclasses.Classes.CommutativeMonoid.unit
+    { monoid = CommutativeMonoid.unit
     , inverse = \() -> ()
     }
         |> AbelianGroup
@@ -63,7 +52,7 @@ trivialGroup =
 -}
 exclusiveOr : AbelianGroup Bool
 exclusiveOr =
-    { monoid = Typeclasses.Classes.CommutativeMonoid.exclusiveOr
+    { monoid = CommutativeMonoid.exclusiveOr
     , inverse = Basics.identity
     }
         |> AbelianGroup
@@ -73,7 +62,7 @@ exclusiveOr =
 -}
 modularArithmetic : Int -> AbelianGroup Int
 modularArithmetic divisor =
-    { monoid = Typeclasses.Classes.CommutativeMonoid.modularArithmetic divisor
+    { monoid = CommutativeMonoid.modularArithmetic divisor
     , inverse = \a -> divisor - a
     }
         |> AbelianGroup

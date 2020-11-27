@@ -2,8 +2,8 @@ module MonoidTests exposing (suite)
 
 import Expect
 import Fuzz
+import Monoid
 import Test
-import Typeclasses.Classes.Monoid
 
 
 suite : Test.Test
@@ -16,10 +16,10 @@ suite =
             \a ->
                 let
                     aAppendIdentity =
-                        Typeclasses.Classes.Monoid.string.semigroup.prepend a Typeclasses.Classes.Monoid.string.identity
+                        Monoid.string.semigroup a Monoid.string.identity
 
                     identityAppendA =
-                        Typeclasses.Classes.Monoid.string.semigroup.prepend Typeclasses.Classes.Monoid.string.identity a
+                        Monoid.string.semigroup Monoid.string.identity a
                 in
                 Expect.true "All equal a" (aAppendIdentity == a && identityAppendA == a)
         , Test.fuzz
@@ -29,10 +29,10 @@ suite =
             \a ->
                 let
                     aMaybeFirstIdentity =
-                        Typeclasses.Classes.Monoid.maybeFirst.semigroup.prepend a Typeclasses.Classes.Monoid.maybeFirst.identity
+                        Monoid.maybeFirst.semigroup a Monoid.maybeFirst.identity
 
                     identityMaybeFirstA =
-                        Typeclasses.Classes.Monoid.maybeFirst.semigroup.prepend Typeclasses.Classes.Monoid.maybeFirst.identity a
+                        Monoid.maybeFirst.semigroup Monoid.maybeFirst.identity a
                 in
                 Expect.true "All equal a" (aMaybeFirstIdentity == a && identityMaybeFirstA == a)
         , Test.fuzz
@@ -42,10 +42,10 @@ suite =
             \a ->
                 let
                     aAppendIdentity =
-                        Typeclasses.Classes.Monoid.list.semigroup.prepend a Typeclasses.Classes.Monoid.list.identity
+                        Monoid.list.semigroup a Monoid.list.identity
 
                     identityAppendA =
-                        Typeclasses.Classes.Monoid.list.semigroup.prepend Typeclasses.Classes.Monoid.list.identity a
+                        Monoid.list.semigroup Monoid.list.identity a
                 in
                 Expect.true "All equal a" (aAppendIdentity == a && identityAppendA == a)
         ]

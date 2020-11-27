@@ -1,9 +1,13 @@
 module RingTests exposing (suite)
 
+import AbelianGroup
+import CommutativeMonoid
+import CommutativeRing
+import CommutativeSemigroup
 import Expect
 import Fuzz
+import Ring
 import Test
-import Typeclasses.Classes.Ring
 
 
 suite : Test.Test
@@ -17,30 +21,54 @@ suite =
           <|
             \x y z ->
                 let
+                    (CommutativeRing.CommutativeRing commutativeRing) =
+                        CommutativeRing.trivialRing
+
+                    multiplication =
+                        commutativeRing.multiplication
+
+                    addition =
+                        commutativeRing.addition
+
+                    (CommutativeMonoid.CommutativeMonoid multiplicationCommutativeMonoid) =
+                        multiplication
+
+                    (CommutativeSemigroup.CommutativeSemigroup multiplicationCommutativeSemigroup) =
+                        multiplicationCommutativeMonoid.semigroup
+
+                    (AbelianGroup.AbelianGroup additionAbelianGroup) =
+                        addition
+
+                    (CommutativeMonoid.CommutativeMonoid additionCommutativeMonoid) =
+                        additionAbelianGroup.monoid
+
+                    (CommutativeSemigroup.CommutativeSemigroup additionCommutativeSemigroup) =
+                        additionCommutativeMonoid.semigroup
+
                     xTimesYPlusZ =
-                        Typeclasses.Classes.Ring.trivialRing.multiplication.semigroup.prepend
+                        multiplicationCommutativeSemigroup
                             x
-                            (Typeclasses.Classes.Ring.trivialRing.addition.monoid.semigroup.prepend y z)
+                            (additionCommutativeSemigroup y z)
 
                     xTimesY =
-                        Typeclasses.Classes.Ring.trivialRing.multiplication.semigroup.prepend x y
+                        multiplicationCommutativeSemigroup x y
 
                     xTimesZ =
-                        Typeclasses.Classes.Ring.trivialRing.multiplication.semigroup.prepend x z
+                        multiplicationCommutativeSemigroup x z
 
                     xTimesYPlusXTimesZ =
-                        Typeclasses.Classes.Ring.trivialRing.addition.monoid.semigroup.prepend xTimesY xTimesZ
+                        additionCommutativeSemigroup xTimesY xTimesZ
 
                     xPlusYTimesZ =
-                        Typeclasses.Classes.Ring.trivialRing.multiplication.semigroup.prepend
-                            (Typeclasses.Classes.Ring.trivialRing.addition.monoid.semigroup.prepend x y)
+                        multiplicationCommutativeSemigroup
+                            (additionCommutativeSemigroup x y)
                             z
 
                     yTimesZ =
-                        Typeclasses.Classes.Ring.trivialRing.multiplication.semigroup.prepend y z
+                        multiplicationCommutativeSemigroup y z
 
                     xTimesZPlusYTimesZ =
-                        Typeclasses.Classes.Ring.trivialRing.addition.monoid.semigroup.prepend xTimesZ yTimesZ
+                        additionCommutativeSemigroup xTimesZ yTimesZ
                 in
                 Expect.true "All equal a"
                     (xTimesYPlusZ
@@ -56,30 +84,54 @@ suite =
           <|
             \x y z ->
                 let
+                    (CommutativeRing.CommutativeRing commutativeRing) =
+                        CommutativeRing.exclusiveOrRing
+
+                    multiplication =
+                        commutativeRing.multiplication
+
+                    addition =
+                        commutativeRing.addition
+
+                    (CommutativeMonoid.CommutativeMonoid multiplicationCommutativeMonoid) =
+                        multiplication
+
+                    (CommutativeSemigroup.CommutativeSemigroup multiplicationCommutativeSemigroup) =
+                        multiplicationCommutativeMonoid.semigroup
+
+                    (AbelianGroup.AbelianGroup additionAbelianGroup) =
+                        addition
+
+                    (CommutativeMonoid.CommutativeMonoid additionCommutativeMonoid) =
+                        additionAbelianGroup.monoid
+
+                    (CommutativeSemigroup.CommutativeSemigroup additionCommutativeSemigroup) =
+                        additionCommutativeMonoid.semigroup
+
                     xAllYXorZ =
-                        Typeclasses.Classes.Ring.exclusiveOrRing.multiplication.semigroup.prepend
+                        multiplicationCommutativeSemigroup
                             x
-                            (Typeclasses.Classes.Ring.exclusiveOrRing.addition.monoid.semigroup.prepend y z)
+                            (additionCommutativeSemigroup y z)
 
                     xAllY =
-                        Typeclasses.Classes.Ring.exclusiveOrRing.multiplication.semigroup.prepend x y
+                        multiplicationCommutativeSemigroup x y
 
                     xAllZ =
-                        Typeclasses.Classes.Ring.exclusiveOrRing.multiplication.semigroup.prepend x z
+                        multiplicationCommutativeSemigroup x z
 
                     xAllYXorXAllZ =
-                        Typeclasses.Classes.Ring.exclusiveOrRing.addition.monoid.semigroup.prepend xAllY xAllZ
+                        additionCommutativeSemigroup xAllY xAllZ
 
                     xXorYAllZ =
-                        Typeclasses.Classes.Ring.exclusiveOrRing.multiplication.semigroup.prepend
-                            (Typeclasses.Classes.Ring.exclusiveOrRing.addition.monoid.semigroup.prepend x y)
+                        multiplicationCommutativeSemigroup
+                            (additionCommutativeSemigroup x y)
                             z
 
                     yAllZ =
-                        Typeclasses.Classes.Ring.exclusiveOrRing.multiplication.semigroup.prepend y z
+                        multiplicationCommutativeSemigroup y z
 
                     xAllZXorYAllZ =
-                        Typeclasses.Classes.Ring.exclusiveOrRing.addition.monoid.semigroup.prepend xAllZ yAllZ
+                        additionCommutativeSemigroup xAllZ yAllZ
                 in
                 Expect.true "All equal a"
                     (xAllYXorZ

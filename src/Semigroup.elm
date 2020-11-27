@@ -188,6 +188,8 @@ unit =
     semigroup
 
 
+{-| Instance for xor
+-}
 xor : Semigroup Bool
 xor =
     let

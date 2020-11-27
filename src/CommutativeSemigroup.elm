@@ -1,7 +1,6 @@
 module CommutativeSemigroup exposing
     ( CommutativeSemigroup(..)
-    , intProduct, intSum, setUnion, setIntersection, and, or, unit, xor, modularArithmetic
-    , numberProduct, numberSum
+    , numberProduct, intProduct, numberSum, intSum, setUnion, setIntersection, and, or, unit, xor, modularArithmetic
     )
 
 {-| Commutative Semigroup typeclass definition and its instances for basic types.
@@ -14,7 +13,7 @@ module CommutativeSemigroup exposing
 
 # Instances
 
-@docs intProduct, intSum, string, maybeFirst, list, setUnion, setIntersection, setDifference, cmd, sub, task, and, or, composition, unit, xor, modularArithmetic
+@docs numberProduct, intProduct, numberSum, intSum, setUnion, setIntersection, and, or, unit, xor, modularArithmetic
 
 -}
 

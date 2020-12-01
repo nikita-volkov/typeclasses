@@ -21,54 +21,33 @@ suite =
           <|
             \x y z ->
                 let
-                    (CommutativeRing.CommutativeRing commutativeRing) =
-                        CommutativeRing.trivialRing
-
-                    multiplication =
-                        commutativeRing.multiplication
-
-                    addition =
-                        commutativeRing.addition
-
-                    (CommutativeMonoid.CommutativeMonoid multiplicationCommutativeMonoid) =
-                        multiplication
-
-                    (CommutativeSemigroup.CommutativeSemigroup multiplicationCommutativeSemigroup) =
-                        multiplicationCommutativeMonoid.semigroup
-
-                    (AbelianGroup.AbelianGroup additionAbelianGroup) =
-                        addition
-
-                    (CommutativeMonoid.CommutativeMonoid additionCommutativeMonoid) =
-                        additionAbelianGroup.monoid
-
-                    (CommutativeSemigroup.CommutativeSemigroup additionCommutativeSemigroup) =
-                        additionCommutativeMonoid.semigroup
+                    (AbelianGroup.AbelianGroup groupAddition) =
+                        Ring.trivialRing.addition
 
                     xTimesYPlusZ =
-                        multiplicationCommutativeSemigroup
+                        Ring.trivialRing.multiplication.semigroup
                             x
-                            (additionCommutativeSemigroup y z)
+                            (groupAddition.monoid.semigroup y z)
 
                     xTimesY =
-                        multiplicationCommutativeSemigroup x y
+                        Ring.trivialRing.multiplication.semigroup x y
 
                     xTimesZ =
-                        multiplicationCommutativeSemigroup x z
+                        Ring.trivialRing.multiplication.semigroup x z
 
                     xTimesYPlusXTimesZ =
-                        additionCommutativeSemigroup xTimesY xTimesZ
+                        groupAddition.monoid.semigroup xTimesY xTimesZ
 
                     xPlusYTimesZ =
-                        multiplicationCommutativeSemigroup
-                            (additionCommutativeSemigroup x y)
+                        Ring.trivialRing.multiplication.semigroup
+                            (groupAddition.monoid.semigroup x y)
                             z
 
                     yTimesZ =
-                        multiplicationCommutativeSemigroup y z
+                        Ring.trivialRing.multiplication.semigroup y z
 
                     xTimesZPlusYTimesZ =
-                        additionCommutativeSemigroup xTimesZ yTimesZ
+                        groupAddition.monoid.semigroup xTimesZ yTimesZ
                 in
                 Expect.true "All equal a"
                     (xTimesYPlusZ
@@ -84,54 +63,33 @@ suite =
           <|
             \x y z ->
                 let
-                    (CommutativeRing.CommutativeRing commutativeRing) =
-                        CommutativeRing.exclusiveOrRing
-
-                    multiplication =
-                        commutativeRing.multiplication
-
-                    addition =
-                        commutativeRing.addition
-
-                    (CommutativeMonoid.CommutativeMonoid multiplicationCommutativeMonoid) =
-                        multiplication
-
-                    (CommutativeSemigroup.CommutativeSemigroup multiplicationCommutativeSemigroup) =
-                        multiplicationCommutativeMonoid.semigroup
-
-                    (AbelianGroup.AbelianGroup additionAbelianGroup) =
-                        addition
-
-                    (CommutativeMonoid.CommutativeMonoid additionCommutativeMonoid) =
-                        additionAbelianGroup.monoid
-
-                    (CommutativeSemigroup.CommutativeSemigroup additionCommutativeSemigroup) =
-                        additionCommutativeMonoid.semigroup
+                    (AbelianGroup.AbelianGroup groupAddition) =
+                        Ring.exclusiveOrRing.addition
 
                     xAllYXorZ =
-                        multiplicationCommutativeSemigroup
+                        Ring.exclusiveOrRing.multiplication.semigroup
                             x
-                            (additionCommutativeSemigroup y z)
+                            (groupAddition.monoid.semigroup y z)
 
                     xAllY =
-                        multiplicationCommutativeSemigroup x y
+                        Ring.exclusiveOrRing.multiplication.semigroup x y
 
                     xAllZ =
-                        multiplicationCommutativeSemigroup x z
+                        Ring.exclusiveOrRing.multiplication.semigroup x z
 
                     xAllYXorXAllZ =
-                        additionCommutativeSemigroup xAllY xAllZ
+                        groupAddition.monoid.semigroup xAllY xAllZ
 
                     xXorYAllZ =
-                        multiplicationCommutativeSemigroup
-                            (additionCommutativeSemigroup x y)
+                        Ring.exclusiveOrRing.multiplication.semigroup
+                            (groupAddition.monoid.semigroup x y)
                             z
 
                     yAllZ =
-                        multiplicationCommutativeSemigroup y z
+                        Ring.exclusiveOrRing.multiplication.semigroup y z
 
                     xAllZXorYAllZ =
-                        additionCommutativeSemigroup xAllZ yAllZ
+                        groupAddition.monoid.semigroup xAllZ yAllZ
                 in
                 Expect.true "All equal a"
                     (xAllYXorZ

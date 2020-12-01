@@ -18,15 +18,13 @@ module AbelianGroup exposing
 
 import Basics
 import CommutativeMonoid
+import Group
 
 
 {-| Explicit typeclass which implements group operations for type `a` when the operation is commutative.
 -}
 type AbelianGroup a
-    = AbelianGroup
-        { monoid : CommutativeMonoid.CommutativeMonoid a
-        , inverse : a -> a
-        }
+    = AbelianGroup (Group.Group a)
 
 
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
@@ -34,37 +32,26 @@ Implements sum.
 -}
 numberSum : AbelianGroup number
 numberSum =
-    { monoid = CommutativeMonoid.numberSum
-    , inverse = \number -> -number
-    }
-        |> AbelianGroup
+    AbelianGroup Group.numberSum
 
 
 {-| Construct trivial group
 -}
 trivialGroup : AbelianGroup ()
 trivialGroup =
-    { monoid = CommutativeMonoid.unit
-    , inverse = \() -> ()
-    }
-        |> AbelianGroup
+    AbelianGroup Group.trivialGroup
 
 
 {-| Construct exclusive Or
 -}
 exclusiveOr : AbelianGroup Bool
 exclusiveOr =
-    { monoid = CommutativeMonoid.exclusiveOr
-    , inverse = Basics.identity
-    }
-        |> AbelianGroup
+    AbelianGroup Group.exclusiveOr
 
 
 {-| Instance for modularArithmetic
 -}
 modularArithmetic : Int -> AbelianGroup Int
 modularArithmetic divisor =
-    { monoid = CommutativeMonoid.modularArithmetic divisor
-    , inverse = \a -> divisor - a
-    }
+    Group.modularArithmetic divisor
         |> AbelianGroup

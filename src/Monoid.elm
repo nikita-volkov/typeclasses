@@ -29,7 +29,6 @@ module Monoid exposing
 
 -}
 
-import CommutativeMonoid
 import CommutativeSemigroup
 import Semigroup as Semigroup exposing (Semigroup)
 import Set exposing (Set)
@@ -106,14 +105,7 @@ Implements multiplication.
 -}
 numberProduct : Monoid number
 numberProduct =
-    let
-        (CommutativeMonoid.CommutativeMonoid monoid) =
-            CommutativeMonoid.numberProduct
-
-        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            monoid.semigroup
-    in
-    semigroupAndIdentity semigroup monoid.identity
+    { semigroup = Semigroup.numberProduct, identity = 1, concat = List.product }
 
 
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
@@ -121,14 +113,7 @@ Implements sum.
 -}
 numberSum : Monoid number
 numberSum =
-    let
-        (CommutativeMonoid.CommutativeMonoid monoid) =
-            CommutativeMonoid.numberSum
-
-        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            monoid.semigroup
-    in
-    semigroupAndIdentity semigroup monoid.identity
+    { semigroup = Semigroup.numberSum, identity = 0, concat = List.sum }
 
 
 {-| Instance for integers under the multiplication operation.
@@ -149,70 +134,35 @@ intSum =
 -}
 all : Monoid Bool
 all =
-    let
-        (CommutativeMonoid.CommutativeMonoid monoid) =
-            CommutativeMonoid.all
-
-        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            monoid.semigroup
-    in
-    semigroupAndIdentity semigroup monoid.identity
+    semigroupAndIdentity Semigroup.and True
 
 
 {-| Instance for any
 -}
 any : Monoid Bool
 any =
-    let
-        (CommutativeMonoid.CommutativeMonoid monoid) =
-            CommutativeMonoid.any
-
-        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            monoid.semigroup
-    in
-    semigroupAndIdentity semigroup monoid.identity
+    semigroupAndIdentity Semigroup.or False
 
 
 {-| Instance for trivial monoid
 -}
 unit : Monoid ()
 unit =
-    let
-        (CommutativeMonoid.CommutativeMonoid monoid) =
-            CommutativeMonoid.unit
-
-        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            monoid.semigroup
-    in
-    semigroupAndIdentity semigroup monoid.identity
+    semigroupAndIdentity Semigroup.unit ()
 
 
 {-| Instance for exclusiveOr
 -}
 exclusiveOr : Monoid Bool
 exclusiveOr =
-    let
-        (CommutativeMonoid.CommutativeMonoid monoid) =
-            CommutativeMonoid.exclusiveOr
-
-        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            monoid.semigroup
-    in
-    semigroupAndIdentity semigroup monoid.identity
+    semigroupAndIdentity Semigroup.xor False
 
 
 {-| Instance for modularArithmetic
 -}
 modularArithmetic : Int -> Monoid Int
 modularArithmetic divisor =
-    let
-        (CommutativeMonoid.CommutativeMonoid monoid) =
-            CommutativeMonoid.modularArithmetic divisor
-
-        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            monoid.semigroup
-    in
-    semigroupAndIdentity semigroup monoid.identity
+    semigroupAndIdentity (Semigroup.modularArithmetic divisor) 0
 
 
 {-| Instance for strings under the appending operation.
@@ -240,11 +190,7 @@ list =
 -}
 setUnion : Monoid (Set comparable)
 setUnion =
-    let
-        (CommutativeSemigroup.CommutativeSemigroup setUnionSemigroup) =
-            CommutativeSemigroup.setUnion
-    in
-    semigroupAndIdentity setUnionSemigroup Set.empty
+    semigroupAndIdentity Semigroup.setUnion Set.empty
 
 
 {-| Instance for set under the difference operation.

@@ -17,7 +17,6 @@ module Ring exposing
 -}
 
 import AbelianGroup
-import CommutativeRing
 import Monoid
 
 
@@ -33,11 +32,7 @@ type alias Ring a =
 -}
 numberRing : Ring number
 numberRing =
-    let
-        (CommutativeRing.CommutativeRing ring) =
-            CommutativeRing.numberRing
-    in
-    { addition = ring.addition
+    { addition = AbelianGroup.numberSum
     , multiplication = Monoid.numberProduct
     }
 
@@ -46,11 +41,7 @@ numberRing =
 -}
 trivialRing : Ring ()
 trivialRing =
-    let
-        (CommutativeRing.CommutativeRing ring) =
-            CommutativeRing.trivialRing
-    in
-    { addition = ring.addition
+    { addition = AbelianGroup.trivialGroup
     , multiplication = Monoid.unit
     }
 
@@ -59,10 +50,6 @@ trivialRing =
 -}
 exclusiveOrRing : Ring Bool
 exclusiveOrRing =
-    let
-        (CommutativeRing.CommutativeRing ring) =
-            CommutativeRing.exclusiveOrRing
-    in
-    { addition = ring.addition
-    , multiplication = Monoid.exclusiveOr
+    { addition = AbelianGroup.exclusiveOr
+    , multiplication = Monoid.all
     }

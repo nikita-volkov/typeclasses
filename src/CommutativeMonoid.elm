@@ -32,13 +32,9 @@ type CommutativeMonoid a
 -}
 commutativeSemigroupAndIdentity : Semigroup.Semigroup a -> a -> CommutativeMonoid a
 commutativeSemigroupAndIdentity commutativeSemigroup identity =
-    let
-        semigroup =
-            commutativeSemigroup
-    in
     { semigroup = commutativeSemigroup
     , identity = identity
-    , concat = List.foldl semigroup identity
+    , concat = List.foldl commutativeSemigroup identity
     }
         |> CommutativeMonoid
 

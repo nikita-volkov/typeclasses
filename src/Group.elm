@@ -16,7 +16,6 @@ module Group exposing
 
 -}
 
-import AbelianGroup
 import CommutativeMonoid
 import CommutativeSemigroup
 import Monoid exposing (Monoid)
@@ -35,12 +34,8 @@ Implements sum.
 -}
 numberSum : Group number
 numberSum =
-    let
-        (AbelianGroup.AbelianGroup group) =
-            AbelianGroup.numberSum
-    in
     { monoid = Monoid.numberSum
-    , inverse = group.inverse
+    , inverse = \number -> -number
     }
 
 
@@ -48,12 +43,8 @@ numberSum =
 -}
 trivialGroup : Group ()
 trivialGroup =
-    let
-        (AbelianGroup.AbelianGroup group) =
-            AbelianGroup.trivialGroup
-    in
     { monoid = Monoid.unit
-    , inverse = group.inverse
+    , inverse = \() -> ()
     }
 
 
@@ -61,12 +52,8 @@ trivialGroup =
 -}
 exclusiveOr : Group Bool
 exclusiveOr =
-    let
-        (AbelianGroup.AbelianGroup group) =
-            AbelianGroup.exclusiveOr
-    in
     { monoid = Monoid.exclusiveOr
-    , inverse = group.inverse
+    , inverse = Basics.identity
     }
 
 
@@ -74,10 +61,6 @@ exclusiveOr =
 -}
 modularArithmetic : Int -> Group Int
 modularArithmetic divisor =
-    let
-        (AbelianGroup.AbelianGroup group) =
-            AbelianGroup.modularArithmetic divisor
-    in
     { monoid = Monoid.modularArithmetic divisor
-    , inverse = group.inverse
+    , inverse = \a -> divisor - a
     }

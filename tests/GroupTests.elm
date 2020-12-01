@@ -5,6 +5,7 @@ import CommutativeMonoid
 import CommutativeSemigroup
 import Expect
 import Fuzz
+import Group
 import Test
 
 
@@ -17,30 +18,24 @@ suite =
           <|
             \a ->
                 let
-                    (AbelianGroup.AbelianGroup group) =
-                        AbelianGroup.numberSum
-
-                    (CommutativeMonoid.CommutativeMonoid monoid) =
-                        group.monoid
-
-                    (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        monoid.semigroup
+                    group =
+                        Group.numberSum
 
                     inversePlusA =
-                        semigroup
+                        Group.numberSum.monoid.semigroup
                             (group.inverse a)
                             a
 
                     aPlusInverse =
-                        semigroup
+                        Group.numberSum.monoid.semigroup
                             a
                             (group.inverse a)
                 in
                 Expect.true "All equal a"
                     (inversePlusA
-                        == monoid.identity
+                        == Group.numberSum.monoid.identity
                         && aPlusInverse
-                        == monoid.identity
+                        == Group.numberSum.monoid.identity
                     )
         , Test.fuzz
             Fuzz.unit
@@ -48,30 +43,24 @@ suite =
           <|
             \a ->
                 let
-                    (AbelianGroup.AbelianGroup group) =
-                        AbelianGroup.trivialGroup
-
-                    (CommutativeMonoid.CommutativeMonoid monoid) =
-                        group.monoid
-
-                    (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        monoid.semigroup
+                    group =
+                        Group.trivialGroup
 
                     inversePlusA =
-                        semigroup
+                        group.monoid.semigroup
                             (group.inverse a)
                             a
 
                     aPlusInverse =
-                        semigroup
+                        group.monoid.semigroup
                             a
                             (group.inverse a)
                 in
                 Expect.true "All equal a"
                     (inversePlusA
-                        == monoid.identity
+                        == group.monoid.identity
                         && aPlusInverse
-                        == monoid.identity
+                        == group.monoid.identity
                     )
         , Test.fuzz
             Fuzz.bool
@@ -79,30 +68,24 @@ suite =
           <|
             \a ->
                 let
-                    (AbelianGroup.AbelianGroup group) =
-                        AbelianGroup.exclusiveOr
-
-                    (CommutativeMonoid.CommutativeMonoid monoid) =
-                        group.monoid
-
-                    (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        monoid.semigroup
+                    group =
+                        Group.exclusiveOr
 
                     inverseXorA =
-                        semigroup
+                        group.monoid.semigroup
                             (group.inverse a)
                             a
 
                     aXorInverse =
-                        semigroup
+                        group.monoid.semigroup
                             a
                             (group.inverse a)
                 in
                 Expect.true "All equal a"
                     (inverseXorA
-                        == monoid.identity
+                        == group.monoid.identity
                         && aXorInverse
-                        == monoid.identity
+                        == group.monoid.identity
                     )
         , Test.fuzz
             Fuzz.int
@@ -110,29 +93,23 @@ suite =
           <|
             \a ->
                 let
-                    (AbelianGroup.AbelianGroup group) =
-                        AbelianGroup.modularArithmetic 12
-
-                    (CommutativeMonoid.CommutativeMonoid monoid) =
-                        group.monoid
-
-                    (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                        monoid.semigroup
+                    group =
+                        Group.modularArithmetic 12
 
                     inversePlusA =
-                        semigroup
+                        group.monoid.semigroup
                             (group.inverse a)
                             a
 
                     aPlusInverse =
-                        semigroup
+                        group.monoid.semigroup
                             a
                             (group.inverse a)
                 in
                 Expect.true "All equal a"
                     (inversePlusA
-                        == monoid.identity
+                        == group.monoid.identity
                         && aPlusInverse
-                        == monoid.identity
+                        == group.monoid.identity
                     )
         ]

@@ -18,42 +18,31 @@ module CommutativeRing exposing
 
 import AbelianGroup
 import CommutativeMonoid
+import Ring
 
 
 {-| Explicit typeclass which implements ring operations for type `a` when the multiplication operation is commutative.
 -}
 type CommutativeRing a
-    = CommutativeRing
-        { addition : AbelianGroup.AbelianGroup a
-        , multiplication : CommutativeMonoid.CommutativeMonoid a
-        }
+    = CommutativeRing (Ring.Ring a)
 
 
 {-| Construct real number ring
 -}
 numberRing : CommutativeRing number
 numberRing =
-    { addition = AbelianGroup.numberSum
-    , multiplication = CommutativeMonoid.numberProduct
-    }
-        |> CommutativeRing
+    CommutativeRing Ring.numberRing
 
 
 {-| Construct trivial ring
 -}
 trivialRing : CommutativeRing ()
 trivialRing =
-    { addition = AbelianGroup.trivialGroup
-    , multiplication = CommutativeMonoid.unit
-    }
-        |> CommutativeRing
+    CommutativeRing Ring.trivialRing
 
 
 {-| Construct exclusive all ring
 -}
 exclusiveOrRing : CommutativeRing Bool
 exclusiveOrRing =
-    { addition = AbelianGroup.exclusiveOr
-    , multiplication = CommutativeMonoid.all
-    }
-        |> CommutativeRing
+    CommutativeRing Ring.exclusiveOrRing

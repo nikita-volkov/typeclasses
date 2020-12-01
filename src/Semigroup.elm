@@ -1,6 +1,6 @@
 module Semigroup exposing
     ( Semigroup
-    , prepend, concat, appendable
+    , concat, appendable
     , map
     , string, maybeFirst, list, cmd, sub, task, composition, setDifference, and, intProduct, intSum, modularArithmetic, numberProduct, numberSum, or, setIntersection, setUnion, unit, xor
     )
@@ -15,7 +15,7 @@ module Semigroup exposing
 
 # Construction utilities
 
-@docs prepend, concat, appendable
+@docs concat, appendable
 
 
 # Instance transformation utilities
@@ -35,10 +35,6 @@ import Task exposing (Task)
 
 
 {-| Explicit typeclass which implements semigroup operations for type `a`.
-
-Notice that the binary operation function is named "prepend" instead of "append",
-because it follows the convention of having the context value come as the last value.
-
 -}
 type alias Semigroup a =
     a -> a -> a
@@ -49,25 +45,18 @@ type alias Semigroup a =
 -------------------------
 
 
-{-| Construct from a prepend function.
--}
-prepend : (a -> a -> a) -> Semigroup a
-prepend prepend_ =
-    prepend_
-
-
 {-| Construct from a concatenation function.
 -}
 concat : (List a -> a) -> Semigroup a
 concat concat_ =
-    prepend (\l r -> concat_ [ l, r ])
+    \l r -> concat_ [ l, r ]
 
 
 {-| Construct an instance for any type which satisfies Elm's `appendable` magic constraint.
 -}
 appendable : Semigroup appendable
 appendable =
-    prepend (++)
+    (++)
 
 
 
@@ -83,7 +72,7 @@ You need to provide both a covariant and a contravariant mapping
 -}
 map : (a -> b) -> (b -> a) -> Semigroup a -> Semigroup b
 map aToB bToA semigroupOfA =
-    prepend (\lb rb -> aToB (semigroupOfA (bToA lb) (bToA rb)))
+    \lb rb -> aToB (semigroupOfA (bToA lb) (bToA rb))
 
 
 
@@ -221,14 +210,13 @@ string =
 -}
 maybeFirst : Semigroup (Maybe a)
 maybeFirst =
-    prepend <|
-        \l r ->
-            case l of
-                Nothing ->
-                    r
+    \l r ->
+        case l of
+            Nothing ->
+                r
 
-                _ ->
-                    l
+            _ ->
+                l
 
 
 {-| Instance for list under concatenation.
@@ -242,7 +230,7 @@ list =
 -}
 setDifference : Semigroup (Set comparable)
 setDifference =
-    prepend Set.diff
+    Set.diff
 
 
 {-| Instance for commands under the batch operation.
@@ -263,11 +251,11 @@ sub =
 -}
 task : Semigroup a -> Semigroup (Task x a)
 task semigroupOfA =
-    prepend <| \l r -> l |> Task.andThen (\la -> Task.map (semigroupOfA la) r)
+    \l r -> l |> Task.andThen (\la -> Task.map (semigroupOfA la) r)
 
 
 {-| Instance for a -> a function
 -}
 composition : Semigroup (a -> a)
 composition =
-    prepend (>>)
+    (>>)

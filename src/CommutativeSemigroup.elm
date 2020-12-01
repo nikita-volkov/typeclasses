@@ -26,19 +26,12 @@ type CommutativeSemigroup a
     = CommutativeSemigroup (a -> a -> a)
 
 
-{-| Construct from a prepend function.
--}
-prepend : (a -> a -> a) -> CommutativeSemigroup a
-prepend prepend_ =
-    CommutativeSemigroup prepend_
-
-
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
 Implements multiplication.
 -}
 numberProduct : CommutativeSemigroup number
 numberProduct =
-    prepend (*)
+    CommutativeSemigroup (*)
 
 
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
@@ -46,7 +39,7 @@ Implements sum.
 -}
 numberSum : CommutativeSemigroup number
 numberSum =
-    prepend (+)
+    CommutativeSemigroup (+)
 
 
 {-| Instance for integers under the multiplication operation.
@@ -67,49 +60,49 @@ intSum =
 -}
 setUnion : CommutativeSemigroup (Set.Set comparable)
 setUnion =
-    prepend Set.union
+    CommutativeSemigroup Set.union
 
 
 {-| Instance for set under the intersection operation.
 -}
 setIntersection : CommutativeSemigroup (Set.Set comparable)
 setIntersection =
-    prepend Set.intersect
+    CommutativeSemigroup Set.intersect
 
 
 {-| Instance for and
 -}
 and : CommutativeSemigroup Bool
 and =
-    prepend (&&)
+    CommutativeSemigroup (&&)
 
 
 {-| Instance for or
 -}
 or : CommutativeSemigroup Bool
 or =
-    prepend (||)
+    CommutativeSemigroup (||)
 
 
 {-| Instance for trivial semigroup
 -}
 unit : CommutativeSemigroup ()
 unit =
-    prepend (\() () -> ())
+    CommutativeSemigroup (\() () -> ())
 
 
 {-| Instance for xor
 -}
 xor : CommutativeSemigroup Bool
 xor =
-    prepend Basics.xor
+    CommutativeSemigroup Basics.xor
 
 
 {-| Instance for modularArithmetic semigroup
 -}
 modularArithmetic : Int -> CommutativeSemigroup Int
 modularArithmetic divisor =
-    prepend
+    CommutativeSemigroup
         (\dividendOne dividendTwo ->
             dividendOne
                 + dividendTwo

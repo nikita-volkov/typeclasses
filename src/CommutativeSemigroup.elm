@@ -17,13 +17,14 @@ module CommutativeSemigroup exposing
 
 -}
 
+import Semigroup exposing (Semigroup)
 import Set
 
 
 {-| Explicit typeclass which implements semigroup operations for type `a` when the operation is commutative.
 -}
 type CommutativeSemigroup a
-    = CommutativeSemigroup (a -> a -> a)
+    = CommutativeSemigroup (Semigroup.Semigroup a)
 
 
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
@@ -31,7 +32,7 @@ Implements multiplication.
 -}
 numberProduct : CommutativeSemigroup number
 numberProduct =
-    CommutativeSemigroup (*)
+    CommutativeSemigroup Semigroup.numberProduct
 
 
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
@@ -39,7 +40,7 @@ Implements sum.
 -}
 numberSum : CommutativeSemigroup number
 numberSum =
-    CommutativeSemigroup (+)
+    CommutativeSemigroup Semigroup.numberSum
 
 
 {-| Instance for integers under the multiplication operation.
@@ -60,51 +61,47 @@ intSum =
 -}
 setUnion : CommutativeSemigroup (Set.Set comparable)
 setUnion =
-    CommutativeSemigroup Set.union
+    CommutativeSemigroup Semigroup.setUnion
 
 
 {-| Instance for set under the intersection operation.
 -}
 setIntersection : CommutativeSemigroup (Set.Set comparable)
 setIntersection =
-    CommutativeSemigroup Set.intersect
+    CommutativeSemigroup Semigroup.setIntersection
 
 
 {-| Instance for and
 -}
 and : CommutativeSemigroup Bool
 and =
-    CommutativeSemigroup (&&)
+    CommutativeSemigroup Semigroup.and
 
 
 {-| Instance for or
 -}
 or : CommutativeSemigroup Bool
 or =
-    CommutativeSemigroup (||)
+    CommutativeSemigroup Semigroup.or
 
 
 {-| Instance for trivial semigroup
 -}
 unit : CommutativeSemigroup ()
 unit =
-    CommutativeSemigroup (\() () -> ())
+    CommutativeSemigroup Semigroup.unit
 
 
 {-| Instance for xor
 -}
 xor : CommutativeSemigroup Bool
 xor =
-    CommutativeSemigroup Basics.xor
+    CommutativeSemigroup Semigroup.xor
 
 
 {-| Instance for modularArithmetic semigroup
 -}
 modularArithmetic : Int -> CommutativeSemigroup Int
 modularArithmetic divisor =
-    CommutativeSemigroup
-        (\dividendOne dividendTwo ->
-            dividendOne
-                + dividendTwo
-                |> Basics.modBy divisor
-        )
+    Semigroup.modularArithmetic divisor
+        |> CommutativeSemigroup

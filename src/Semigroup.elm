@@ -29,7 +29,6 @@ module Semigroup exposing
 
 -}
 
-import CommutativeSemigroup
 import Set exposing (Set)
 import Task exposing (Task)
 
@@ -85,11 +84,7 @@ Implements multiplication.
 -}
 numberProduct : Semigroup number
 numberProduct =
-    let
-        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            CommutativeSemigroup.numberProduct
-    in
-    semigroup
+    (*)
 
 
 {-| Construct an instance for any type which satisfies Elm's `number` magic constraint.
@@ -97,22 +92,14 @@ Implements sum.
 -}
 numberSum : Semigroup number
 numberSum =
-    let
-        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            CommutativeSemigroup.numberSum
-    in
-    semigroup
+    (+)
 
 
 {-| Instance for integers under the multiplication operation.
 -}
 intProduct : Semigroup Int
 intProduct =
-    let
-        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            CommutativeSemigroup.intProduct
-    in
-    semigroup
+    numberProduct
 
 
 {-| Instance for integers under the sum operation.
@@ -126,77 +113,52 @@ intSum =
 -}
 setUnion : Semigroup (Set.Set comparable)
 setUnion =
-    let
-        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            CommutativeSemigroup.setUnion
-    in
-    semigroup
+    Set.union
 
 
 {-| Instance for set under the intersection operation.
 -}
 setIntersection : Semigroup (Set.Set comparable)
 setIntersection =
-    let
-        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            CommutativeSemigroup.setIntersection
-    in
-    semigroup
+    Set.intersect
 
 
 {-| Instance for and
 -}
 and : Semigroup Bool
 and =
-    let
-        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            CommutativeSemigroup.and
-    in
-    semigroup
+    (&&)
 
 
 {-| Instance for or
 -}
 or : Semigroup Bool
 or =
-    let
-        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            CommutativeSemigroup.or
-    in
-    semigroup
+    (||)
 
 
 {-| Instance for trivial semigroup
 -}
 unit : Semigroup ()
 unit =
-    let
-        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            CommutativeSemigroup.unit
-    in
-    semigroup
+    \() () -> ()
 
 
 {-| Instance for xor
 -}
 xor : Semigroup Bool
 xor =
-    let
-        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            CommutativeSemigroup.xor
-    in
-    semigroup
+    Basics.xor
 
 
 {-| Instance for modularArithmetic semigroup
 -}
 modularArithmetic : Int -> Semigroup Int
 modularArithmetic divisor =
-    let
-        (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-            CommutativeSemigroup.modularArithmetic divisor
-    in
-    semigroup
+    \dividendOne dividendTwo ->
+        dividendOne
+            + dividendTwo
+            |> Basics.modBy divisor
 
 
 {-| Instance for strings under the appending operation.

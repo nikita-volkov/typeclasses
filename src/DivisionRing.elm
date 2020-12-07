@@ -1,5 +1,5 @@
 module DivisionRing exposing
-    ( trivialDivisionRing
+    ( floatDivisionRing, trivialDivisionRing
     , DivisionRing
     )
 

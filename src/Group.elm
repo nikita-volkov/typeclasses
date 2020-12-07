@@ -1,6 +1,6 @@
 module Group exposing
     ( Group
-    , numberSum, trivialGroup, exclusiveOr, modularArithmetic
+    , numberSum, trivialGroup, exclusiveOr, modularArithmetic, floatProduct
     )
 
 {-| Group typeclass definition and its instances for basic types.
@@ -12,11 +12,10 @@ module Group exposing
 
 #Instances
 
-@docs numberSum, trivialGroup, exclusiveOr, modularArithmetic
+@docs numberSum, trivialGroup, exclusiveOr, modularArithmetic, floatProduct
 
 -}
 
-import AbelianGroup
 import CommutativeMonoid
 import CommutativeSemigroup
 import Monoid exposing (Monoid)
@@ -35,12 +34,17 @@ Implements sum.
 -}
 numberSum : Group number
 numberSum =
-    let
-        (AbelianGroup.AbelianGroup group) =
-            AbelianGroup.numberSum
-    in
     { monoid = Monoid.numberSum
-    , inverse = group.inverse
+    , inverse = \number -> -number
+    }
+
+
+{-| Implements product.
+-}
+floatProduct : Group Float
+floatProduct =
+    { monoid = Monoid.numberSum
+    , inverse = \number -> 1 / number
     }
 
 
@@ -48,12 +52,8 @@ numberSum =
 -}
 trivialGroup : Group ()
 trivialGroup =
-    let
-        (AbelianGroup.AbelianGroup group) =
-            AbelianGroup.trivialGroup
-    in
     { monoid = Monoid.unit
-    , inverse = group.inverse
+    , inverse = \() -> ()
     }
 
 
@@ -61,12 +61,8 @@ trivialGroup =
 -}
 exclusiveOr : Group Bool
 exclusiveOr =
-    let
-        (AbelianGroup.AbelianGroup group) =
-            AbelianGroup.exclusiveOr
-    in
     { monoid = Monoid.exclusiveOr
-    , inverse = group.inverse
+    , inverse = Basics.identity
     }
 
 
@@ -74,10 +70,6 @@ exclusiveOr =
 -}
 modularArithmetic : Int -> Group Int
 modularArithmetic divisor =
-    let
-        (AbelianGroup.AbelianGroup group) =
-            AbelianGroup.modularArithmetic divisor
-    in
     { monoid = Monoid.modularArithmetic divisor
-    , inverse = group.inverse
+    , inverse = \a -> divisor - a
     }

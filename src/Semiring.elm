@@ -19,7 +19,6 @@ module Semiring exposing
 import AbelianGroup
 import CommutativeMonoid
 import Monoid
-import Ring
 
 
 {-| Explicit typeclass which implements group operations for type `a`.
@@ -35,13 +34,10 @@ type alias Semiring a =
 numberRing : Semiring number
 numberRing =
     let
-        ring =
-            Ring.numberRing
-
-        (AbelianGroup.AbelianGroup group) =
-            ring.addition
+        sumMonoid =
+            CommutativeMonoid.numberSum
     in
-    { addition = group.monoid
+    { addition = sumMonoid
     , multiplication = Monoid.numberProduct
     }
 
@@ -50,14 +46,7 @@ numberRing =
 -}
 trivialRing : Semiring ()
 trivialRing =
-    let
-        ring =
-            Ring.trivialRing
-
-        (AbelianGroup.AbelianGroup group) =
-            ring.addition
-    in
-    { addition = group.monoid
+    { addition = CommutativeMonoid.unit
     , multiplication = Monoid.unit
     }
 
@@ -67,12 +56,9 @@ trivialRing =
 exclusiveOrRing : Semiring Bool
 exclusiveOrRing =
     let
-        ring =
-            Ring.exclusiveOrRing
-
-        (AbelianGroup.AbelianGroup group) =
-            ring.addition
+        exclusiveOrMonoid =
+            CommutativeMonoid.exclusiveOr
     in
-    { addition = group.monoid
+    { addition = exclusiveOrMonoid
     , multiplication = Monoid.exclusiveOr
     }

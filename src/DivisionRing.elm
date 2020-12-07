@@ -1,4 +1,7 @@
-module DivisionRing exposing (..)
+module DivisionRing exposing
+    ( trivialDivisionRing
+    , DivisionRing
+    )
 
 {-| Divison Ring typeclass definition and its instances for basic types.
 

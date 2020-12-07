@@ -1,6 +1,7 @@
 module Group exposing
     ( Group
     , numberSum, trivialGroup, exclusiveOr, modularArithmetic
+    , floatProduct
     )
 
 {-| Group typeclass definition and its instances for basic types.
@@ -36,6 +37,15 @@ numberSum : Group number
 numberSum =
     { monoid = Monoid.numberSum
     , inverse = \number -> -number
+    }
+
+
+{-| Implements product.
+-}
+floatProduct : Group Float
+floatProduct =
+    { monoid = Monoid.numberSum
+    , inverse = \number -> 1 / number
     }
 
 

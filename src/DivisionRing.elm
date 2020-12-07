@@ -1,6 +1,6 @@
 module DivisionRing exposing
-    ( floatDivisionRing, trivialDivisionRing
-    , DivisionRing
+    ( DivisionRing
+    , floatDivisionRing, trivialDivisionRing
     )
 
 {-| Divison Ring typeclass definition and its instances for basic types.
@@ -8,7 +8,7 @@ module DivisionRing exposing
 
 # Definition
 
-@docs Division Ring
+@docs DivisionRing
 
 #Instances
 
@@ -21,7 +21,7 @@ import Group
 import Monoid
 
 
-{-| Explicit typeclass which implements ring operations for type `a`.
+{-| Explicit typeclass which implements division ring operations for type `a`.
 -}
 type alias DivisionRing a =
     { addition : AbelianGroup.AbelianGroup a

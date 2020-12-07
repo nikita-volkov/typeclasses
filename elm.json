@@ -15,7 +15,8 @@
         "Group",
         "Ring",
         "Semigroup",
-        "Semiring"
+        "Semiring",
+        "DivisionRing"
     ],
     "elm-version": "0.19.0 <= v < 0.20.0",
     "dependencies": {

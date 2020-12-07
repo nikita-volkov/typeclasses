@@ -1,6 +1,6 @@
 module Field exposing
     ( Field(..)
-    , exclusiveOrField, numberField, trivialField
+    , numberField, trivialField
     )
 
 {-| Field typeclass definition and its instances for basic types.
@@ -16,31 +16,24 @@ module Field exposing
 
 -}
 
-import CommutativeRing
+import CommutativeDivisionRing
 
 
 {-| Explicit typeclass which implements group operations for type `a`.
 -}
 type Field a
-    = Field (CommutativeRing.CommutativeRing a)
+    = Field (CommutativeDivisionRing.CommutativeDivisionRing a)
 
 
 {-| Construct real number field
 -}
-numberField : Field number
+numberField : Field Float
 numberField =
-    Field CommutativeRing.numberRing
+    Field CommutativeDivisionRing.floatCommutativeDivisionRing
 
 
 {-| Construct trivial field
 -}
 trivialField : Field ()
 trivialField =
-    Field CommutativeRing.trivialRing
-
-
-{-| Construct exclusive all field
--}
-exclusiveOrField : Field Bool
-exclusiveOrField =
-    Field CommutativeRing.exclusiveOrRing
+    Field CommutativeDivisionRing.trivialCommutativeDivisionRing

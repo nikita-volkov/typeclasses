@@ -43,7 +43,7 @@ numberSum =
 -}
 floatProduct : Group Float
 floatProduct =
-    { monoid = Monoid.numberSum
+    { monoid = Monoid.numberProduct
     , inverse = \number -> 1 / number
     }
 

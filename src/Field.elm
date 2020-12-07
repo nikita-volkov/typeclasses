@@ -12,7 +12,7 @@ module Field exposing
 
 #Instances
 
-@docs exclusiveOrField, numberField, trivialField
+@docs numberField, trivialField
 
 -}
 

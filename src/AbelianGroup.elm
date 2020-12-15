@@ -16,8 +16,6 @@ module AbelianGroup exposing
 
 -}
 
-import Basics
-import CommutativeMonoid
 import Group
 
 

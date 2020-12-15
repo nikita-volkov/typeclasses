@@ -18,7 +18,6 @@ module DivisionRing exposing
 
 import AbelianGroup
 import Group
-import Monoid
 
 
 {-| Explicit typeclass which implements division ring operations for type `a`.

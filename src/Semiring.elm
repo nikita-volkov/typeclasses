@@ -16,7 +16,6 @@ module Semiring exposing
 
 -}
 
-import AbelianGroup
 import CommutativeMonoid
 import Monoid
 

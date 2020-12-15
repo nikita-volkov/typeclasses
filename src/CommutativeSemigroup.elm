@@ -17,7 +17,7 @@ module CommutativeSemigroup exposing
 
 -}
 
-import Semigroup exposing (Semigroup)
+import Semigroup
 import Set
 
 

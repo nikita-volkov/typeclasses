@@ -16,15 +16,13 @@ module Group exposing
 
 -}
 
-import CommutativeMonoid
-import CommutativeSemigroup
-import Monoid exposing (Monoid)
+import Monoid
 
 
 {-| Explicit typeclass which implements group operations for type `a`.
 -}
 type alias Group a =
-    { monoid : Monoid a
+    { monoid : Monoid.Monoid a
     , inverse : a -> a
     }
 

@@ -18,18 +18,15 @@ suite =
           <|
             \a ->
                 let
-                    group =
-                        Group.numberSum
-
                     inversePlusA =
                         Group.numberSum.monoid.semigroup
-                            (group.inverse a)
+                            (Group.numberSum.inverse a)
                             a
 
                     aPlusInverse =
                         Group.numberSum.monoid.semigroup
                             a
-                            (group.inverse a)
+                            (Group.numberSum.inverse a)
                 in
                 Expect.true "All equal a"
                     (inversePlusA
@@ -43,24 +40,21 @@ suite =
           <|
             \a ->
                 let
-                    group =
-                        Group.trivialGroup
-
                     inversePlusA =
-                        group.monoid.semigroup
-                            (group.inverse a)
+                        Group.trivialGroup.monoid.semigroup
+                            (Group.trivialGroup.inverse a)
                             a
 
                     aPlusInverse =
-                        group.monoid.semigroup
+                        Group.trivialGroup.monoid.semigroup
                             a
-                            (group.inverse a)
+                            (Group.trivialGroup.inverse a)
                 in
                 Expect.true "All equal a"
                     (inversePlusA
-                        == group.monoid.identity
+                        == Group.trivialGroup.monoid.identity
                         && aPlusInverse
-                        == group.monoid.identity
+                        == Group.trivialGroup.monoid.identity
                     )
         , Test.fuzz
             Fuzz.bool
@@ -68,24 +62,21 @@ suite =
           <|
             \a ->
                 let
-                    group =
-                        Group.exclusiveOr
-
                     inverseXorA =
-                        group.monoid.semigroup
-                            (group.inverse a)
+                        Group.exclusiveOr.monoid.semigroup
+                            (Group.exclusiveOr.inverse a)
                             a
 
                     aXorInverse =
-                        group.monoid.semigroup
+                        Group.exclusiveOr.monoid.semigroup
                             a
-                            (group.inverse a)
+                            (Group.exclusiveOr.inverse a)
                 in
                 Expect.true "All equal a"
                     (inverseXorA
-                        == group.monoid.identity
+                        == Group.exclusiveOr.monoid.identity
                         && aXorInverse
-                        == group.monoid.identity
+                        == Group.exclusiveOr.monoid.identity
                     )
         , Test.fuzz
             Fuzz.int

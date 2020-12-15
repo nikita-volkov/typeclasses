@@ -17,8 +17,7 @@ module CommutativeMonoid exposing
 
 -}
 
-import CommutativeSemigroup
-import Monoid exposing (Monoid)
+import Monoid
 import Semigroup
 
 

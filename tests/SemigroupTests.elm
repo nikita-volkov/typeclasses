@@ -58,7 +58,7 @@ suite =
                 \a b c ->
                     let
                         (CommutativeSemigroup.CommutativeSemigroup semigroup) =
-                            CommutativeSemigroup.intSum
+                            CommutativeSemigroup.numberSum
 
                         aPlusBThenPlusC =
                             semigroup (semigroup a b) c

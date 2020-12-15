@@ -16,10 +16,7 @@ module CommutativeDivisionRing exposing
 
 -}
 
-import AbelianGroup
-import DivisionRing exposing (DivisionRing)
-import Group
-import Monoid
+import DivisionRing
 
 
 {-| Explicit typeclass which implements division ring operations for type `a`.

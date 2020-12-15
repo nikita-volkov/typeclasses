@@ -16,8 +16,6 @@ module CommutativeRing exposing
 
 -}
 
-import AbelianGroup
-import CommutativeMonoid
 import Ring
 
 

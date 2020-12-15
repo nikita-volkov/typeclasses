@@ -29,8 +29,8 @@ module Semigroup exposing
 
 -}
 
-import Set exposing (Set)
-import Task exposing (Task)
+import Set
+import Task
 
 
 {-| Explicit typeclass which implements semigroup operations for type `a`.
@@ -190,7 +190,7 @@ list =
 
 {-| Instance for set under the difference operation.
 -}
-setDifference : Semigroup (Set comparable)
+setDifference : Semigroup (Set.Set comparable)
 setDifference =
     Set.diff
 
@@ -211,7 +211,7 @@ sub =
 
 {-| Instance for tasks, which sequentially executes them and groups the results.
 -}
-task : Semigroup a -> Semigroup (Task x a)
+task : Semigroup a -> Semigroup (Task.Task x a)
 task semigroupOfA =
     \l r -> l |> Task.andThen (\la -> Task.map (semigroupOfA la) r)
 

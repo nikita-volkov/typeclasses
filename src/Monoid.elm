@@ -29,16 +29,15 @@ module Monoid exposing
 
 -}
 
-import CommutativeSemigroup
-import Semigroup as Semigroup exposing (Semigroup)
-import Set exposing (Set)
-import Task exposing (Task)
+import Semigroup
+import Set
+import Task
 
 
 {-| Explicit typeclass which implements monoid operations for type `a`.
 -}
 type alias Monoid a =
-    { semigroup : Semigroup a
+    { semigroup : Semigroup.Semigroup a
     , identity : a
     , concat : List a -> a
     }
@@ -61,7 +60,7 @@ identityAndConcat identity concat =
 
 {-| Construct an instance by specifying a semigroup instance and an identity value.
 -}
-semigroupAndIdentity : Semigroup a -> a -> Monoid a
+semigroupAndIdentity : Semigroup.Semigroup a -> a -> Monoid a
 semigroupAndIdentity semigroup identity =
     { semigroup = semigroup
     , identity = identity
@@ -188,14 +187,14 @@ list =
 
 {-| Instance for set under the union operation.
 -}
-setUnion : Monoid (Set comparable)
+setUnion : Monoid (Set.Set comparable)
 setUnion =
     semigroupAndIdentity Semigroup.setUnion Set.empty
 
 
 {-| Instance for set under the difference operation.
 -}
-setDifference : Monoid (Set comparable)
+setDifference : Monoid (Set.Set comparable)
 setDifference =
     semigroupAndIdentity Semigroup.setDifference Set.empty
 
@@ -216,7 +215,7 @@ sub =
 
 {-| Instance for tasks, which sequentially executes them and groups the results.
 -}
-task : Monoid a -> Monoid (Task x a)
+task : Monoid a -> Monoid (Task.Task x a)
 task monoidOfA =
     { semigroup = Semigroup.task monoidOfA.semigroup
     , identity = Task.succeed monoidOfA.identity

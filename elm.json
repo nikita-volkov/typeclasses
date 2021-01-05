@@ -3,7 +3,7 @@
     "name": "jonathanfishbein1/numeric-typeclasses",
     "summary": "Numeric typeclasses",
     "license": "MIT",
-    "version": "3.0.2",
+    "version": "3.0.3",
     "exposed-modules": [
         "Monoid",
         "Semigroup",

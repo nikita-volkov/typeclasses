@@ -7,38 +7,38 @@ as assosiativity, commutivity, and distributative laws.
 
 For example the most elementary mathematical object is called a Magma and it is defined as a set with a closed binary operation.  However the binary operation associated with the Magma does **Not** have to conform to the assosiative property.  The Magma is the most elementary mathemtaical objects and is used here for only illustrative purposes.  It does not have much value in math or programming and so this library starts its hierarchy with the Semigroup.
 
-## Semigroup
+### Semigroup
 
     * A Set  
     + Closed binary operation  
     + Binary operation conforms to the associative property  
 
-## CommutativeSemigroup
+### CommutativeSemigroup
 
     + Semigroup
     + Semigroup binary operation conforms to the commutative property
 
-## Monoid
+### Monoid
 
     + Semigroup
     + Identity value
 
-## CommutativeMonoid
+### CommutativeMonoid
 
     + Monoid
     + Monoid binary operation conforms to the commutative property
 
-## Group
+### Group
 
     + Monoid
     + Inverses
 
-## AbelianGroup
+### AbelianGroup
 
     + Group
     + Group binary operation conforms to the commutative property
 
-## Semring
+### Semring
 
     + Two Binary operations
         + Addition
@@ -46,7 +46,7 @@ For example the most elementary mathematical object is called a Magma and it is 
         + Multiplication
             + Monoid
 
-## Ring
+### Ring
 
     + Two Binary operations
         + Addition
@@ -54,21 +54,37 @@ For example the most elementary mathematical object is called a Magma and it is 
         + Multiplication
             +Monoid
 
-## CommutativeRing
+### CommutativeRing
 
     + Ring
     + Ring multiplication operation conforms to the commutative property
 
-## DivisionRing
+### DivisionRing
 
     + Ring
     + Ring multiplication is a Group
 
-## CommutativeDivisionRing
+### CommutativeDivisionRing
 
     + DivisionRing
     + Ring multiplication operation conforms to the commutative property
 
-## Field
+### Field
 
     + CommutativeDivisionRing
+
+## Usage
+
+This library is used extensively in [jonathanfishbein1/linear-algebra](https://package.elm-lang.org/packages/jonathanfishbein1/linear-algebra/latest/).
+
+
+```
+{-| Zero vector given a Field and dimension
+-}
+zeros : Monoid.Monoid a -> Int -> Vector a
+zeros { identity } dim =
+    List.repeat dim identity
+        |> Vector
+
+
+```

@@ -78,7 +78,7 @@ For example the most elementary mathematical object is called a Magma and it is 
 This library is used extensively in [jonathanfishbein1/linear-algebra](https://package.elm-lang.org/packages/jonathanfishbein1/linear-algebra/latest/).
 
 
-```
+```elm
 {-| Zero vector given a Field and dimension
 -}
 zeros : Monoid.Monoid a -> Int -> Vector a

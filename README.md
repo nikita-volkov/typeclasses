@@ -2,14 +2,15 @@
 
 This pacakge attempts to model the numeric hierachay found in abstract algebra.  
 
-These mathemtaical ojbects are defined as sets with accompanying closed binary operations that also, depending on the object, obey certain propetries such
-as assosiativity, commutivity, and distributative laws.
+These mathemtaical objects are defined as sets with accompanying closed binary operations that also, depending on the object, obey certain propetries such as assosiativity, commutivity, and distributative laws.
 
-For example the most elementary mathematical object is called a Magma and it is defined as a set with a closed binary operation.  However the binary operation associated with the Magma does **Not** have to conform to the assosiative property.  The Magma is the most elementary mathemtaical objects and is used here for only illustrative purposes.  It does not have much value in math or programming and so this library starts its hierarchy with the Semigroup.
+For example, the most elementary mathematical object is called a Magma and it is defined as a set with a closed binary operation.  However, the binary operation associated with the Magma does **Not** have to conform to the assosiative property.  Magma is the most elementary mathemtaical object and is used here only for illustrative purposes.  It does not have much value in math or programming and so this library starts its hierarchy with the Semigroup.
+
+## Definitions
 
 ### Semigroup
 
-    * A Set  
+    + A Set  
     + Closed binary operation  
     + Binary operation conforms to the associative property  
 
@@ -52,7 +53,7 @@ For example the most elementary mathematical object is called a Magma and it is 
         + Addition
             + AbelianGroup
         + Multiplication
-            +Monoid
+            + Monoid
 
 ### CommutativeRing
 
@@ -85,6 +86,4 @@ zeros : Monoid.Monoid a -> Int -> Vector a
 zeros { identity } dim =
     List.repeat dim identity
         |> Vector
-
-
 ```

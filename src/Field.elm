@@ -1,7 +1,6 @@
 module Field exposing
     ( Field(..)
-    , float
-    , trivial
+    , float, trivial
     )
 
 {-| Field typeclass definition and its instances for basic types.
@@ -13,7 +12,7 @@ module Field exposing
 
 #Instances
 
-@docs float, trivialField
+@docs float, trivial
 
 -}
 

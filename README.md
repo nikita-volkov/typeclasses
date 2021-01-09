@@ -1,139 +1,89 @@
-# Summary
+# Numeric Typeclasses
 
-They say Elm doesn't support typeclasses.
-What they actually mean is that it doesn't support implicit values.
-Typeclasses can be defined as records with their instances provided as explicit values.
-Elm has problems, which typeclasses can solve.
-This package aims to do exactly that.
+This pacakge attempts to model the numeric hierachay found in abstract algebra.  
 
-# Motivation
+These mathemtaical objects are defined as sets with accompanying closed binary operations that also, depending on the object, obey certain propetries such as assosiativity, commutivity, and distributative laws.
 
-Elm has a rough edge in its design when it comes to generic operations:
-the compiler provides several functions which magically generalize over numeric, comparable and appendable types
-(for details see [the "Constrained type variables" section of Elm Guide](https://guide.elm-lang.org/types/reading_types.html#constrained-type-variables)).
+For example, the most elementary mathematical object is called a Magma and it is defined as a set with a closed binary operation.  However, the binary operation associated with the Magma does **Not** have to conform to the assosiative property.  Magma is the most elementary mathemtaical object and is used here only for illustrative purposes.  It does not have much value in math or programming and so this library starts its hierarchy with the Semigroup.
 
-This comes with several consequences:
+## Definitions
 
-1. You only have a limited set of predefined generic APIs, which is just numeric, appending and comparison ops:
-    - You cannot add support of such APIs to your custom types;
-    - You cannot define new generic APIs, e.g.: a hashing function, a custom conversion to string, a binary codec, an arbitrary value generator for Fuzz-tests (aka Property-tests).
-1. Because `Set` requires its elements to be comparable, it limits you to `Int`, `Float`, `Char`, `String`, and lists/tuples of such values. You cannot have custom types there. This goes beyond just `Set`.
-1. Normally you're free to choose names for type parameters. These ones you have to name strictly `comparable` or `appendable` and etc.
-1. To allow you to have a thing that is both `comparable` or `appendable` the compiler has to employ another level of workarounds: a combined constraint `compappend`.
+### Semigroup
 
-# Solution
+    + A Set  
+    + Closed binary operation  
+    + Binary operation conforms to the associative property  
 
-Let's take the comparable values for example.
-We can define a type like the following, which will contain a dictionary of the same operations as the `comparable` magic constraint provides:
+### CommutativeSemigroup
 
-```elm
-type alias Comparison a =
-  {
-    compare : a -> a -> Order,
-    lt : a -> a -> Bool,
-    le : a -> a -> Bool,
-    gt : a -> a -> Bool,
-    ge : a -> a -> Bool,
-    min : a -> a -> a,
-    max : a -> a -> a
-  }
-```
+    + Semigroup
+    + Semigroup binary operation conforms to the commutative property
 
-Then we can instantiate it for specific types, e.g.:
+### Monoid
 
-```elm
-int : Comparison Int
-int =
-  {
-    compare = compare,
-    lt = (<),
-    le = (<=),
-    gt = (>),
-    ge = (>=),
-    min = min,
-    max = max
-  }
-```
+    + Semigroup
+    + Identity value
 
-We can have helper functions, which would allow us to reduce the amount of operations to implement (I'll leave the details of implementation down):
+### CommutativeMonoid
 
-```elm
-fromCompare : (a -> a -> Order) -> Comparison a
-```
+    + Monoid
+    + Monoid binary operation conforms to the commutative property
 
-Then we can define instances for our custom types:
+### Group
 
-```elm
-type Quality = Low | High
+    + Monoid
+    + Inverses
 
-comparison : Comparison Quality
-comparison = fromCompare <| \ left right -> case left of
-  Low -> case right of
-    Low -> EQ
-    _ -> LT
-  High -> case right of
-    High -> EQ
-    _ -> GT
-```
+### AbelianGroup
 
-And we can design generic APIs without magical constraints.
-Meaning that they'll work for any type that you can provide `Comparison` for:
+    + Group
+    + Group binary operation conforms to the commutative property
 
-```elm
-module Set exposing (..)
+### Semring
 
-fromList : Comparison a -> List a -> Set a
-```
+    + Two Binary operations
+        + Addition
+            + CommutativeMonoid
+        + Multiplication
+            + Monoid
 
-What you've seen here can be defined thus:
-- `type alias Comparison a` is a declaration of a typeclass
-- `int : Comparison Int` is an instance of a typeclass
-- `fromList : Comparison a -> List a -> Set a` is a polymorphic function constrained by a typeclass
+### Ring
 
-There! If you haven't before, now you know typeclasses. It's that simple.
+    + Two Binary operations
+        + Addition
+            + AbelianGroup
+        + Multiplication
+            + Monoid
 
-# Status
+### CommutativeRing
 
-This library is in a stage of active development and not yet well covered with tests,
-which is why it is not yet advised to rely production systems on it.
-To change the status sooner you're welcome to PR with tests, benchmarks and
-missing instance declarations for basic types.
+    + Ring
+    + Ring multiplication operation conforms to the commutative property
 
-# FAQ
+### DivisionRing
 
-## Why no Functors, Monads and alike?
+    + Ring
+    + Ring multiplication is a Group
 
-Unfortunately Elm's type system has two limitations:
+### CommutativeDivisionRing
 
-* it doesn't support `forall` quantification;
-* it doesn't support higher-kinded polymorphism.
+    + DivisionRing
+    + Ring multiplication operation conforms to the commutative property
 
-Having such features we would be able to provide definitions such as the following:
+### Field
+
+    + CommutativeDivisionRing
+
+## Usage
+
+This library is used extensively in [jonathanfishbein1/linear-algebra](https://package.elm-lang.org/packages/jonathanfishbein1/linear-algebra/latest/).
+
 
 ```elm
-type alias Functor f =
-  {
-    map : forall a b. (a -> b) -> f a -> f b
-  }
-
-list : Functor List
-list = { map = List.map }
+{-| Zero vector given a Field and dimension
+-}
+zeros : Monoid.Monoid a -> Int -> Vector a
+zeros { identity } dim =
+    List.repeat dim identity
+        |> Vector
 ```
-
-However until we get these features the best we can do is something like this:
-
-```elm
-type alias Functor a b fa fb =
-  {
-    map : (a -> b) -> fa -> fb
-  }
-
-list : Functor a b (List a) (List b)
-list = { map = List.map }
-```
-
-Because such type signatures seem likely to breed terrible APIs, we haven't yet dived into studying this opportunity deeper and limited this library to classes which at least don't require higher-kinded polymorphism.
-
-# Acknowledgements
-
-The work behind this library was much inspired by the ideas expressed in [the "Scrap your typeclasses" Haskell blogpost](http://www.haskellforall.com/2012/05/scrap-your-type-classes.html) by Gabriel Gonzalez.

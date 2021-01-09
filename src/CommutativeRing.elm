@@ -1,6 +1,6 @@
 module CommutativeRing exposing
     ( CommutativeRing(..)
-    , numberRing, trivialRing, exclusiveOrRing
+    , number, trivial, exclusiveOr
     )
 
 {-| Commutative Ring typeclass definition and its instances for basic types.
@@ -12,7 +12,7 @@ module CommutativeRing exposing
 
 #Instances
 
-@docs numberRing, trivialRing, exclusiveOrRing
+@docs number, trivial, exclusiveOr
 
 -}
 
@@ -27,20 +27,20 @@ type CommutativeRing a
 
 {-| Construct real number ring
 -}
-numberRing : CommutativeRing number
-numberRing =
-    CommutativeRing Ring.numberRing
+number : CommutativeRing number
+number =
+    CommutativeRing Ring.number
 
 
 {-| Construct trivial ring
 -}
-trivialRing : CommutativeRing ()
-trivialRing =
-    CommutativeRing Ring.trivialRing
+trivial : CommutativeRing ()
+trivial =
+    CommutativeRing Ring.trivial
 
 
 {-| Construct exclusive all ring
 -}
-exclusiveOrRing : CommutativeRing Bool
-exclusiveOrRing =
-    CommutativeRing Ring.exclusiveOrRing
+exclusiveOr : CommutativeRing Bool
+exclusiveOr =
+    CommutativeRing Ring.exclusiveOr

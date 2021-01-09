@@ -22,32 +22,32 @@ suite =
             \x y z ->
                 let
                     (AbelianGroup.AbelianGroup groupAddition) =
-                        Ring.trivialRing.addition
+                        Ring.trivial.addition
 
                     xLeftMultiplyYplusZ =
-                        Ring.trivialRing.multiplication.semigroup
+                        Ring.trivial.multiplication.semigroup
                             x
                             (groupAddition.monoid.semigroup y z)
 
                     yLeftMultiplyX =
-                        Ring.trivialRing.multiplication.semigroup x y
+                        Ring.trivial.multiplication.semigroup x y
 
                     zLeftMultiplyX =
-                        Ring.trivialRing.multiplication.semigroup x z
+                        Ring.trivial.multiplication.semigroup x z
 
                     yLeftMultiplyXPlusZLeftMultiplyX =
                         groupAddition.monoid.semigroup yLeftMultiplyX zLeftMultiplyX
 
                     xPlusYRightMultiplyZ =
-                        Ring.trivialRing.multiplication.semigroup
+                        Ring.trivial.multiplication.semigroup
                             (groupAddition.monoid.semigroup x y)
                             z
 
                     xRightMultiplyZ =
-                        Ring.trivialRing.multiplication.semigroup x z
+                        Ring.trivial.multiplication.semigroup x z
 
                     yRightMultiplyZ =
-                        Ring.trivialRing.multiplication.semigroup y z
+                        Ring.trivial.multiplication.semigroup y z
 
                     xRightMultiplyZPlusYRightMultiplyZ =
                         groupAddition.monoid.semigroup xRightMultiplyZ yRightMultiplyZ
@@ -65,32 +65,32 @@ suite =
             \x y z ->
                 let
                     (AbelianGroup.AbelianGroup groupAddition) =
-                        Ring.exclusiveOrRing.addition
+                        Ring.exclusiveOr.addition
 
                     xLeftMultiplyYplusZ =
-                        Ring.exclusiveOrRing.multiplication.semigroup
+                        Ring.exclusiveOr.multiplication.semigroup
                             x
                             (groupAddition.monoid.semigroup y z)
 
                     yLeftMultiplyX =
-                        Ring.exclusiveOrRing.multiplication.semigroup x y
+                        Ring.exclusiveOr.multiplication.semigroup x y
 
                     zLeftMultiplyX =
-                        Ring.exclusiveOrRing.multiplication.semigroup x z
+                        Ring.exclusiveOr.multiplication.semigroup x z
 
                     yLeftMultiplyXPlusZLeftMultiplyX =
                         groupAddition.monoid.semigroup yLeftMultiplyX zLeftMultiplyX
 
                     xPlusYRightMultiplyZ =
-                        Ring.exclusiveOrRing.multiplication.semigroup
+                        Ring.exclusiveOr.multiplication.semigroup
                             (groupAddition.monoid.semigroup x y)
                             z
 
                     xRightMultiplyZ =
-                        Ring.exclusiveOrRing.multiplication.semigroup x z
+                        Ring.exclusiveOr.multiplication.semigroup x z
 
                     yRightMultiplyZ =
-                        Ring.exclusiveOrRing.multiplication.semigroup y z
+                        Ring.exclusiveOr.multiplication.semigroup y z
 
                     xRightMultiplyZPlusYRightMultiplyZ =
                         groupAddition.monoid.semigroup xRightMultiplyZ yRightMultiplyZ
@@ -108,32 +108,32 @@ suite =
             \x y z ->
                 let
                     (AbelianGroup.AbelianGroup groupAddition) =
-                        Ring.numberRing.addition
+                        Ring.number.addition
 
                     xLeftMultiplyYplusZ =
-                        Ring.numberRing.multiplication.semigroup
+                        Ring.number.multiplication.semigroup
                             x
                             (groupAddition.monoid.semigroup y z)
 
                     yLeftMultiplyX =
-                        Ring.numberRing.multiplication.semigroup x y
+                        Ring.number.multiplication.semigroup x y
 
                     zLeftMultiplyX =
-                        Ring.numberRing.multiplication.semigroup x z
+                        Ring.number.multiplication.semigroup x z
 
                     yLeftMultiplyXPlusZLeftMultiplyX =
                         groupAddition.monoid.semigroup yLeftMultiplyX zLeftMultiplyX
 
                     xPlusYRightMultiplyZ =
-                        Ring.numberRing.multiplication.semigroup
+                        Ring.number.multiplication.semigroup
                             (groupAddition.monoid.semigroup x y)
                             z
 
                     xRightMultiplyZ =
-                        Ring.numberRing.multiplication.semigroup x z
+                        Ring.number.multiplication.semigroup x z
 
                     yRightMultiplyZ =
-                        Ring.numberRing.multiplication.semigroup y z
+                        Ring.number.multiplication.semigroup y z
 
                     xRightMultiplyZPlusYRightMultiplyZ =
                         groupAddition.monoid.semigroup xRightMultiplyZ yRightMultiplyZ

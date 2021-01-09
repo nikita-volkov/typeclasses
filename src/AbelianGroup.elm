@@ -1,6 +1,6 @@
 module AbelianGroup exposing
     ( AbelianGroup(..)
-    , numberSum, trivialGroup, exclusiveOr, modularArithmetic
+    , numberSum, trivial, exclusiveOr, modularArithmetic
     )
 
 {-| Abelian Group typeclass definition and its instances for basic types.
@@ -12,7 +12,7 @@ module AbelianGroup exposing
 
 #Instances
 
-@docs numberSum, trivialGroup, exclusiveOr, modularArithmetic
+@docs numberSum, trivial, exclusiveOr, modularArithmetic
 
 -}
 
@@ -35,9 +35,9 @@ numberSum =
 
 {-| Construct trivial group
 -}
-trivialGroup : AbelianGroup ()
-trivialGroup =
-    AbelianGroup Group.trivialGroup
+trivial : AbelianGroup ()
+trivial =
+    AbelianGroup Group.trivial
 
 
 {-| Construct exclusive Or

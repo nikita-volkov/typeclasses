@@ -1,6 +1,6 @@
 module CommutativeDivisionRing exposing
     ( CommutativeDivisionRing(..)
-    , floatCommutativeDivisionRing, trivialCommutativeDivisionRing
+    , float, trivial
     )
 
 {-| Commutative Divison Ring typeclass definition and its instances for basic types.
@@ -12,7 +12,7 @@ module CommutativeDivisionRing exposing
 
 #Instances
 
-@docs floatCommutativeDivisionRing, trivialCommutativeDivisionRing
+@docs float, trivial
 
 -}
 
@@ -27,15 +27,15 @@ type CommutativeDivisionRing a
 
 {-| Construct real number division ring
 -}
-floatCommutativeDivisionRing : CommutativeDivisionRing Float
-floatCommutativeDivisionRing =
+float : CommutativeDivisionRing Float
+float =
     CommutativeDivisionRing
         DivisionRing.floatDivisionRing
 
 
 {-| Construct trivial Division ring
 -}
-trivialCommutativeDivisionRing : CommutativeDivisionRing ()
-trivialCommutativeDivisionRing =
+trivial : CommutativeDivisionRing ()
+trivial =
     CommutativeDivisionRing
         DivisionRing.trivialDivisionRing

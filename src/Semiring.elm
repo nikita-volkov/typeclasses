@@ -1,6 +1,6 @@
 module Semiring exposing
     ( Semiring
-    , numberRing, trivialRing, exclusiveOrRing
+    , number, trivial, exclusiveOr
     )
 
 {-| Semiring typeclass definition and its instances for basic types.
@@ -12,7 +12,7 @@ module Semiring exposing
 
 #Instances
 
-@docs numberRing, trivialRing, exclusiveOrRing
+@docs number, trivial, exclusiveOr
 
 -}
 
@@ -30,8 +30,8 @@ type alias Semiring a =
 
 {-| Construct real number ring
 -}
-numberRing : Semiring number
-numberRing =
+number : Semiring number
+number =
     let
         sumMonoid =
             CommutativeMonoid.numberSum
@@ -43,8 +43,8 @@ numberRing =
 
 {-| Construct trivial ring
 -}
-trivialRing : Semiring ()
-trivialRing =
+trivial : Semiring ()
+trivial =
     { addition = CommutativeMonoid.unit
     , multiplication = Monoid.unit
     }
@@ -52,8 +52,8 @@ trivialRing =
 
 {-| Construct exclusive all ring
 -}
-exclusiveOrRing : Semiring Bool
-exclusiveOrRing =
+exclusiveOr : Semiring Bool
+exclusiveOr =
     let
         exclusiveOrMonoid =
             CommutativeMonoid.exclusiveOr

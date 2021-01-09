@@ -1,6 +1,6 @@
 module Field exposing
     ( Field(..)
-    , numberField, trivialField
+    , float, trivial
     )
 
 {-| Field typeclass definition and its instances for basic types.
@@ -12,7 +12,7 @@ module Field exposing
 
 #Instances
 
-@docs numberField, trivialField
+@docs float, trivial
 
 -}
 
@@ -27,13 +27,13 @@ type Field a
 
 {-| Construct real number field
 -}
-numberField : Field Float
-numberField =
-    Field CommutativeDivisionRing.floatCommutativeDivisionRing
+float : Field Float
+float =
+    Field CommutativeDivisionRing.float
 
 
 {-| Construct trivial field
 -}
-trivialField : Field ()
-trivialField =
-    Field CommutativeDivisionRing.trivialCommutativeDivisionRing
+trivial : Field ()
+trivial =
+    Field CommutativeDivisionRing.trivial

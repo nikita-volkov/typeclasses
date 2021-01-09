@@ -1,6 +1,6 @@
 module Group exposing
     ( Group
-    , numberSum, trivialGroup, exclusiveOr, modularArithmetic, floatProduct
+    , numberSum, trivial, exclusiveOr, modularArithmetic, floatProduct
     )
 
 {-| Group typeclass definition and its instances for basic types.
@@ -12,7 +12,7 @@ module Group exposing
 
 #Instances
 
-@docs numberSum, trivialGroup, exclusiveOr, modularArithmetic, floatProduct
+@docs numberSum, trivial, exclusiveOr, modularArithmetic, floatProduct
 
 -}
 
@@ -48,8 +48,8 @@ floatProduct =
 
 {-| Construct trivial group
 -}
-trivialGroup : Group ()
-trivialGroup =
+trivial : Group ()
+trivial =
     { monoid = Monoid.unit
     , inverse = \() -> ()
     }

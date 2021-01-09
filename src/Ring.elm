@@ -1,6 +1,6 @@
 module Ring exposing
     ( Ring
-    , exclusiveOrRing, numberRing, trivialRing
+    , exclusiveOr, number, trivial
     )
 
 {-| Ring typeclass definition and its instances for basic types.
@@ -12,7 +12,7 @@ module Ring exposing
 
 #Instances
 
-@docs exclusiveOrRing, numberRing, trivialRing
+@docs exclusiveOr, number, trivial
 
 -}
 
@@ -30,8 +30,8 @@ type alias Ring a =
 
 {-| Construct real number ring
 -}
-numberRing : Ring number
-numberRing =
+number : Ring number
+number =
     { addition = AbelianGroup.numberSum
     , multiplication = Monoid.numberProduct
     }
@@ -39,17 +39,17 @@ numberRing =
 
 {-| Construct trivial ring
 -}
-trivialRing : Ring ()
-trivialRing =
-    { addition = AbelianGroup.trivialGroup
+trivial : Ring ()
+trivial =
+    { addition = AbelianGroup.trivial
     , multiplication = Monoid.unit
     }
 
 
 {-| Construct exclusive all ring
 -}
-exclusiveOrRing : Ring Bool
-exclusiveOrRing =
+exclusiveOr : Ring Bool
+exclusiveOr =
     { addition = AbelianGroup.exclusiveOr
     , multiplication = Monoid.all
     }

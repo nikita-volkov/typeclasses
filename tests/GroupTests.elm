@@ -41,20 +41,20 @@ suite =
             \a ->
                 let
                     inversePlusA =
-                        Group.trivialGroup.monoid.semigroup
-                            (Group.trivialGroup.inverse a)
+                        Group.trivial.monoid.semigroup
+                            (Group.trivial.inverse a)
                             a
 
                     aPlusInverse =
-                        Group.trivialGroup.monoid.semigroup
+                        Group.trivial.monoid.semigroup
                             a
-                            (Group.trivialGroup.inverse a)
+                            (Group.trivial.inverse a)
                 in
                 Expect.true "All equal a"
                     (inversePlusA
-                        == Group.trivialGroup.monoid.identity
+                        == Group.trivial.monoid.identity
                         && aPlusInverse
-                        == Group.trivialGroup.monoid.identity
+                        == Group.trivial.monoid.identity
                     )
         , Test.fuzz
             Fuzz.bool

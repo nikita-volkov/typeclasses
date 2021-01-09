@@ -41,6 +41,6 @@ floatDivisionRing =
 -}
 trivialDivisionRing : DivisionRing ()
 trivialDivisionRing =
-    { addition = AbelianGroup.trivialGroup
-    , multiplication = Group.trivialGroup
+    { addition = AbelianGroup.trivial
+    , multiplication = Group.trivial
     }
